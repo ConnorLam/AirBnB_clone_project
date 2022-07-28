@@ -5,6 +5,7 @@ const { User } = require('../../db/models')
 
 const router = express.Router()
 
+// this signs up a new user
 router.post('/', async (req, res) => {
     const {email, password, username} = req.body
     const user = await User.signup({email, username, password})
