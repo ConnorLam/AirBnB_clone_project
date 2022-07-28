@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+https://drawsql.app/app-academy-54/diagrams/first-airbnb-project-schema
 
 ## API Documentation
 
