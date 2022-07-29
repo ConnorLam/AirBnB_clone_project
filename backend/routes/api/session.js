@@ -7,6 +7,19 @@ const {handleValidationErrors} = require('../../utils/validation')
 
 const router = express.Router()
 
+const validateLogin = [
+    check('credential')
+        .exists({ checkFalsy: true})
+        .notEmpty()
+        .withMessage('Please provide a valid email or username'),
+    check('password')
+        .exists({ checkFalsy: true})
+        .withMessage('Please provide a password.'),
+    handleValidationErrors
+]
+// checks to see whether or not req.body.credential or req.body.password
+// are empty, if one is emoty than you will get an error with response
+
 //logging in
 router.post('/', validateLogin, async (req, res, next) => {
     const {credential, password} = req.body;
@@ -16,7 +29,7 @@ router.post('/', validateLogin, async (req, res, next) => {
         const err = new Error('Login failed')
         err.status = 401
         err.title = 'Login failed'
-        err.errors = ['The provided credentials were invalid']
+        err.errors = ['The provided credentials were invalid.']
         return next(err)
     }
 
@@ -46,16 +59,6 @@ router.get('/', restoreUser, (req, res) => {
     }
 })
 
-const validateLogin = [
-    check('credential')
-        .exists({ checkFalsy: true})
-        .notEmpty()
-        .withMessage('Please provide a valid email or username'),
-    check('password')
-        .exists({ checkFalsy: true})
-        .withMessage('Please provide a password.'),
-    handleValidationErrors
-]
 
 
 module.exports = router
