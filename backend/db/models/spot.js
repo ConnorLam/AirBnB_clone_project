@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       address: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       city: {
         type: DataTypes.STRING,
@@ -38,18 +39,40 @@ module.exports = (sequelize, DataTypes) => {
       lat: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+        validate: {
+          min: -90,
+          max: 90,
+          invalidLatitude(){
+            if (this.lat > 90 || this.lat < -90){
+              throw new Error('Invalid Latitude')
+            }
+          }
+        }
       },
       lng: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+        validate: {
+          min: -180,
+          max: 180,
+          invalidLatitude(){
+            if (this.lng > 90 || this.lng < -90){
+              throw new Error('Invalid Latitude')
+            }
+          }
+        }
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
       description: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          len: [10, 500]
+        }
       },
       price: {
         type: DataTypes.INTEGER,

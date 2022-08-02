@@ -10,18 +10,30 @@ module.exports = {
       },
       url: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       previewImage: {
         type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
       },
       spotId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Spots'},
+        onDelete: "CASCADE",
+        allowNull: false
       },
       reviewId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Reviews'},
+        onDelete: 'CASCADE',
+        allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Users'},
+        onDelete: 'CASCADE',
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

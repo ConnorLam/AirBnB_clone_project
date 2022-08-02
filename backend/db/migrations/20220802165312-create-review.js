@@ -10,15 +10,23 @@ module.exports = {
       },
       review: {
         type: Sequelize.TEXT,
+        allowNull: false
       },
       stars: {
         type: Sequelize.INTEGER,
+        allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,
+        references: { model: "Users" },
+        onDelete: "CASCADE",
+        allowNull: false,
       },
       spotId: {
         type: Sequelize.INTEGER,
+        references: { model: "Spots" },
+        onDelete: "CASCADE",
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
