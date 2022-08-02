@@ -59,9 +59,9 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           min: -180,
           max: 180,
-          invalidLatitude(){
-            if (this.lng > 90 || this.lng < -90){
-              throw new Error('Invalid Latitude')
+          invalidLongitude(){
+            if (this.lng > 180 || this.lng < -180){
+              throw new Error('Invalid Longitude')
             }
           }
         }

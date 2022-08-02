@@ -22,13 +22,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Spots'},
         onDelete: "CASCADE",
-        allowNull: false
+        // allowNull: false
       },
       reviewId: {
         type: Sequelize.INTEGER,
         references: {model: 'Reviews'},
         onDelete: 'CASCADE',
-        allowNull: false
+        // allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,
