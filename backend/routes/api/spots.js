@@ -173,7 +173,7 @@ router.get('/', async (req, res) => {
     res.json({Spots: spotArr})
 })
 
-router.get('/current', restoreUser, async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
     const {user} = req
     // console.log(user)
     if (user){
