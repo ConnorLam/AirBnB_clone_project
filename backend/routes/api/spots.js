@@ -137,9 +137,9 @@ router.get('/', async (req, res) => {
     for(let spot of allSpots){
         let Spots = {}
         Spots.id = spot.id,
+        Spots.ownerId = spot.ownerId,
         Spots.address = spot.address,
         Spots.city = spot.city,
-        Spots.ownerId = spot.ownerId,
         Spots.state = spot.state,
         Spots.country = spot.country,
         Spots.lat = spot.lat,
@@ -196,9 +196,51 @@ router.get('/current', restoreUser, async (req, res) => {
             
         })
         
-        console.log(userSpots)
-        return res.json(userSpots)
-    }
+        let spotArr = [];
+
+        for (let spot of userSpots) {
+            let Spots = {};
+            (Spots.id = spot.id),
+            (Spots.ownerId = spot.ownerId),
+            (Spots.address = spot.address),
+            (Spots.city = spot.city),
+            (Spots.state = spot.state),
+            (Spots.country = spot.country),
+            (Spots.lat = spot.lat),
+            (Spots.lng = spot.lng),
+            (Spots.name = spot.name),
+            (Spots.description = spot.description),
+            (Spots.price = spot.price),
+            (Spots.createdAt = spot.createdAt),
+            (Spots.updatedAt = spot.updatedAt),
+            (Spots.avgRating = spot.avgRating);
+
+          let images = await Image.findAll({
+            where: { spotId: spot.id },
+            attributes: ["url", "previewImage"],
+            raw: true,
+          });
+
+          for (let image of images) {
+            if (image.previewImage === 1) {
+              Spots.previewImage = image.url;
+            }
+          }
+          if (!Spots.previewImage) {
+            Spots.previewImage = null;
+          }
+
+          spotArr.push(Spots);
+        }
+
+        // console.log()
+        if(spotArr.length >= 1){
+            return res.json({Spots: spotArr})
+        } else {
+            res.status(404)
+            return res.json({message: 'User does not own any spots'})
+        }
+    } 
 
 })
 
