@@ -85,32 +85,91 @@ const router = express.Router();
 //     res.json({Spots})
 // })
 
-router.get("/", async (req, res) => {
-  const Spots = await Spot.findAll({
-    attributes: {
-      include: [
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
-        [sequelize.literal('Images.url'), 'previewImage']
-      ],
+// router.get("/", async (req, res) => {
+//   const Spots = await Spot.findAll({
+//     attributes: {
+//       include: [
+//         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+//         [sequelize.literal('Images.url'), 'previewImage']
+//       ],
 
-    },
-    include: [
+//     },
+//     include: [
+//         {
+//             model: Review,
+//             attributes: [],
+//         },
+//         {
+//             model: Image,
+//             where: {
+//                 previewImage: true
+//             },
+//             attributes: []
+//         }
+//     ],
+//     group: ["Spot.id"],
+//   });
+
+//   return res.json({Spots});
+// });
+
+router.get('/', async (req, res) => {
+    const allSpots = await Spot.findAll({
+      attributes: {
+        include: [
+            [
+                sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"
+            ],
+        ],
+      },
+      include: [
         {
             model: Review,
-            attributes: [],
-        },
-        {
-            model: Image,
-            where: {
-                previewImage: true
-            },
             attributes: []
         }
-    ],
-    group: ["Spot.id"],
-  });
+      ],
+      group: ['Spot.id'],
+      raw: true
+    });
 
-  return res.json({Spots});
-});
+    let spotArr = []
+
+    for(let spot of allSpots){
+        let Spots = {}
+        Spots.id = spot.id,
+        Spots.address = spot.address,
+        Spots.city = spot.city,
+        Spots.ownerId = spot.ownerId,
+        Spots.state = spot.state,
+        Spots.country = spot.country,
+        Spots.lat = spot.lat,
+        Spots.lng = spot.lng,
+        Spots.name = spot.name,
+        Spots.description = spot.description,
+        Spots.price = spot.price,
+        Spots.createdAt = spot.createdAt,
+        Spots.updatedAt = spot.updatedAt,
+        Spots.avgRating = spot.avgRating
+
+        let images = await Image.findAll({
+            where: {spotId: spot.id},
+            attributes: ['url', 'previewImage'],
+            raw: true
+        })
+
+        for(let image of images){
+            if(image.previewImage === 1){
+                Spots.previewImage = image.url
+            }
+        }
+        if(!Spots.previewImage) {
+            Spots.previewImage = null
+        }
+
+        spotArr.push(Spots)
+    }
+
+    res.json({Spots: spotArr})
+})
 
 module.exports = router
