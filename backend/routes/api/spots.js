@@ -158,7 +158,7 @@ router.get('/', async (req, res) => {
         })
 
         for(let image of images){
-            if(image.previewImage === 1){
+            if(image.previewImage){
                 Spots.previewImage = image.url
             }
         }
@@ -222,7 +222,7 @@ router.get('/current', restoreUser, async (req, res) => {
           });
 
           for (let image of images) {
-            if (image.previewImage === 1) {
+            if (image.previewImage) {
               Spots.previewImage = image.url;
             }
           }
