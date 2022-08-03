@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     spotId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     reviewId: {
       type: DataTypes.INTEGER,
