@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { setTokenCookie, restoreUser } = require("../../utils/auth");
+const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
 const { User, Spot, Review, Image, Booking, sequelize } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -368,7 +368,7 @@ router.get('/:spotId', async (req, res) => {
     ];
 
 
-router.post('/', restoreUser, validatePost, async (req, res) => {
+router.post('/', requireAuth, validatePost, async (req, res) => {
     const {user} = req
     const id = user.id
     const {address, city, state, country, lat, lng, name, description, price} = req.body
@@ -389,6 +389,45 @@ router.post('/', restoreUser, validatePost, async (req, res) => {
     res.json(newSpot)
 })
 
+router.post("/:spotId/images", requireAuth, async (req, res) => {
+    const {user} = req
+    const {url, previewImage} = req.body
+
+    const spot = await Spot.findOne({
+        where: {id: req.params.spotId}
+    })
+    
+    if (!spot){
+        return res.status(404),
+          res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404,
+          });
+    }
+
+    let newImage;
+    if(spot.ownerId === user.id){
+        newImage = await Image.create({
+            url,
+            previewImage,
+            spotId: req.params.spotId,
+            reviewId: null,
+            userId: user.id,
+        })
+    } else {
+        res.status(401)
+        res.json({
+            message: 'Unauthorized, must be owner to post an image',
+            statusCode: 401
+        })
+    }
+
+    res.json({
+        id: newImage.id,
+        imageableId: newImage.spotId,
+        url: newImage.url
+    })
+});
 
 
 // console.log(check('     '.notEmpty().withMessage('test'), handleValidationErrors))
