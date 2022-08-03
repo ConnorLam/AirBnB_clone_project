@@ -28,7 +28,7 @@ module.exports = {
      },
      {
        url: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.bayshorehomesales.com%2Fcm%2Fdpl%2Fimages%2Flocations%2F82%2Fmain%2F82.jpg&imgrefurl=https%3A%2F%2Fwww.bayshorehomesales.com%2Fcommunities%2FTheVillageatSixFlags&tbnid=RGlF07f3gfU2uM&vet=12ahUKEwj6lZqM_aj5AhV5AjQIHRQ-CBcQMygAegUIARC7AQ..i&docid=5eQHINtyyXXxwM&w=2000&h=1000&q=sixflags%20home&ved=2ahUKEwj6lZqM_aj5AhV5AjQIHRQ-CBcQMygAegUIARC7AQ",
-       previewImage: true,
+       previewImage: false,
        spotId: 3,
        reviewId: null,
        userId: 3
