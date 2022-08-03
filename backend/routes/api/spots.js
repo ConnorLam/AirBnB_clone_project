@@ -266,7 +266,7 @@ router.get('/:spotId', async (req, res) => {
             attributes: ['id', 'firstName', 'lastName']
         }
     ],
-      group: ["Spot.id"],
+      group: ["Spot.id", 'User.id'],
     //   raw:true 
     });
 
