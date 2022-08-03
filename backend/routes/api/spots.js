@@ -5,6 +5,7 @@ const { User, Spot, Review, Image, Booking, sequelize } = require("../../db/mode
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { application } = require("express");
+const { Op } = require('sequelize')
 
 const router = express.Router();
 
@@ -158,7 +159,7 @@ router.get('/', async (req, res) => {
         })
 
         for(let image of images){
-            if(image.previewImage === 1){
+            if(image.previewImage){
                 Spots.previewImage = image.url
             }
         }
@@ -222,7 +223,7 @@ router.get('/current', restoreUser, async (req, res) => {
           });
 
           for (let image of images) {
-            if (image.previewImage === 1) {
+            if (image.previewImage) {
               Spots.previewImage = image.url;
             }
           }
@@ -242,6 +243,82 @@ router.get('/current', restoreUser, async (req, res) => {
         }
     } 
 
+})
+
+router.get('/:spotId', async (req, res) => {
+    const id = req.params.spotId
+
+    const spot = await Spot.findOne({
+      where: { id: id },
+      attributes: {
+        include: [
+          [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
+          [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+        ],
+      },
+      include: [
+        {
+            model: Review,
+            attributes: [],
+        },
+        {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+        }
+    ],
+      group: ["Spot.id"],
+    //   raw:true 
+    });
+
+    // let spots = eval(spot)
+    console.log('111111111', spot)
+
+    const imagesData = await Image.findAll({
+        where: {spotId: req.params.spotId}
+    })
+    console.log(imagesData)
+
+
+    let imagesObj;
+    for (let image of imagesData){
+        imagesObj = {}
+        imagesObj.id = image.id
+        if(image.spotId){
+            imagesObj.imageableId = image.spotId
+        } else {
+            imagesObj.imageableId = image.reviewId
+        }
+        imagesObj.url = image.url
+
+    }
+
+
+    let details = {
+        id: spot.id,
+        ownerId: spot.ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+        price: spot.price,
+        createdAt: spot.createdAt,
+        updatedAt: spot.updatedAt,
+        numReviews: spot.numReviews,
+        avgRating: spot.avgRating,
+        Images: [{...imagesObj}],
+        Owner: {
+            id: spot.User.dataValues.id,
+            firstName: spot.User.dataValues.firstName,
+            lastName: spot.User.dataValues.lastName
+        }
+        
+    }
+    
+    res.json(details)
 })
 
 module.exports = router
