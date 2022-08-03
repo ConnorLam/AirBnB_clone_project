@@ -270,6 +270,13 @@ router.get('/:spotId', async (req, res) => {
     //   raw:true 
     });
 
+    if(!spot){
+        res.status(404)
+        res.json({
+            message: `Spot couldn't be found`,
+            statusCode: 404
+        })
+    }
     // let spots = eval(spot)
     console.log('111111111', spot)
 
