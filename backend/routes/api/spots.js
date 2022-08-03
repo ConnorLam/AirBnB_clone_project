@@ -86,7 +86,7 @@ const router = express.Router();
 // })
 
 router.get("/", async (req, res) => {
-  let allSpots = await Spot.findAll({
+  const Spots = await Spot.findAll({
     attributes: {
       include: [
         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
@@ -110,7 +110,7 @@ router.get("/", async (req, res) => {
     group: ["Spot.id"],
   });
 
-  return res.json(allSpots);
+  return res.json({Spots});
 });
 
 module.exports = router
