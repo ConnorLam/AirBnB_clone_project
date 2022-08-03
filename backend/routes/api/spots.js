@@ -172,4 +172,34 @@ router.get('/', async (req, res) => {
     res.json({Spots: spotArr})
 })
 
+router.get('/current', restoreUser, async (req, res) => {
+    const {user} = req
+    // console.log(user)
+    if (user){
+        const userSpots = await Spot.findAll({
+            where: {ownerId: user.id},
+            attributes: {
+                include: [
+                    [
+                        sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'
+                    ]
+                ]
+            },
+            include: [
+                {
+                    model: Review,
+                    attributes: []
+                }
+            ],
+            group: ['Spot.id'],
+            raw:true
+            
+        })
+        
+        console.log(userSpots)
+        return res.json(userSpots)
+    }
+
+})
+
 module.exports = router
