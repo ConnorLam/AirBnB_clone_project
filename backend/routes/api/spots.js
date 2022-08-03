@@ -328,4 +328,70 @@ router.get('/:spotId', async (req, res) => {
     res.json(details)
 })
 
+// req.body destructure to get all keys:values needs
+// use the restore user to get a user and their id
+// create a new spot with everything
+// have validations for if everything is there (maybe a check like you have in the user routes?)
+// console.log(check)
+    const validatePost = [
+      check("address")
+        .exists({ checkFalsy: true })
+        .withMessage("Street address is required"),
+      check("city")
+        .exists({ checkFalsy: true })
+        .withMessage("City is required"),
+      check("state")
+        .exists({ checkFalsy: true })
+        .withMessage("State is required"),
+      check("country")
+        .exists({ checkFalsy: true })
+        .withMessage("Country is required"),
+      check("lat")
+        .exists({ checkFalsy: true })
+        .isNumeric({ min: -90, max: 90 })
+        .withMessage("Latitude is not valid"),
+      check("lng")
+        .exists({ checkFalsy: true })
+        .isNumeric({ min: -180, max: 180 })
+        .withMessage("Longitude is not valid"),
+      check("name")
+        .exists({ checkFalsy: true })
+        .isLength({ max: 49 })
+        .withMessage("Name must be less than 50 characters"),
+      check("description")
+        .exists({ checkFalsy: true })
+        .withMessage("Description is required"),
+      check("price")
+        .exists({ checkFalsy: true })
+        .withMessage("Price per day is required"),
+      handleValidationErrors,
+    ];
+
+
+router.post('/', restoreUser, validatePost, async (req, res) => {
+    const {user} = req
+    const id = user.id
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
+
+    const newSpot = await Spot.create({
+        ownerId: id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    })
+
+    res.json(newSpot)
+})
+
+
+
+// console.log(check('     '.notEmpty().withMessage('test'), handleValidationErrors))
+
+
 module.exports = router
