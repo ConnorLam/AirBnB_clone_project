@@ -11,22 +11,82 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Spot.belongsTo(models.User, {foreignKey: 'ownerId'})
+      Spot.hasMany(models.Booking, {foreignKey: 'spotId'})
+      Spot.hasMany(models.Image, {foreignKey: 'spotId'})
+      Spot.hasMany(models.Review, {foreignKey: 'spotId'})
     }
   }
-  Spot.init({
-    ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Spot',
-  });
+  Spot.init(
+    {
+      ownerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      country: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lat: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        validate: {
+          min: -90,
+          max: 90,
+          invalidLatitude(){
+            if (this.lat > 90 || this.lat < -90){
+              throw new Error('Invalid Latitude')
+            }
+          }
+        }
+      },
+      lng: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        validate: {
+          min: -180,
+          max: 180,
+          invalidLongitude(){
+            if (this.lng > 180 || this.lng < -180){
+              throw new Error('Invalid Longitude')
+            }
+          }
+        }
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [10, 500]
+        }
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: "Spot",
+    }
+  );
   return Spot;
 };
