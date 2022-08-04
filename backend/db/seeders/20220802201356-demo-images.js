@@ -31,7 +31,21 @@ module.exports = {
        previewImage: false,
        spotId: 3,
        reviewId: null,
-       userId: 3
+       userId: 3,
+     },
+     {
+       url: "https://www.google.com/search?q=google+images+house&rlz=1C5CHFA_enUS968US973&sxsrf=ALiCzsYlWCIbzhKD_xEZ8kZ0ZOnLYNXskg:1659629175534&tbm=isch&source=iu&ictx=1&vet=1&fir=PCj5VWGURIThbM%252Cw_edFuvJNI2ApM%252C_%253BcjQOiJJH3Z4yZM%252CT55zsjz2ITUg7M%252C_%253BGVcXzOd3_TQV2M%252C6inABsBslRZ-VM%252C_%253BGclkGao6tuZgDM%252C2uNKdPs1uKjSCM%252C_%253Bq6Jp0Ta9mOhtJM%252CnDO3u3UfKpV1AM%252C_%253BIoVF-e5xUTzZMM%252C_T57MqD5osSFMM%252C_%253BBMn_TiKksH5oXM%252CU1fuiZE5efZUEM%252C_%253B3YtEHtoM2Hma4M%252C9_OLnaPpz1kR3M%252C_%253B7YbLuGBb_o-56M%252CbO7Qudyz-02aqM%252C_%253BZnn8pC4J6QFc1M%252CqMwDAJDX8iPIOM%252C_%253B_7vXHpIgoxUYkM%252CmyxG20UTKcewIM%252C_%253Br_CaE0ZtM0dByM%252C61CG1-By7LdgQM%252C_&usg=AI4_-kSFX0SkLv-oD7lwlg7rUbZNSMzmTQ&sa=X&ved=2ahUKEwjJt927yK35AhXAD0QIHexiDsMQ9QF6BAgDEAE#imgrc=PCj5VWGURIThbM",
+       previewImage: false,
+       spotId: null,
+       reviewId: 1,
+       userId: 1,
+     },
+     {
+       url: "this is a fake link",
+       previewImage: false,
+       spotId: null,
+       reviewId: 1,
+       userId: 1,
      },
    ]);
   },
