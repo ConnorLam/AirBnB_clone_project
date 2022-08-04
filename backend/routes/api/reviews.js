@@ -77,6 +77,13 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
         });
     }
 
+    if(review.userId !== user.id){
+        return res.json({
+          message: "Forbidden",
+          statusCode: 403,
+        });
+    }
+
     if(images.length >= 10){
         res.statusCode = 403
         return res.json({
@@ -104,7 +111,51 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     res.json(response)
 })
 
+const validateReview = [
+  check("review")
+    .exists({ checkFalsy: true })
+    .withMessage("Review text is required."),
+  check("stars")
+    .exists({ checkFalsy: true })
+    .isNumeric({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
 
+  handleValidationErrors,
+];
+
+router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
+    const {user} = req
+    const {review, stars} = req.body
+    const id = user.id
+    const reviewData = await Review.findByPk(req.params.reviewId)
+    if(!reviewData){
+        res.statusCode = 404
+        return res.json({
+          message: "Review couldn't be found",
+          statusCode: 404,
+        });
+    }
+
+    if(user.id !== reviewData.userId){
+        res.statusCode = 403;
+        return res.json({
+          message: "Maximum number of images for this resource was reached",
+          statusCode: 403,
+        });
+    }
+
+    reviewData.set({
+        userId: user.id,
+        spotId: reviewData.spotId,
+        review,
+        stars
+    })
+    await reviewData.save()
+
+    res.json(reviewData)
+
+    
+})
 
 
 module.exports = router
