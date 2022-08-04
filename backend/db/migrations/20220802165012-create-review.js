@@ -39,8 +39,12 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
+    await queryInterface.addIndex('Reviews',
+    ['spotId', 'userId'],
+    {unique: true})
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Reviews');
+    await queryInterface.removeIndex('Reviews', ['spotId', 'userId'])
   }
 };
