@@ -429,6 +429,44 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     })
 });
 
+router.put('/:spotId', requireAuth, validatePost, async (req, res) => {
+    const {user} = req
+    const {address, city, state, country, lat, lng, name, description, price} = req.body;
+    const id = user.id
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if(!spot){
+        res.statusCode = 404
+        return res.json({
+          message: "Spot couldn't be found",
+          statusCode: 404,
+        });
+    }
+
+    if(spot.ownerId !== id){
+        res.statusCode = 401
+        return res.json({
+          message: "Unauthorized, must be owner to edit a spot",
+          statusCode: 401,
+        });
+    }
+
+    spot.set({
+      ownerId: id,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    });
+
+    await spot.save()
+    res.json(spot)
+})
 
 // console.log(check('     '.notEmpty().withMessage('test'), handleValidationErrors))
 
