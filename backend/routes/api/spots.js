@@ -289,16 +289,14 @@ router.get('/:spotId', async (req, res) => {
     let imagesArr = []
     for (let image of imagesData){
         let imagesObj = {}
-        imagesObj.id = image.id
         if(image.spotId){
-            imagesObj.imageableId = image.spotId
-        } else {
-            imagesObj.imageableId = image.reviewId
-        }
-        imagesObj.url = image.url
-        imagesArr.push(imagesObj)
+          imagesObj.id = image.id
+          imagesObj.imageableId = image.spotId
+          imagesObj.url = image.url
+          imagesArr.push(imagesObj)
+        } 
     }
-    console.log('                 ', imagesArr)
+    console.log('        test         ', imagesArr)
 
     let details = {
         id: spot.id,
@@ -496,6 +494,32 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
       message: "Successfully deleted",
       statusCode: 200,
     });
+
+})
+
+router.get('/:spotId/reviews', async(req, res) => {
+  const Reviews = await Review.findAll({
+    where: {spotId: req.params.spotId},
+    include: [
+      {
+        model: User, 
+        attributes: ['id', 'firstName', 'lastName']
+      },
+      {
+        model: Image,
+        attributes: ['id', ['spotId', 'imageableId'], 'url']
+      }
+    ]
+  })
+
+  // let review = JSON.parse(JSON.stringify(Reviews));
+  // const images = await Image.findAll({
+  //   where: {
+  //     [Op.not]: [reviewId: null]
+  //   }
+  // })
+
+  res.json({Reviews})
 
 })
 // console.log(check('     '.notEmpty().withMessage('test'), handleValidationErrors))
