@@ -78,6 +78,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     }
 
     if(review.userId !== user.id){
+        res.statusCode = 403
         return res.json({
           message: "Forbidden",
           statusCode: 403,
@@ -139,7 +140,7 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
     if(user.id !== reviewData.userId){
         res.statusCode = 403;
         return res.json({
-          message: "Maximum number of images for this resource was reached",
+          message: "Forbidden",
           statusCode: 403,
         });
     }
