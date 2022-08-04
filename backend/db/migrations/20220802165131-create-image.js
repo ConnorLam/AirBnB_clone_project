@@ -11,7 +11,7 @@ module.exports = {
       url: {
         type: Sequelize.TEXT,
         allowNull: false,
-        unique: true
+        // unique: true
       },
       previewImage: {
         type: Sequelize.BOOLEAN,
