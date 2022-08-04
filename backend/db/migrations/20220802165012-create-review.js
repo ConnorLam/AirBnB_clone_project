@@ -8,14 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      review: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      stars: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       userId: {
         type: Sequelize.INTEGER,
         references: { model: "Users" },
@@ -27,6 +19,14 @@ module.exports = {
         references: { model: "Spots" },
         onDelete: "CASCADE",
         allowNull: false,
+      },
+      review: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      stars: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
