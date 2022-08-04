@@ -271,24 +271,24 @@ router.get('/:spotId', async (req, res) => {
     });
 
     if(!spot){
-        res.status(404)
-        res.json({
+        res.statusCode = 404
+        return res.json({
             message: `Spot couldn't be found`,
             statusCode: 404
         })
     }
     // let spots = eval(spot)
-    console.log('111111111', spot)
+    // console.log('111111111', spot)
 
     const imagesData = await Image.findAll({
         where: {spotId: req.params.spotId}
     })
-    console.log(imagesData)
+    // console.log(imagesData)
 
 
-    let imagesObj;
+    let imagesArr = []
     for (let image of imagesData){
-        imagesObj = {}
+        let imagesObj = {}
         imagesObj.id = image.id
         if(image.spotId){
             imagesObj.imageableId = image.spotId
@@ -296,9 +296,9 @@ router.get('/:spotId', async (req, res) => {
             imagesObj.imageableId = image.reviewId
         }
         imagesObj.url = image.url
-
+        imagesArr.push(imagesObj)
     }
-
+    console.log('                 ', imagesArr)
 
     let details = {
         id: spot.id,
@@ -316,7 +316,7 @@ router.get('/:spotId', async (req, res) => {
         updatedAt: spot.updatedAt,
         numReviews: spot.numReviews,
         avgRating: spot.avgRating,
-        Images: [{...imagesObj}],
+        Images: imagesArr,
         Owner: {
             id: spot.User.dataValues.id,
             firstName: spot.User.dataValues.firstName,
@@ -468,6 +468,36 @@ router.put('/:spotId', requireAuth, validatePost, async (req, res) => {
     res.json(spot)
 })
 
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const {user} = req
+    const id = user.id
+
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if(!spot){
+        res.statusCode = 404
+        return res.json({
+          message: "Spot couldn't be found",
+          statusCode: 404,
+        });
+    }
+
+    if (spot.ownerId !== id){
+        res.statusCode = 401
+        return res.json({
+          message: "Unauthorized, must be owner to delete a spot",
+          statusCode: 401,
+        });
+    }
+
+    await spot.destroy()
+    res.statusCode = 200
+    return res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+
+})
 // console.log(check('     '.notEmpty().withMessage('test'), handleValidationErrors))
 
 
