@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       startDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         // validate: {
         //   isDate: true,
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         // },
       },
       endDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         // validate: {
         //   isDate: true,
