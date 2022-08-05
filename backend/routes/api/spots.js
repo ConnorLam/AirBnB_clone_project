@@ -214,7 +214,7 @@ router.get('/current', requireAuth, async (req, res) => {
             (Spots.price = spot.price),
             (Spots.createdAt = spot.createdAt),
             (Spots.updatedAt = spot.updatedAt),
-            (Spots.avgRating = spot.avgRating);
+            (Spots.avgRating = spot.avgRating.toFixed());
 
           let images = await Image.findAll({
             where: { spotId: spot.id },
