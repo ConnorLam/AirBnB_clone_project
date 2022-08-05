@@ -28,18 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       startDate: {
         type: DataTypes.DATE,
         allowNull: false,
-        validate: {
-          isDate: true,
-          isAfter: new Date().toISOString().slice(0, 10), //gives date today
-        },
+        // validate: {
+        //   isDate: true,
+        //   isAfter: new Date().toISOString().slice(0, 10), //gives date today
+        // },
       },
       endDate: {
         type: DataTypes.DATE,
         allowNull: false,
-        validate: {
-          isDate: true,
-          isAfter: this.startDate
-        },
+        // validate: {
+        //   isDate: true,
+        //   isAfter: this.startDate
+        // },
       },
     },
     {

@@ -413,11 +413,11 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
             userId: user.id,
         })
     } else {
-        res.status(401)
+        res.status(401);
         res.json({
-            message: 'Unauthorized, must be owner to post an image',
-            statusCode: 401
-        })
+          message: "Unauthorized, must be owner to post an image",
+          statusCode: 401,
+        });
     }
 
     res.json({
@@ -617,6 +617,41 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     return res.json({Bookings: bookings})
   }
 
+})
+
+router.post('/:spotId/bookings', requireAuth, async(req, res) => {
+  const {user} = req
+  const spot = await Spot.findByPk(req.params.spotId);
+  let {startDate, endDate} = req.body
+
+  startDate = new Date(startDate)
+  endDate = new Date(endDate)
+
+  if (!spot) {
+    res.statusCode = 404;
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  if(spot.ownerId === user.id){
+    res.statusCode = 403
+    return res.json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+
+  const newBooking = await Booking.create({
+    spotId: spot['id'],
+    userId: user['id'],
+    startDate,
+    endDate
+  })
+
+  console.log(newBooking.id)
+  res.json(newBooking)
 })
 
 module.exports = router
