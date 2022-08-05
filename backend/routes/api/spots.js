@@ -413,11 +413,11 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
             userId: user.id,
         })
     } else {
-        res.status(401)
+        res.status(401);
         res.json({
-            message: 'Unauthorized, must be owner to post an image',
-            statusCode: 401
-        })
+          message: "Unauthorized, must be owner to post an image",
+          statusCode: 401,
+        });
     }
 
     res.json({
@@ -618,5 +618,85 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
   }
 
 })
+
+
+router.post('/:spotId/bookings', requireAuth, async(req, res) => {
+  const {user} = req
+  const spot = await Spot.findByPk(req.params.spotId);
+
+  if (!spot) {
+    res.statusCode = 404;
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  const {startDate, endDate} = req.body
+  
+  const bookings = await Booking.findAll({
+    where: {
+      [Op.and]: [
+        {startDate: startDate}, {spotId: spot.id}
+      ]
+    },
+  })
+
+  // const bookingSet = new Set(booking)
+  // console.log(booking)
+
+
+  // startDate = new Date(startDate)
+  // endDate = new Date(endDate)
+  // console.log(startDate.toLocaleDateString())
+
+  if(spot.ownerId === user.id){
+    res.statusCode = 403
+    return res.json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+
+  // console.log(new Date(startDate).getTime());
+  // console.log(new Date(endDate).getTime());
+
+  if(new Date(startDate).getTime() >= new Date(endDate).getTime()){
+    res.statusCode = 400
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        endDate: "endDate cannot be on or before startDate",
+      },
+    });
+  }
+
+  // console.log(bookings.length);
+  if(bookings.length >= 1){
+    res.statusCode = 403
+    return res.json({
+      message: "Sorry, this spot is already booked for the specified dates",
+      statusCode: 403,
+      errors: {
+        startDate: "Start date conflicts with an existing booking",
+        endDate: "End date conflicts with an existing booking",
+      },
+    });
+  }
+// console.log(startDate.getTime())
+
+  
+
+  const newBooking = await Booking.create({
+    spotId: spot['id'],
+    userId: user['id'],
+    startDate: startDate,
+    endDate: endDate
+  })
+
+  // console.log(newBooking.id)
+  res.json(newBooking)
+})
+
 
 module.exports = router
