@@ -619,13 +619,14 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 })
 
+// const validateBooking = [
+//   check('startDate')
+//     .
+// ]
+
 router.post('/:spotId/bookings', requireAuth, async(req, res) => {
   const {user} = req
   const spot = await Spot.findByPk(req.params.spotId);
-  let {startDate, endDate} = req.body
-
-  startDate = new Date(startDate)
-  endDate = new Date(endDate)
 
   if (!spot) {
     res.statusCode = 404;
@@ -634,6 +635,20 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
       statusCode: 404,
     });
   }
+  
+  const bookings = await Booking.findAll({
+    where: {spotId: spot.id},
+    raw: true
+  })
+
+  // const bookingSet = new Set(booking)
+  // console.log(booking)
+
+  let {startDate, endDate} = req.body
+
+  startDate = new Date(startDate)
+  endDate = new Date(endDate)
+
 
   if(spot.ownerId === user.id){
     res.statusCode = 403
@@ -643,6 +658,39 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
     });
   }
 
+  if(startDate.getTime() >= endDate.getTime()){
+    res.statusCode = 400
+    return res.json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        endDate: "endDate cannot be on or before startDate",
+      },
+    });
+  }
+
+  // console.log(startDate.toLocaleDateString());
+  for(let booking of bookings){
+    let bookingStartDate = booking.startDate
+    let bookingEndDate = booking.endDate 
+    if (
+      bookingStartDate.toLocaleDateString() === startDate.toLocaleDateString()
+    ) {
+      res.statusCode = 403;
+      return res.json({
+        message: "Sorry, this spot is already booked for the specified dates",
+        statusCode: 403,
+        errors: {
+          startDate: "Start date conflicts with an existing booking",
+          endDate: "End date conflicts with an existing booking",
+        },
+      });
+    }
+  }
+console.log(startDate.getTime())
+
+  
+
   const newBooking = await Booking.create({
     spotId: spot['id'],
     userId: user['id'],
@@ -650,7 +698,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
     endDate
   })
 
-  console.log(newBooking.id)
+  // console.log(newBooking.id)
   res.json(newBooking)
 })
 
