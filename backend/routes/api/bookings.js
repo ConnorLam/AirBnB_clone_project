@@ -21,9 +21,10 @@ router.get('/current', async (req, res) => {
 
     for(let booking of bookings){
         const spot = await Spot.findByPk(booking.spotId, {
-            attributes: {exclude: ['createdAt', 'updatedAt', 'description']}
+            attributes: {exclude: ['createdAt', 'updatedAt', 'description']},
+            raw: true
         })
-
+        console.log(spot)
         let image = await Image.findOne({
             where: {
                 spotId: booking.spotId,
@@ -49,7 +50,7 @@ router.get('/current', async (req, res) => {
         }
         bookingsArr.push(bookingObj)
     }
-    
+
     console.log(bookingsArr)
     res.json({Bookings: bookingsArr})
 })
