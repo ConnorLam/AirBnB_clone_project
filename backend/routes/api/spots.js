@@ -150,7 +150,7 @@ router.get('/', async (req, res) => {
         Spots.price = spot.price,
         Spots.createdAt = spot.createdAt,
         Spots.updatedAt = spot.updatedAt,
-        Spots.avgRating = spot.Number(avgRating).toFixed(0)
+        Spots.avgRating = spot.avgRating
 
         let images = await Image.findAll({
             where: {spotId: spot.id},
@@ -214,7 +214,7 @@ router.get('/current', requireAuth, async (req, res) => {
             (Spots.price = spot.price),
             (Spots.createdAt = spot.createdAt),
             (Spots.updatedAt = spot.updatedAt),
-            (Spots.avgRating = spot.Number(avgRating).toFixed(0));
+            (Spots.avgRating = spot.avgRating);
 
           let images = await Image.findAll({
             where: { spotId: spot.id },
@@ -313,7 +313,7 @@ router.get('/:spotId', async (req, res) => {
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
         numReviews: spot.numReviews,
-        avgRating: spot.Number(avgRating).toFixed(0),
+        avgRating: spot.avgRating,
         Images: imagesArr,
         Owner: {
             id: spot.User.dataValues.id,
