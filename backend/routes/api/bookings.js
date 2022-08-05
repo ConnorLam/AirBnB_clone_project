@@ -75,7 +75,7 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
 
     if(booking.userId !== id){
         res.statusCode = 403
-        res.json({
+        return res.json({
           message: "Forbidden",
           statusCode: 403,
         });
@@ -129,6 +129,47 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
 })
 
 
+router.delete('/:bookingId', requireAuth, async(req, res) => {
+    const {user} = req
+    const id = user.id
+    const today = new Date().toISOString().slice(0, 10);
+
+
+    const booking = await Booking.findByPk(req.params.bookingId, {
+      where: { userId: id },
+    });
+
+    if(!booking){
+        res.statusCode = 404
+        return res.json({
+          message: "Booking couldn't be found",
+          statusCode: 404,
+        });
+    }
+
+    if(booking.userId !== id){
+        res.statusCode = 403;
+        return res.json({
+          message: "Forbidden",
+          statusCode: 403,
+        });
+    }
+
+    if(booking.startDate < today){
+        res.statusCode = 403
+        return res.json({
+          message: "Bookings that have been started can't be deleted",
+          statusCode: 403,
+        });
+    }
+
+    await booking.destroy()
+    res.statusCode = 200
+    return res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+})
 
 
 
