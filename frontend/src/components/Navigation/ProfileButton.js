@@ -1,10 +1,49 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux' 
+import { logout } from '../../store/session'
 
 const ProfileButton = () => {
+    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
+
+
+    const [showMenu, setShowMenu] = useState(false);
+
+    const openMenu = () => {
+        if (showMenu) return
+        setShowMenu(true)
+    }
+
+    useEffect(() => {
+        const closeMenu = () => {
+            if(showMenu){
+                setShowMenu(false)
+            }
+        }
+
+        document.addEventListener('click', closeMenu)
+        return () => document.removeEventListener('click', closeMenu)
+    }, [showMenu])
+
+    const logOut = (e) => {
+        e.preventDefault()
+        dispatch(logout())
+    }
+
     return (
-        <div>
-            <i className="fa-solid fa-user"></i>
-        </div>
+      <div>
+        {/* () => showMenu === false ? setShowMenu(true) : showMenu */}
+        <button onClick={openMenu}>
+          <i className="fas fa-user-circle"></i>
+        </button>
+        {showMenu && (
+            <ul>
+                <li>{user.username}</li>
+                <li>{user.email}</li>
+                <button onClick={logOut}> Log Out</button>
+            </ul>
+        )}
+      </div>
     );
 }
 

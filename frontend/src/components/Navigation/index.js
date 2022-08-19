@@ -1,11 +1,13 @@
 import {NavLink} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import ProfileButton from './ProfileButton'
+import {useState} from 'react'
 
 
 const Navigation = () => {
 
     const user = useSelector(state => state.session.user)
+
 
     let session;
     if(!user){
