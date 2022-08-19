@@ -4,6 +4,7 @@ import {Route, Switch} from 'react-router-dom'
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SingupFormPage';
 import {useDispatch} from 'react-redux'
+import Navigation from './components/Navigation'
 
 
 function App() {
@@ -15,15 +16,18 @@ function App() {
     dispatch(restoreUser()).then(() => setIsLoaded(true)) //what is setIsLoaded and is loaded
   }, [dispatch])
 
-  return (
-    <Switch>
-      <Route path='/login'>
-        <LoginFormPage />
-      </Route>
-      <Route path='/signup'>
-        <SignupFormPage />
-      </Route>
-    </Switch>
+  return isLoaded && (
+    <>
+      <Navigation />
+      <Switch>
+        <Route path='/login'>
+          <LoginFormPage />
+        </Route>
+        <Route path='/signup'>
+          <SignupFormPage />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
