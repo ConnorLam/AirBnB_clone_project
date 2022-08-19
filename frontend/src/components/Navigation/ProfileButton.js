@@ -2,11 +2,9 @@ import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux' 
 import { logout } from '../../store/session'
 
-const ProfileButton = () => {
-    const user = useSelector(state => state.session.user)
+const ProfileButton = ({user}) => {
+    // const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
-
-
     const [showMenu, setShowMenu] = useState(false);
 
     const openMenu = () => {
@@ -40,7 +38,9 @@ const ProfileButton = () => {
             <ul>
                 <li>{user.username}</li>
                 <li>{user.email}</li>
-                <button onClick={logOut}> Log Out</button>
+                <li>
+                    <button onClick={logOut}> Log Out</button>
+                </li>
             </ul>
         )}
       </div>

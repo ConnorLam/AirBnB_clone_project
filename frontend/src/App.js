@@ -16,17 +16,19 @@ function App() {
     dispatch(restoreUser()).then(() => setIsLoaded(true)) //what is setIsLoaded and is loaded
   }, [dispatch])
 
-  return isLoaded && (
+  return (
     <>
-      <Navigation />
-      <Switch>
-        <Route path='/login'>
-          <LoginFormPage />
-        </Route>
-        <Route path='/signup'>
-          <SignupFormPage />
-        </Route>
-      </Switch>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
+        </Switch>
+      )}
     </>
   );
 }
