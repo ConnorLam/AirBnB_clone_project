@@ -18,9 +18,9 @@ router.use('/reviews', reviewsRouter)
 router.use('/bookings', bookingsRouter)
 router.use('/images', imagesRouter)
 
-router.post('/test', (req, res) => {
-    res.json({ requestBody: req.body })
-})
+// router.post('/test', (req, res) => {
+//     res.json({ requestBody: req.body })
+// })
 
 // router.post('/test', (req, res) => {
 //     res.json({ requestBody: req.body })
