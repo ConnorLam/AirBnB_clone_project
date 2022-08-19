@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import {login} from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import './LoginForm.css'
 
 
 
 const LoginFormPage = () => {
 
-    const history = useHistory()
+    // const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
 
@@ -16,9 +16,7 @@ const LoginFormPage = () => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([])
 
-    if(user) {
-        history.push('/')
-    }
+    if (user) return <Redirect to="/" />;
 
     const onSubmit = (e) => {
         e.preventDefault()
