@@ -30,10 +30,10 @@ export const login = (user) => async (dispatch) => {
             credential, password
         })
     })
-    console.log('this is my response', res)
+    // console.log('this is my response', res)
     if (res.ok){
         const data = await res.json()
-        console.log('this is my data', data)
+        // console.log('this is my data', data)
         dispatch(setUser(data))
     }
 }

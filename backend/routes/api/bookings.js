@@ -24,7 +24,7 @@ router.get('/current', async (req, res) => {
             attributes: {exclude: ['createdAt', 'updatedAt', 'description']},
             raw: true
         })
-        console.log(spot)
+        // console.log(spot)
         let image = await Image.findOne({
             where: {
                 spotId: booking.spotId,
@@ -51,7 +51,7 @@ router.get('/current', async (req, res) => {
         bookingsArr.push(bookingObj)
     }
 
-    console.log(bookingsArr)
+    // console.log(bookingsArr)
     res.json({Bookings: bookingsArr})
 })
 
