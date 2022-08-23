@@ -24,7 +24,7 @@ const SpotById = () => {
 
     function validImage(spot){
         if(spot.Images.length > 0){
-            return spot.Images[0].url
+            return images
         } else {
             return "https://thumbs.dreamstime.com/z/young-man-says-no-white-53544424.jpg";
         }
