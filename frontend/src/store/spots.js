@@ -36,6 +36,7 @@ export const getSpotById = (id) => async dispatch => {
     if(res.ok){
         const spotById = await res.json()
         dispatch(loadSpotById(spotById))
+        return spotById
     }
 }
 
@@ -62,11 +63,11 @@ const spotsReducer = (state = initialState, action) => {
             ...allSpots
         };
         case GET_SPOT_ID:
-            console.log(action.spot)
+            console.log(action.spot.id)
             // console.log(state)
             return {
                 ...state,
-                [action.spots.id]: {
+                [action.spot.id]: {
                     ...state[action.spot.id],
                     ...action.spot
                 }

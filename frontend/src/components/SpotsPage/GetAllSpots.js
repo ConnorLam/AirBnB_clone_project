@@ -25,12 +25,24 @@ const GetSpots = () => {
             <ul>
                 {spotsArr.map(spot => {
                     return (
-                        <li key={spot.id}>
-                            <NavLink className='Spots' to={`/spots/${spot.id}`}> 
-                                {spot.address} {spot.city} {spot.avgRating} {`$${spot.price} night`} 
-                                <img src={spot.previewImage} alt={spot.name}/>
-                            </NavLink>
-                        </li>
+                        <>
+                            <div key={spot.id}>
+                                <NavLink className='Spots' to={`/spots/${spot.id}`}>
+                                    <div>
+                                        <img src={spot.previewImage} alt={spot.name}/>
+                                    </div>
+                                    <div>
+                                        {spot.city}, {spot.state}
+                                    </div>  
+                                    <div>
+                                        {spot.avgRating}
+                                    </div>  
+                                    <div>
+                                        {`$${spot.price} night`} 
+                                    </div>  
+                                </NavLink>
+                            </div>
+                        </>
                     )
                 })}
             </ul>
