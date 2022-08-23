@@ -8,7 +8,7 @@ const SpotById = () => {
     const {spotId} = useParams()
     // console.log(spotId)
     const spot = useSelector(state => state.spots[spotId])
-    // console.log(spot)
+    console.log(spot)
 
     const dispatch = useDispatch()
 
@@ -18,7 +18,7 @@ const SpotById = () => {
 
     if(!spot) return <div>loading</div>
 
-    console.log(spot)
+    console.log(spot.previewImage)
     return(
         <div>
             <div>{spot.name}</div>
