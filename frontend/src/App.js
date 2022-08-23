@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux'
 import Navigation from './components/Navigation'
 import GetSpots from './components/SpotsPage/GetAllSpots';
 import SpotById from './components/SpotsPage/SpotDetails';
+import CreateSpot from './components/SpotFormPage/createSpot';
 
 
 function App() {
@@ -23,11 +24,14 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
           <Route exact path='/'>
             <GetSpots />
+          </Route>
+          <Route exact path={'/spots/create'}>
+            <CreateSpot />
           </Route>
           <Route exact path={'/spots/:spotId'}>
             <SpotById />
