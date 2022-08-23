@@ -35,7 +35,7 @@ const GetSpots = () => {
                                         {spot.city}, {spot.state}
                                     </div>  
                                     <div>
-                                        {spot.avgRating}
+                                        {Number(spot.avgRating).toFixed(2)}
                                     </div>  
                                     <div>
                                         {`$${spot.price} night`} 
