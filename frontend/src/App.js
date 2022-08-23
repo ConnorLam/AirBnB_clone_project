@@ -5,6 +5,8 @@ import {Route, Switch} from 'react-router-dom'
 import SignupFormPage from './components/SignupFormPage';
 import {useDispatch} from 'react-redux'
 import Navigation from './components/Navigation'
+import GetSpots from './components/SpotsPage/GetAllSpots';
+import SpotById from './components/SpotsPage/SpotDetails';
 
 
 function App() {
@@ -23,6 +25,12 @@ function App() {
         <Switch>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path='/'>
+            <GetSpots />
+          </Route>
+          <Route exact path={'/spots/:spotId'}>
+            <SpotById />
           </Route>
         </Switch>
       )}
