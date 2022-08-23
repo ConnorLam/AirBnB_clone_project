@@ -8,7 +8,7 @@ const SpotById = () => {
     const {spotId} = useParams()
     console.log(spotId)
     const parsedSpotId = Number(spotId)
-    const spot = useSelector(state => (state.spots?.[parsedSpotId]))
+    const spot = useSelector(state => (state.spots[parsedSpotId]))
     console.log('this is my selector', spot)
     // console.log(getSpotById.res)
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ const SpotById = () => {
 
     if(!spot || spot === {}) return <div>loading</div>
 
-    let images = spot.Images.map(image => image.url)
+    let images = spot.Images?.map(image => image.url)
     console.log(images)
     return(
         <div>

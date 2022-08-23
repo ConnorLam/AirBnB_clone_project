@@ -71,7 +71,7 @@ export const createOneSpot = (spot) => async dispatch => {
 const initialState = {}
 
 const spotsReducer = (state = initialState, action) => {
-    let newState = {}
+    // let newState = {}
     switch (action.type){
         case GET_SPOTS:
             const allSpots = {}
@@ -95,13 +95,7 @@ const spotsReducer = (state = initialState, action) => {
                 }
             }
         case CREATE_SPOT:
-            if(!state[action.spot.id]) {
-                const newState = {
-                    ...state,
-                    [action.spot.id]: action.spot
-                }
-            }
-            return newState
+            return {...state, ...action.spot}
         default:
             return state
     }
