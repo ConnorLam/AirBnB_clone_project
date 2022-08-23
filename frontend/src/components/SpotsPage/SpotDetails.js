@@ -9,7 +9,7 @@ const SpotById = () => {
     // console.log(spotId)
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => (state.spots[parsedSpotId]))
-    // console.log('this is my selector', spot)
+    console.log('this is my selector', spot)
     // console.log(getSpotById.res)
     const dispatch = useDispatch()
 
@@ -22,12 +22,20 @@ const SpotById = () => {
     if(!spot.Images) return null
     let images = spot.Images.map(image => image.url)
 
+    function validImage(spot){
+        if(spot.Images.length > 0){
+            return spot.Images[0].url
+        } else {
+            return "https://thumbs.dreamstime.com/z/young-man-says-no-white-53544424.jpg";
+        }
+    }
+
     return(
         <div>
             <h1>{spot.name}</h1>
-            <div>{spot.city}, {spot.state}</div>
+            <div>{spot.city}, {spot.state}, {spot.Owner.firstName}</div>
             <div>
-                <img src={images} alt={spot.name}/> 
+                <img src={validImage(spot)} alt={spot.name}/> 
             </div>
         </div>
     )

@@ -6,6 +6,12 @@ import { createOneSpot } from "../../store/spots";
 
 const CreateSpot = () => {
 
+    const dispatch = useDispatch()
+    const history = useHistory()
+    
+    const user = useSelector(state => state.session.user)
+    console.log(user)
+
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -15,11 +21,74 @@ const CreateSpot = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
+    const [validationErrors, setValidationErrors] = useState([])
+    // const [previewImage, setPreviewImage] = useState('')
+    const [hasSubmitted, setHasSubmitted] = useState(false)
+
+    useEffect(() => {
+      const errors = [];
+
+      if (name.length < 1 || name.length > 49) errors.push("Name must be between 1 and 49 characters")
+      if (price <= 0) errors.push("Please set a higher price");
+      if (!address.length) errors.push("Please provide an address");
+      if (!city.length) errors.push("Please provide a city");
+      if (!state.length) errors.push("Please provide a state")
+      if (!country.length) errors.push("Please provide a country")
+      if (!lat) errors.push("Please provide a lat")
+      if (!lng) errors.push("Please provide a lng")
+      if (!description) errors.push("Please provide a description")
+      if (description.length < 10 || description.length > 500) errors.push("description must be between 10 and 500")
+      
+
+
+      return setValidationErrors(errors);
+
+  }, [name, price, address, city, state, country,lat, lng, description])
+
+  if(user === null) {
+    alert('must be signed up to create a spot')
+    return history.push(`/`)
+  }
+
+  async function onSubmit(e){
+    e.preventDefault();
+
+    setHasSubmitted(true);
+    if(validationErrors.length) return alert('must fix your errors')
+
+
+    const details = { name, price, address, city, state, country, lng, lat, description }
+
+    const spot = await dispatch(createOneSpot(details))
+
+
+    if(spot){
+        history.push(`/spots/${spot.id}`)
+    }
+
+
+}
+
+    // useEffect(() => {
+    //     dispatch(createOneSpot())
+    // })
 
     return (
         <div>
             <h2>Host A Spot!</h2>
-            <form>
+            <form
+            onSubmit={onSubmit}
+            >
+                {hasSubmitted && validationErrors.length > 0 && (
+                    <div>
+                        Please check your form for errors
+                        <ul>
+                            {validationErrors.map((validationError => (
+                                <li key={validationError}>{validationError}</li>
+                            )))}
+                        </ul>
+                    </div>
+                )}
                 <div>
                     <label htmlFor="name">Name</label>
                     <input
@@ -27,6 +96,7 @@ const CreateSpot = () => {
                         type='text'
                         onChange={(e) => setName(e.target.value)}
                         value={name}
+                        required
                     />
                 </div>
                 <div>
@@ -36,6 +106,7 @@ const CreateSpot = () => {
                         type='text'
                         onChange={(e) => setAddress(e.target.value)}
                         value={address}
+                        required
                     />
                 </div>
                 <div>
@@ -45,6 +116,7 @@ const CreateSpot = () => {
                         type='text'
                         onChange={(e) => setCity(e.target.value)}
                         value={city}
+                        required
                     />
                 </div>
                 <div>
@@ -54,6 +126,7 @@ const CreateSpot = () => {
                         type='text'
                         onChange={(e) => setState(e.target.value)}
                         value={state}
+                        required
                     />
                 </div>
                 <div>
@@ -63,6 +136,7 @@ const CreateSpot = () => {
                         type='text'
                         onChange={(e) => setCountry(e.target.value)}
                         value={country}
+                        required
                     />
                 </div>
                 <div>
@@ -72,6 +146,7 @@ const CreateSpot = () => {
                         type='number'
                         onChange={(e) => setLat(e.target.value)}
                         value={lat}
+                        required
                     />
                 </div>
                 <div>
@@ -81,6 +156,7 @@ const CreateSpot = () => {
                         type='number'
                         onChange={(e) => setLng(e.target.value)}
                         value={lng}
+                        required
                     />
                 </div>
                 <div>
@@ -90,6 +166,7 @@ const CreateSpot = () => {
                         type='text'
                         onChange={(e) => setDescription(e.target.value)}
                         value={description}
+                        required
                     />
                 </div>
                 <div>
@@ -99,9 +176,19 @@ const CreateSpot = () => {
                         type='number'
                         onChange={(e) => setPrice(e.target.value)}
                         value={price}
+                        required
                     />
                 </div>
-                <button>Submit</button>
+                {/* <div>
+                    <label htmlFor="previewImage">Preview Image</label>
+                    <input
+                        id="previewImage"
+                        type='url'
+                        onChange={(e) => setPreviewImage(e.target.value)}
+                        value={previewImage}
+                    />
+                </div> */}
+                <button type="submit">Submit</button>
             </form>
         </div>
     )
