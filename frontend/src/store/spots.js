@@ -41,16 +41,27 @@ export const getSpotById = (id) => async dispatch => {
     const res = await csrfFetch(`/api/spots/${id}`)
     if(res.ok){
         const spotById = await res.json()
-        console.log('this is inside my thunk', spotById)
+        // console.log('this is inside my thunk', spotById)
         dispatch(loadSpotById(spotById))
         return spotById
     }
 }
 
 export const createOneSpot = (spot) => async dispatch => {
+    const {address, city, state, country, lat, lng, name, description, price} = spot
     const res = await csrfFetch(`/api/spots`, {
         method: 'POST',
-        body: JSON.stringify(spot)
+        body: JSON.stringify({
+            address,
+            city,
+            state, 
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        })
     })
     if (res.ok){
         const createdSpot = await res.json()
@@ -84,18 +95,24 @@ const spotsReducer = (state = initialState, action) => {
             ...allSpots
         };
         case GET_SPOT_ID:
-            console.log(action.spot.id)
+            // console.log(action.spot.id)
             // console.log(state)
             // newState = {...state}
-            return {
-                ...state,
-                [action.spot.id]: {
-                    ...state[action.spot.id],
-                    ...action.spot
-                }
-            }
+            let oneSpot = { ...state };
+            oneSpot[action.spot.id] = action.spot;
+            return oneSpot;
+            // return {
+            //     ...state,
+            //     [action.spot.id]: {
+            //         ...state[action.spot.id],
+            //         ...action.spot
+            //     }
+            //     // ...newState[action.spot.id] = action.spot
+            // }
         case CREATE_SPOT:
-            return {...state, ...action.spot}
+            let createSpot = {...state}
+            createSpot[action.spot.id] = action.spot
+            return createSpot
         default:
             return state
     }

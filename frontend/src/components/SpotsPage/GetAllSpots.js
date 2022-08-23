@@ -20,29 +20,35 @@ const GetSpots = () => {
         return null
     }
 
+    function validImage(spot) {
+      if (spot.previewImage) {
+        return spot.previewImage;
+      } else {
+        return "https://thumbs.dreamstime.com/z/young-man-says-no-white-53544424.jpg";
+      }
+    }
+
     return (
         <div>
             <ul>
                 {spotsArr.map(spot => {
                     return (
-                        <>
-                            <div key={spot.id}>
-                                <NavLink className='Spots' to={`/spots/${spot.id}`}>
-                                    <div>
-                                        <img src={spot.previewImage} alt={spot.name}/>
-                                    </div>
-                                    <div>
-                                        {spot.city}, {spot.state}
-                                    </div>  
-                                    <div>
-                                        {Number(spot.avgRating).toFixed(2)}
-                                    </div>  
-                                    <div>
-                                        {`$${spot.price} night`} 
-                                    </div>  
-                                </NavLink>
-                            </div>
-                        </>
+                        <div key={spot.id}>
+                            <NavLink className='Spots' to={`/spots/${spot.id}`}>
+                                <div>
+                                    <img src={validImage(spot)} alt={spot.name}/>
+                                </div>
+                                <div>
+                                    {spot.city}, {spot.state}
+                                </div>  
+                                <div>
+                                    {Number(spot.avgRating).toFixed(2)}
+                                </div>  
+                                <div>
+                                    {`$${spot.price} night`} 
+                                </div>  
+                            </NavLink>
+                        </div>
                     )
                 })}
             </ul>
