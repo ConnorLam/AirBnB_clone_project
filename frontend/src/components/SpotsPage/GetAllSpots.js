@@ -15,7 +15,7 @@ const GetSpots = () => {
     let spots = useSelector(state => state.spots)
     // console.log(spots)
     let spotsArr = Object.values(spots)
-    console.log(spotsArr)
+    // console.log(spotsArr)
     if (!spotsArr){
         return null
     }

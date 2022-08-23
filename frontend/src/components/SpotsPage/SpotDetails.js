@@ -6,25 +6,27 @@ import { getSpotById } from '../../store/spots'
 
 const SpotById = () => {
     const {spotId} = useParams()
-    // console.log(spotId)
-    const spot = useSelector(state => state.spots[spotId])
-    console.log(spot)
-
+    console.log(spotId)
+    const parsedSpotId = Number(spotId)
+    const spot = useSelector(state => (state.spots?.[parsedSpotId]))
+    console.log('this is my selector', spot)
+    // console.log(getSpotById.res)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getSpotById(spotId))
     }, [dispatch, spotId])
 
-    if(!spot) return <div>loading</div>
+    if(!spot || spot === {}) return <div>loading</div>
 
-    console.log(spot.previewImage)
+    let images = spot.Images.map(image => image.url)
+    console.log(images)
     return(
         <div>
-            <div>{spot.name}</div>
+            <h1>{spot.name}</h1>
             <div>{spot.city}, {spot.state}</div>
             <div>
-                <img src={spot.previewImage} alt={spot.name}/> 
+                <img src={images} alt={spot.name}/> 
             </div>
         </div>
     )

@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf"
 
 const GET_SPOTS = 'spots/getSpots'
 const GET_SPOT_ID = 'spots/getSpotsId'
+const CREATE_SPOT = 'spots/createSpot'
 
 
 const loadSpots = spots => ({
@@ -14,6 +15,11 @@ const loadSpotById = spot => ({
     spot
 })
 
+const createSpot = spot => ({
+    type: CREATE_SPOT,
+    spot
+})
+
 
 
 
@@ -22,7 +28,7 @@ const loadSpotById = spot => ({
 
 
 export const getAllSpots = () => async dispatch => {
-    const res = await fetch(`/api/spots`)
+    const res = await csrfFetch(`/api/spots`)
 
     if (res.ok){
         const spots = await res.json()
@@ -32,12 +38,26 @@ export const getAllSpots = () => async dispatch => {
 }
 
 export const getSpotById = (id) => async dispatch => {
-    const res = await fetch(`/api/spots/${id}`)
+    const res = await csrfFetch(`/api/spots/${id}`)
     if(res.ok){
         const spotById = await res.json()
+        console.log('this is inside my thunk', spotById)
         dispatch(loadSpotById(spotById))
         return spotById
     }
+}
+
+export const createOneSpot = (spot) => async dispatch => {
+    const res = await csrfFetch(`/api/spots`, {
+        method: 'POST',
+        body: JSON.stringify(spot)
+    })
+    if (res.ok){
+        const createdSpot = await res.json()
+        dispatch(createSpot(createdSpot))
+        return createdSpot
+    }
+    return res
 }
 
 
@@ -51,24 +71,27 @@ export const getSpotById = (id) => async dispatch => {
 const initialState = {}
 
 const spotsReducer = (state = initialState, action) => {
+    let newState = {}
     switch (action.type){
         case GET_SPOTS:
+            newState = {...state}
             const allSpots = {}
             // console.log(action.spots)
             action.spots.Spots.forEach(spot => {
                 allSpots[spot.id] = spot
             })
         return {
-            ...state,
+            ...newState,
             ...allSpots
         };
         case GET_SPOT_ID:
             console.log(action.spot.id)
             // console.log(state)
+            newState = {...state}
             return {
-                ...state,
+                ...newState,
                 [action.spot.id]: {
-                    ...state[action.spot.id],
+                    ...newState[action.spot.id],
                     ...action.spot
                 }
             }
