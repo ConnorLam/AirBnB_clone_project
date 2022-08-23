@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-// import { NavLink, Route } from "react-router-dom"; 
+import { NavLink } from "react-router-dom"; 
 
 import { getAllSpots } from "../../store/spots";
 
@@ -24,7 +24,14 @@ const GetSpots = () => {
         <div>
             <ul>
                 {spotsArr.map(spot => {
-                    return <li key={spot.id}> {spot.address} {spot.city} {spot.avgRating} {`$${spot.price} night`} </li>
+                    return (
+                        <li key={spot.id}>
+                            <NavLink className='Spots' to={`/spots/${spot.id}`}> 
+                                {spot.address} {spot.city} {spot.avgRating} {`$${spot.price} night`} 
+                                <img src={spot.previewImage} alt={spot.name}/>
+                            </NavLink>
+                        </li>
+                    )
                 })}
             </ul>
         </div>
