@@ -20,6 +20,7 @@ const Navigation = ({isLoaded}) => {
     } else {
         session = (
             <>
+                <NavLink to={'/mySpots'}>Your Spots</NavLink>
                 <ProfileButton user={user}/>
             </>
         )

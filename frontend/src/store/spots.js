@@ -19,7 +19,7 @@ const loadSpotById = spot => ({
 
 const loadSpotByUser = spots => ({
     type: GET_SPOTS_USERS,
-    spots
+    spots 
 })
 
 const createSpot = spot => ({
@@ -104,11 +104,12 @@ export const deleteASpot = (spotId) => async dispatch => {
     })
 
     if (res.ok){
-        const {id: deletedSpotId} = await res.json()
-        dispatch(deleteSpot(deletedSpotId))
-        return deletedSpotId
+        // const id = await res.json()
+        // console.log('inside of my thunk', id)
+        dispatch(deleteSpot(spotId))
+        // return id
     }
-    return res
+    // return res
 }
 
 
@@ -131,7 +132,6 @@ const spotsReducer = (state = initialState, action) => {
                 allSpots[spot.id] = spot
             })
         return {
-            ...state,
             ...allSpots
         };
         case GET_SPOT_ID:
@@ -154,17 +154,18 @@ const spotsReducer = (state = initialState, action) => {
             action.spots.Spots.forEach(spot => {
                 userSpot[spot.id] = spot
             })
-            return {
-                ...state,
-                ...userSpot
-            }
+            return userSpot
         case CREATE_SPOT:
             let createSpot = {...state}
             createSpot[action.spot.id] = action.spot
             return createSpot
         case DELETE_SPOT:
             let deleteSpot = {...state}
+            // console.log(deleteSpot)
+            // console.log(action)
             delete deleteSpot[action.spotId]
+            // console.log('after i delete', deleteSpot)
+            // console.log('after delete action', action)
             return deleteSpot
         default:
             return state

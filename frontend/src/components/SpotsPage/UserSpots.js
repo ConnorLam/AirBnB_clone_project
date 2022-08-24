@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useHistory } from "react-router-dom"; 
 
@@ -9,6 +9,7 @@ import { deleteASpot } from "../../store/spots";
 const UserSpots = () => {
 
     const history = useHistory()
+    // const [state, setState] = useState(false) 
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -19,17 +20,20 @@ const UserSpots = () => {
     }
     
     useEffect(() => {
-        dispatch(getUserSpots())
-    }, [dispatch])
+        if(user){
+            dispatch(getUserSpots())
+        }
+    }, [dispatch, user])
     
     let spots = useSelector(state => state.spots)
+    // if(!spots) return <div>You have no spots yet</div>
 
     if(!spots) return null
 
     let spotsArr = Object.values(spots)
 
-    if(!spotsArr){
-        return null
+    if(spotsArr.length === 0){
+        return <h2>No spots available</h2>
     }
 
     function validImage(spot) {
@@ -40,10 +44,14 @@ const UserSpots = () => {
       }
     }
 
-    // const deleteButton = async (e) => {
+    // const deleteButton = async (e, spot) => {
     //     // e.preventDefault()
     //     await dispatch(deleteASpot(spot))
   
+    // }
+
+    // const setToFalse = () => {
+    //     setState(true)
     // }
 
     return (
@@ -61,6 +69,7 @@ const UserSpots = () => {
                                 <div>
                                     <NavLink to={'/spots/edit'}>Edit Info</NavLink>
                                     <button onClick={() => dispatch(deleteASpot(spot.id))}>Delete Spot</button>
+                                    {/* <button onClick={() => deleteButton(spot)}>Delete Spot</button> */}
                                 </div>
                             </div>
                         </div>

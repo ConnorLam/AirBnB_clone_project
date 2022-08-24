@@ -218,12 +218,13 @@ router.get('/current', requireAuth, async (req, res) => {
         }
 
         // console.log()
-        if(spotArr.length >= 1){
+        // if(spotArr.length >= 1){
             return res.json({Spots: spotArr})
-        } else {
-            res.status(404)
-            return res.json({message: 'User does not own any spots'})
-        }
+        // } 
+        // else {
+            // res.status(404)
+            // return res.json({message: 'User does not own any spots'})
+        // }
     } 
 
 })
