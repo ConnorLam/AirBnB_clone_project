@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useHistory } from "react-router-dom"; 
 
@@ -47,7 +47,6 @@ const UserSpots = () => {
     // const deleteButton = async (e, spot) => {
     //     // e.preventDefault()
     //     await dispatch(deleteASpot(spot))
-  
     // }
 
     // const setToFalse = () => {
@@ -59,15 +58,16 @@ const UserSpots = () => {
             <h2>All Your Spots</h2>
             <ul>
                 {spotsArr?.map(spot => {
+                    // console.log(spot.id)
                     return(
                         <div>
                             <div>
                                 <img src={validImage(spot)} alt={spot.name}/>
                             </div>
                             <div>
-                                {spot.name}, {spot.city}, 
+                                {spot.name}, {spot.city} {spot.id}, 
                                 <div>
-                                    <NavLink to={'/spots/edit'}>Edit Info</NavLink>
+                                    <NavLink to={`/spots/${spot.id}/edit`} spot={spot}>Edit Info</NavLink>
                                     <button onClick={() => dispatch(deleteASpot(spot.id))}>Delete Spot</button>
                                     {/* <button onClick={() => deleteButton(spot)}>Delete Spot</button> */}
                                 </div>
