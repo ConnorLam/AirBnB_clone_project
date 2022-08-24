@@ -13,7 +13,7 @@ const EditSpot = () => {
 //   console.log(spotId)
 
   const user = useSelector((state) => state.session.user);
-  const spot = useSelector((state) => state.spots)
+//   const spot = useSelector((state) => state.spots)
   // console.log(user)
 //   console.log(spot)
 // const spotId = spot.id
