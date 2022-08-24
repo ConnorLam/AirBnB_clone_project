@@ -20,6 +20,7 @@ const Navigation = ({isLoaded}) => {
     } else {
         session = (
             <>
+                <NavLink to={'/mySpots'}>Your Spots</NavLink>
                 <ProfileButton user={user}/>
             </>
         )
@@ -27,10 +28,10 @@ const Navigation = ({isLoaded}) => {
 
     return (
         <ul>
-            <li>
+            <div>
                 <NavLink exact to='/'>Home</NavLink>
                 {isLoaded && session}
-            </li>
+            </div>
         </ul>
     )
 }

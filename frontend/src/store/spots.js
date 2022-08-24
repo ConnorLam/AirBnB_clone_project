@@ -3,6 +3,8 @@ import { csrfFetch } from "./csrf"
 const GET_SPOTS = 'spots/getSpots'
 const GET_SPOT_ID = 'spots/getSpotsId'
 const CREATE_SPOT = 'spots/createSpot'
+const DELETE_SPOT = 'spots/deleteSpot'
+const GET_SPOTS_USERS = 'spots/getUserSpots'
 
 
 const loadSpots = spots => ({
@@ -15,9 +17,19 @@ const loadSpotById = spot => ({
     spot
 })
 
+const loadSpotByUser = spots => ({
+    type: GET_SPOTS_USERS,
+    spots 
+})
+
 const createSpot = spot => ({
     type: CREATE_SPOT,
     spot
+})
+
+const deleteSpot = spotId => ({
+    type: DELETE_SPOT,
+    spotId
 })
 
 
@@ -37,7 +49,20 @@ export const getAllSpots = () => async dispatch => {
     }
 }
 
+export const getUserSpots = () => async dispatch => {
+    const res = await csrfFetch(`/api/spots/current`)
+
+    if (res.ok){
+        const spots = await res.json()
+        console.log(spots)
+        dispatch(loadSpotByUser(spots))
+        return spots
+    }
+    return res
+}
+
 export const getSpotById = (id) => async dispatch => {
+    // console.log(id)
     const res = await csrfFetch(`/api/spots/${id}`)
     if(res.ok){
         const spotById = await res.json()
@@ -71,6 +96,22 @@ export const createOneSpot = (spot) => async dispatch => {
     return res
 }
 
+export const deleteASpot = (spotId) => async dispatch => {
+    // console.log(spotId)
+    // const {id} = spot
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok){
+        // const id = await res.json()
+        // console.log('inside of my thunk', id)
+        dispatch(deleteSpot(spotId))
+        // return id
+    }
+    // return res
+}
+
 
 
 
@@ -91,7 +132,6 @@ const spotsReducer = (state = initialState, action) => {
                 allSpots[spot.id] = spot
             })
         return {
-            ...state,
             ...allSpots
         };
         case GET_SPOT_ID:
@@ -109,10 +149,24 @@ const spotsReducer = (state = initialState, action) => {
             //     }
             //     // ...newState[action.spot.id] = action.spot
             // }
+        case GET_SPOTS_USERS:
+            let userSpot = {}
+            action.spots.Spots.forEach(spot => {
+                userSpot[spot.id] = spot
+            })
+            return userSpot
         case CREATE_SPOT:
             let createSpot = {...state}
             createSpot[action.spot.id] = action.spot
             return createSpot
+        case DELETE_SPOT:
+            let deleteSpot = {...state}
+            // console.log(deleteSpot)
+            // console.log(action)
+            delete deleteSpot[action.spotId]
+            // console.log('after i delete', deleteSpot)
+            // console.log('after delete action', action)
+            return deleteSpot
         default:
             return state
     }

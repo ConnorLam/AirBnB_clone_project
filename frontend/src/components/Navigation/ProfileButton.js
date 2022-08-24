@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux' 
 import { logout } from '../../store/session'
+import { Redirect, useHistory } from 'react-router-dom'
+
 
 const ProfileButton = ({user}) => {
     // const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+    const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
 
     const openMenu = () => {
@@ -28,6 +31,11 @@ const ProfileButton = ({user}) => {
         dispatch(logout())
     }
 
+    const goToYourSpots = (e) => {
+        e.preventDefault()
+        return history.push('/mySpots')
+    }
+
     return (
       <div>
         {/* () => showMenu === false ? setShowMenu(true) : showMenu */}
@@ -40,6 +48,9 @@ const ProfileButton = ({user}) => {
                 <li>{user.email}</li>
                 <li>
                     <button onClick={logOut}> Log Out</button>
+                </li>
+                <li>
+                    <button onClick={goToYourSpots}>Your Spots</button>
                 </li>
             </ul>
         )}

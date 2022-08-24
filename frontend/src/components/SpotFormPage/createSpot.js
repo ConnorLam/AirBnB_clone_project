@@ -10,7 +10,7 @@ const CreateSpot = () => {
     const history = useHistory()
     
     const user = useSelector(state => state.session.user)
-    console.log(user)
+    // console.log(user)
 
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
