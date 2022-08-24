@@ -8,6 +8,7 @@ import Navigation from './components/Navigation'
 import GetSpots from './components/SpotsPage/GetAllSpots';
 import SpotById from './components/SpotsPage/SpotDetails';
 import CreateSpot from './components/SpotFormPage/createSpot';
+import UserSpots from './components/SpotsPage/UserSpots';
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path={'/spots/:spotId'}>
             <SpotById />
+          </Route>
+          <Route exact path={`/mySpots`}>
+            <UserSpots />
           </Route>
         </Switch>
       )}

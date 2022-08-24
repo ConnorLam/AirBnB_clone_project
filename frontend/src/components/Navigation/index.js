@@ -27,10 +27,10 @@ const Navigation = ({isLoaded}) => {
 
     return (
         <ul>
-            <li>
+            <div>
                 <NavLink exact to='/'>Home</NavLink>
                 {isLoaded && session}
-            </li>
+            </div>
         </ul>
     )
 }
