@@ -36,6 +36,7 @@ const SpotById = () => {
 
 
     if(!reviews) return null
+    if(!user) return null
     // if(!reviews.User) return null
     // if(reviewsArr.length === 0) return <h2>no reviews yet</h2>
     
