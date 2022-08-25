@@ -3,6 +3,7 @@ import { NavLink, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
+import DeleteSpot from '../DeleteReviewButton/DeleteReview'
 
 
 const SpotById = () => {
@@ -51,6 +52,21 @@ const SpotById = () => {
         }
     }
 
+    // let navLink;
+    // console.log(user.id)
+    // let userId = user.id
+    // let ownerId = spot.ownerId
+    // console.log(spot.ownerId)
+    // if(userId === ownerId){
+    //     navLink = (
+    //         <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+    //     )
+    // } else {
+    //     navLink = (
+    //         <div></div>
+    //     )
+    // }
+
     return isLoaded && (
         <div>
             <div>
@@ -64,6 +80,7 @@ const SpotById = () => {
                 <h2>Reviews</h2>
                 {/* {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>} */}
                 <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+                {/* {navLink} */}
             </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
@@ -78,6 +95,9 @@ const SpotById = () => {
                             </div>
                             <div>
                                 <img src={review.Images ? review.Images.map(image => image.url) : <p>no images</p>} alt={''}></img>
+                            </div>
+                            <div>
+                                <DeleteSpot review={review} user={user}/>
                             </div>
                         </div>
                     )
