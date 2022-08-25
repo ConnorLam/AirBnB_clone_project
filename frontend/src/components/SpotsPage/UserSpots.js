@@ -65,9 +65,9 @@ const UserSpots = () => {
                                 <img src={validImage(spot)} alt={spot.name}/>
                             </div>
                             <div>
-                                {spot.name}, {spot.city} {spot.id}, 
+                                {spot.name}, {spot.city} {spot.id}, {spot.price} 
                                 <div>
-                                    <NavLink to={`/spots/${spot.id}/edit`} spot={spot}>Edit Info</NavLink>
+                                    <NavLink to={`/spots/${spot.id}/edit`} >Edit Info</NavLink>
                                     <button onClick={() => dispatch(deleteASpot(spot.id))}>Delete Spot</button>
                                     {/* <button onClick={() => deleteButton(spot)}>Delete Spot</button> */}
                                 </div>
