@@ -52,20 +52,20 @@ const SpotById = () => {
         }
     }
 
-    // let navLink;
+    let navLink;
     // console.log(user.id)
-    // let userId = user.id
-    // let ownerId = spot.ownerId
+    let userId = user.id
+    let ownerId = spot.ownerId
     // console.log(spot.ownerId)
-    // if(userId === ownerId){
-    //     navLink = (
-    //         <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
-    //     )
-    // } else {
-    //     navLink = (
-    //         <div></div>
-    //     )
-    // }
+    if(userId !== ownerId){
+        navLink = (
+            <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+        )
+    } else {
+        navLink = (
+            <div></div>
+        )
+    }
 
     return isLoaded && (
         <div>
@@ -79,8 +79,8 @@ const SpotById = () => {
             <div>
                 <h2>Reviews</h2>
                 {/* {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>} */}
-                <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
-                {/* {navLink} */}
+                {/* <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink> */}
+                {navLink}
             </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
