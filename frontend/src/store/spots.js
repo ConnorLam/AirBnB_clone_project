@@ -60,7 +60,7 @@ export const getUserSpots = () => async dispatch => {
 
     if (res.ok){
         const spots = await res.json()
-        console.log(spots)
+        // console.log(spots)
         dispatch(loadSpotByUser(spots))
         return spots
     }
