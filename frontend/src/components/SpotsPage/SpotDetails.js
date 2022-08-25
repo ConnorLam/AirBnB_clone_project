@@ -1,5 +1,5 @@
 import { useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
@@ -11,9 +11,9 @@ const SpotById = () => {
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => state.spots[parsedSpotId])
     const reviews = useSelector(state => state.reviews)
-    console.log('this is in my component', reviews)
+    // console.log('this is in my component', reviews)
     let reviewsArr = Object.values(reviews)
-    console.log(reviewsArr, 'ARRAY')
+    // console.log(reviewsArr, 'ARRAY')
     // console.log('this is my selector', spot)
     // console.log(getSpotById.res)
     const dispatch = useDispatch()
@@ -25,11 +25,9 @@ const SpotById = () => {
 
     if(!spot || spot === {}) return <div>loading</div>
 
-    // let reviewsDetails = reviewsArr.map(review => {
-
-    // })
 
     if(!reviews) return null
+    // if(!reviews.User) return null
     // if(reviewsArr.length === 0) return <h2>no reviews yet</h2>
     
     if(!spot.Images) return null
@@ -52,10 +50,13 @@ const SpotById = () => {
                     <img src={validImage(spot)} alt={spot.name}/> 
                 </div>
             </div>
-
-            <h2>Reviews</h2>
+            <div>
+                <h2>Reviews</h2>
+                <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+            </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
+                    console.log('review!!!!!!!!!!!!!!!!!!!!', review)
                     return(
                         <div key={review.id}>
                             <div>
@@ -65,7 +66,7 @@ const SpotById = () => {
                                 {review.review}
                             </div>
                             <div>
-                                <img src={review.Images ? review.Images.map(image => image.url) : <p>no images</p>} alt='not loading'></img>
+                                <img src={review.Images ? review.Images.map(image => image.url) : <p>no images</p>} alt={''}></img>
                             </div>
                         </div>
                     )

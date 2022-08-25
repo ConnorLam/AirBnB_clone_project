@@ -10,6 +10,7 @@ import SpotById from './components/SpotsPage/SpotDetails';
 import CreateSpot from './components/SpotFormPage/createSpot';
 import UserSpots from './components/SpotsPage/UserSpots';
 import EditSpot from './components/SpotFormPage/editSpot';
+import CreateAReview from './components/CreateReviewPage/CreateReview';
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path={`/spots/:spotId/edit`}>
             <EditSpot />
+          </Route>
+          <Route exact path={`/spots/:spotId/create/review`}>
+            <CreateAReview />
           </Route>
           <Route exact path={'/spots/:spotId'}>
             <SpotById />
