@@ -5,18 +5,21 @@ const DeleteSpot = ({review, user}) => {
     const dispatch = useDispatch()
     // console.log(user)
     // console.log(review)
-    const userId = user.id
+    // const userId = user.id
     const reviewUserId = review.userId
     let button;
-    if(userId === reviewUserId){
+    if(!user || user.id !== reviewUserId){
         button = (
-          <button onClick={() => dispatch(deleteASpot(review.id))}>
-            Delete Review
-          </button>
+          //   <button onClick={() => dispatch(deleteASpot(review.id))}>
+          //     Delete Review
+          //   </button>
+          <div></div>
         );
     } else {
         button = (
-            <div></div>
+            <button onClick={() => dispatch(deleteASpot(review.id))}>
+              Delete Review
+            </button>
         )
     }
     return(

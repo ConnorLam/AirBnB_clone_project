@@ -54,16 +54,16 @@ const SpotById = () => {
 
     let navLink;
     // console.log(user.id)
-    let userId = user.id
+    // let userId = user.id
     let ownerId = spot.ownerId
     // console.log(spot.ownerId)
-    if(userId !== ownerId){
-        navLink = (
-            <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+    if(!user || user.id === ownerId){
+        navLink = (  
+            <div></div>
         )
     } else {
         navLink = (
-            <div></div>
+            <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
         )
     }
 
