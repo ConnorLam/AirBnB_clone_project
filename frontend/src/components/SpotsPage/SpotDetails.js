@@ -56,7 +56,7 @@ const SpotById = () => {
             </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
-                    console.log('review!!!!!!!!!!!!!!!!!!!!', review)
+                    // console.log('review!!!!!!!!!!!!!!!!!!!!', review)
                     return(
                         <div key={review.id}>
                             <div>
