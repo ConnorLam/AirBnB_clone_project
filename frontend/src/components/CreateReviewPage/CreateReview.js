@@ -20,13 +20,13 @@ const CreateAReview = () => {
     // const [submissionErrors, setSubmissionErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
-    useEffect(() => {
-        const errors = []
-        if(review.length < 10 || review.length > 500) errors.push('Reviews must be between 10 and 500 characters')
-        if(stars < 1 || stars > 5) errors.push('Please put stars between 1 and 5')
+    // useEffect(() => {
+    //     const errors = []
+    //     if(review.length < 10 || review.length > 500) errors.push('Reviews must be between 10 and 500 characters')
+    //     if(stars < 1 || stars > 5) errors.push('Please put stars between 1 and 5')
 
-        return setValidationErrors(errors)
-    }, [review, stars])
+    //     return setValidationErrors(errors)
+    // }, [review, stars])
 
     // console.log(Error)
     
@@ -90,17 +90,23 @@ const CreateAReview = () => {
                 )}
                 <div>
                     <label htmlFor="review">Review:</label>
-                    <textarea 
+                    <input 
                         id="review"
                         type='text'
+                        placeholder="10-500 characters"
+                        minLength='10'
+                        maxLength={500}
                         onChange={(e) => setReview(e.target.value)}
                         value={review}
+                        required
                     />
                 </div>
                 <div>
                     <label htmlFor="stars">Stars</label>
                     <input
                         id="stars"
+                        min={1}
+                        max={5}
                         type='number'
                         onChange={(e) => setStars(e.target.value)}
                         value={stars}
