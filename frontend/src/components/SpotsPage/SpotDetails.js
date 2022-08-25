@@ -27,6 +27,7 @@ const SpotById = () => {
 
 
     if(!reviews) return null
+    // if(!reviews.User) return null
     // if(reviewsArr.length === 0) return <h2>no reviews yet</h2>
     
     if(!spot.Images) return null
@@ -55,6 +56,7 @@ const SpotById = () => {
             </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
+                    console.log('review!!!!!!!!!!!!!!!!!!!!', review)
                     return(
                         <div key={review.id}>
                             <div>

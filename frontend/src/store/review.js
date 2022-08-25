@@ -19,6 +19,7 @@ const createOneReview = review => ({
 
 
 
+
 export const spotReview = (spotId) => async dispatch =>{
     // console.log(spotId)
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
@@ -43,14 +44,9 @@ export const createReview = (reviewObj, spotId) => async dispatch => {
         return createdReview
     } 
     // else {
-    //     let errorJson;
-    //    let error = await res.json()
-    //    try{
-    //     errorJson = JSON.parse(error)
-    //     console.log(errorJson)
-    //    } catch{
-    //     throw new Error(error)
-    //    }
+    //     if (res.status === 403){
+    //         return 'You already have a review'
+    //     }
     // }
     return res
 }

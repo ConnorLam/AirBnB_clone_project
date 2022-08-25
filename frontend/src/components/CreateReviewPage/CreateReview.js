@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { createReview } from "../../store/review";
+import { spotReview } from "../../store/review";
 
 
 const CreateAReview = () => {
@@ -11,7 +12,7 @@ const CreateAReview = () => {
     const {spotId} = useParams()
 
     const user = useSelector(state => state.session.user)
-    console.log(user)
+    // console.log(user)
 
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
@@ -43,11 +44,14 @@ const CreateAReview = () => {
         const reviewDetails = {
             spotId: spotId,
             // firstName: user.firstName, 
+            // lastName: user.lastName,
             review,
             stars
         }
 
         const reviewByUser = await dispatch(createReview(reviewDetails))
+        await dispatch(spotReview(spotId))
+        console.log(reviewByUser.errors)
 
         if(reviewByUser){
             history.push(`/spots/${spotId}`)
