@@ -36,7 +36,7 @@ const SpotById = () => {
 
 
     if(!reviews) return null
-    if(!user) return null
+    // if(!user) return null
     // if(!reviews.User) return null
     // if(reviewsArr.length === 0) return <h2>no reviews yet</h2>
     
@@ -62,8 +62,8 @@ const SpotById = () => {
             </div>
             <div>
                 <h2>Reviews</h2>
-                {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>}
-                {/* <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink> */}
+                {/* {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>} */}
+                <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
             </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
