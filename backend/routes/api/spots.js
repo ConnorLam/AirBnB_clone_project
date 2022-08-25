@@ -482,7 +482,16 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 })
 
 router.get('/:spotId/reviews', async(req, res) => {
-  const spot = await Review.findByPk(req.params.spotId)
+  const spot = await Spot.findByPk(req.params.spotId)
+  
+  if(!spot){
+    res.statusCode = 404
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  
   const Reviews = await Review.findAll({
     where: {spotId: req.params.spotId},
     include: [
@@ -497,13 +506,6 @@ router.get('/:spotId/reviews', async(req, res) => {
     ]
   })
 
-  if(!spot){
-    res.statusCode = 404
-    res.json({
-      message: "Spot couldn't be found",
-      statusCode: 404,
-    });
-  }
   // let review = JSON.parse(JSON.stringify(Reviews));
   // const images = await Image.findAll({
   //   where: {
