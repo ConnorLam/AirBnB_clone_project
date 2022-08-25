@@ -40,7 +40,7 @@ const CreateAReview = () => {
         e.preventDefault()
         
         setHasSubmitted(true)
-        if(validationErrors.length) return alert('please check your submission')
+        // if(validationErrors.length) return alert('please check your submission')
 
         const reviewDetails = {
             spotId: spotId,
@@ -50,17 +50,25 @@ const CreateAReview = () => {
             stars
         }
 
-        dispatch(createReview(reviewDetails)).then(() => {history.push(`/spots/${spotId}`)}).catch(async (res) => {
-            const data = await res.json();
-            // console.log('data.errors', data.errors);
-            if (data && data.errors){
-                // console.log('please come here')
-                setValidationErrors(data.errors);
-            } 
-            // console.log('!!!!!!!!!!!!!!', submissionErrors)
-        });
-        // console.log('!!!!!!!!!!!!!!!!!!', reviewByUser)
-        dispatch(spotReview(spotId))
+        dispatch(createReview(reviewDetails))
+            // .then(dispatch(spotReview(spotId)))
+            // .then(() => {dispatch(spotReview(spotId))})
+            .then(() => {history.push(`/spots/${spotId}`)})
+            .then(() => {dispatch(spotReview(spotId))})
+            .catch(async (res) => {
+                const data = await res.json();
+                // console.log('data.errors', data.errors);
+                if (data && data.errors) {
+                    // console.log('please come here')
+                    setValidationErrors(data.errors);
+                }
+                
+                // console.log('!!!!!!!!!!!!!!', submissionErrors)
+            })
+            // .then(() => {history.push(`/spots/${spotId}`)})
+            // .then(() => {dispatch(spotReview(spotId))})
+              // console.log('!!!!!!!!!!!!!!!!!!', reviewByUser)
+        // dispatch(spotReview(spotId))
 
         // if(reviewByUser && !submissionErrors.length){
         //     history.push(`/spots/${spotId}`)

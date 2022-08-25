@@ -1,4 +1,4 @@
-import { useEffect} from 'react'
+import { useEffect, useState} from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpotById } from '../../store/spots'
@@ -8,8 +8,14 @@ import { spotReview } from '../../store/review'
 const SpotById = () => {
     const {spotId} = useParams()
     // console.log(spotId)
+
+    const [isLoaded, setIsLoaded] = useState(false)
+
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => state.spots[parsedSpotId])
+    const user = useSelector(state => state.session.user)
+    // console.log(user)
+    // console.log(spotId)
     const reviews = useSelector(state => state.reviews)
     // console.log('this is in my component', reviews)
     let reviewsArr = Object.values(reviews)
@@ -20,7 +26,10 @@ const SpotById = () => {
 
     useEffect(() => {
         dispatch(getSpotById(spotId))
-        dispatch(spotReview(spotId))
+            .then(() =>
+            dispatch(spotReview(spotId))
+        .then(() => (setIsLoaded(true)))
+        );
     }, [dispatch, spotId])
 
     if(!spot || spot === {}) return <div>loading</div>
@@ -41,7 +50,7 @@ const SpotById = () => {
         }
     }
 
-    return(
+    return isLoaded && (
         <div>
             <div>
                 <h1>{spot.name}</h1>
@@ -52,7 +61,8 @@ const SpotById = () => {
             </div>
             <div>
                 <h2>Reviews</h2>
-                <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+                {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>}
+                {/* <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink> */}
             </div>
             <ul>
                 {reviewsArr.length ? reviewsArr.map(review => {
