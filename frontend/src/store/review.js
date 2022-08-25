@@ -6,6 +6,7 @@ const CREATE_REVIEWS = 'reviews/createReviews'
 
 
 
+
 const loadReviewsBySpot = (reviews) => ({
     type: GET_REVIEWS,
     reviews
@@ -62,7 +63,7 @@ const reviewsReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_REVIEWS:
             const spotReviews = {}
-            console.log(action)
+            // console.log(action)
             action.reviews.Reviews.forEach(review => {
                 spotReviews[review.id] = review
             })

@@ -17,6 +17,7 @@ const CreateAReview = () => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
     const [validationErrors, setValidationErrors] = useState([]);
+    // const [submissionErrors, setSubmissionErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const CreateAReview = () => {
         history.push('/')
     }
 
-    async function onSubmit(e){
+    function onSubmit(e){
         e.preventDefault()
         
         setHasSubmitted(true)
@@ -49,13 +50,21 @@ const CreateAReview = () => {
             stars
         }
 
-        const reviewByUser = await dispatch(createReview(reviewDetails))
-        await dispatch(spotReview(spotId))
-        console.log(reviewByUser.errors)
+        dispatch(createReview(reviewDetails)).then(() => {history.push(`/spots/${spotId}`)}).catch(async (res) => {
+            const data = await res.json();
+            // console.log('data.errors', data.errors);
+            if (data && data.errors){
+                // console.log('please come here')
+                setValidationErrors(data.errors);
+            } 
+            // console.log('!!!!!!!!!!!!!!', submissionErrors)
+        });
+        // console.log('!!!!!!!!!!!!!!!!!!', reviewByUser)
+        dispatch(spotReview(spotId))
 
-        if(reviewByUser){
-            history.push(`/spots/${spotId}`)
-        }
+        // if(reviewByUser && !submissionErrors.length){
+        //     history.push(`/spots/${spotId}`)
+        // }
     }
     return (
         <div>
