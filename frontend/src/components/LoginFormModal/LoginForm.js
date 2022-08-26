@@ -26,40 +26,46 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <ul>
-        {errors.map((error) => (
-          <li key={error}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          onChange={(e) => setCredential(e.target.value)}
-          value={credential}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-      <button 
-        type="submit" 
-        onClick={e => {
-          setCredential('Demo-lition')
-          setPassword('password')
-        }}>
-      Demo User
-      </button>
-    </form>
+    <div>
+      <div className="header">
+        <h4>Log In</h4>
+      </div>
+      <form className="login-form" onSubmit={onSubmit}>
+        <ul>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Username or Email
+          <input
+            type="text"
+            onChange={(e) => setCredential(e.target.value)}
+            value={credential}
+            required
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+          />
+        </label>
+        <button type="submit">Log In</button>
+        <button 
+          type="submit" 
+          onClick={e => {
+            setCredential('Demo-lition')
+            setPassword('password')
+          }}>
+        Demo User
+        </button>
+      </form>
+
+    </div>
   );
 };
 
