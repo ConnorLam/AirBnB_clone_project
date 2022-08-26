@@ -29,7 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        len: [10, 500]
+        len: {
+          args: [[10, 500]],
+          msg: "must be between 10 and 500 characters"
+
+        } 
       }
     },
     stars: {

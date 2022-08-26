@@ -77,6 +77,7 @@ const CreateAReview = () => {
     return (
         <div>
             <h2>Tell people how you liked this spot.</h2>
+            <h3>Only one review per spot please</h3>
             <form onSubmit={onSubmit}>
                 {hasSubmitted && validationErrors.length > 0 && (
                     <div>
@@ -94,8 +95,8 @@ const CreateAReview = () => {
                         id="review"
                         type='text'
                         placeholder="10-500 characters"
-                        minLength='10'
-                        maxLength={500}
+                        minlength='10'
+                        maxlength='500'
                         onChange={(e) => setReview(e.target.value)}
                         value={review}
                         required
