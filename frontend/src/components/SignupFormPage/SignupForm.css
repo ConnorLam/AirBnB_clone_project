@@ -1,0 +1,17 @@
+.signup-modal-button {
+    height: 40px;
+    width: 75px;
+    border-radius: 20%;
+    background-color: white;
+    /* border: rgb(0, 0, 0); */
+    border: rgb(121, 120, 120) solid 2px;
+    font-weight: bold;
+    /* margin-left: %; */
+}
+
+    .signup-modal-button:hover{
+        background-color: rgb(189, 188, 188);
+        cursor: pointer;
+    }
+
+    /* .signup-modal-button */

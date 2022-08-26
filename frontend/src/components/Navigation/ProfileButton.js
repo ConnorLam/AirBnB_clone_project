@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux' 
 import { logout } from '../../store/session'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 const ProfileButton = ({user}) => {
@@ -39,20 +39,21 @@ const ProfileButton = ({user}) => {
     return (
       <div>
         {/* () => showMenu === false ? setShowMenu(true) : showMenu */}
-        <button onClick={openMenu}>
-          <i className="fas fa-user-circle"></i>
+        <button className='button' onClick={openMenu}>
+          <i className="fa-solid fa-bars fa-2x"></i>
+          <i className="fas fa-user-circle fa-2x"></i>
         </button>
         {showMenu && (
-            <ul>
-                <li>{user.username}</li>
-                <li>{user.email}</li>
-                <li>
-                    <button onClick={logOut}> Log Out</button>
-                </li>
-                <li>
-                    <button onClick={goToYourSpots}>Your Spots</button>
-                </li>
-            </ul>
+          <ul className="dropdown">
+            <div className='dropdown-info'>{user.username}</div>
+            <div className='dropdown-info'>{user.email}</div>
+            <div>
+              <button className='dropdown-info-button' onClick={logOut}> Log Out</button>
+            </div>
+            <div>
+              <button className='dropdown-info-button' onClick={goToYourSpots}>Your Spots</button>
+            </div>
+          </ul>
         )}
       </div>
     );

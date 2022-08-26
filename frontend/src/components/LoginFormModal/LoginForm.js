@@ -31,7 +31,7 @@ const LoginForm = () => {
         <h4>Log In</h4>
       </div>
       <div className="welcome">
-        <p>Welcome to Walmart-AirBnB</p>
+        <p>Welcome to Bootleg-AirBnB</p>
       </div>
       <form className="login-form" onSubmit={onSubmit}>
         {/* <ul>
