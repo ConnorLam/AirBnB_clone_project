@@ -1,14 +1,29 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
-    /* .whole-modal {
+    .whole-modal {
         display: flex;
-        padding-left: 5%;
+        /* padding-left: 5%; */
         flex-direction: column;
-    } */
-    
+    }
+
+
+    .login-modal-button {
+        height: 40px;
+        width: 75px;
+        border-radius: 20%;
+        background-color: white;
+        border: rgb(121, 120, 120) solid 2px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+        .login-modal-button:hover{
+            background-color: rgb(189, 188, 188);
+            cursor: pointer;
+        }
     
     .header {
         display: flex;
@@ -16,7 +31,7 @@
         align-items: center;
         border-bottom: rgb(201, 199, 199) solid 1px;
         font-weight: bold;
-        background-color: rgb(243, 242, 239);
+        /* background-color: rgb(243, 242, 239); */
         /* border-top-left-radius: 25px; */
         /* border-top-right-radius: 25px; */
     }
@@ -128,13 +143,15 @@
                     /* width: 200%; */
                     /* height: ; */
                     width: 100%;
-                    background-color: rgb(238, 145, 161);
+                    background-color: #FE375C;
+                    color: white;
                     border: pink;
                     border-radius: 25px;
                 }
 
                 .actual-button:hover { 
                     background-color: red;
+                    cursor: pointer;
                 }
         /* .login-buttons > button {
             display: flex;

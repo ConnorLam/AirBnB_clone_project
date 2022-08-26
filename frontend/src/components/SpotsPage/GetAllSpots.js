@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from "react-router-dom"; 
 
 import { getAllSpots } from "../../store/spots";
+import './GetAllSpots.css'
 
 
 const GetSpots = () => {
@@ -36,7 +37,7 @@ const GetSpots = () => {
                         <div key={spot.id}>
                             <NavLink className='Spots' to={`/spots/${spot.id}`}>
                                 <div>
-                                    <img src={validImage(spot)} alt={spot.name}/>
+                                    <img className='img' src={validImage(spot)} alt={spot.name}/>
                                 </div>
                                 <div>
                                     {spot.city}, {spot.state}

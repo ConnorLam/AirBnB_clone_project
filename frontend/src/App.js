@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { restoreUser } from './store/session';
 import {Route, Switch} from 'react-router-dom'
 // import LoginFormPage from './components/LoginFormModal';
-import SignupFormPage from './components/SignupFormPage';
+// import SignupFormPage from './components/SignupFormPage';
 import {useDispatch} from 'react-redux'
 import Navigation from './components/Navigation'
 import GetSpots from './components/SpotsPage/GetAllSpots';
@@ -24,31 +24,32 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <div className='navBar'>
+        <Navigation isLoaded={isLoaded} />
+      </div>
       {isLoaded && (
-        <Switch>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route exact path='/'>
-            <GetSpots />
-          </Route>
-          <Route exact path={'/spots/create'}>
-            <CreateSpot />
-          </Route>
-          <Route exact path={`/spots/:spotId/edit`}>
-            <EditSpot />
-          </Route>
-          <Route exact path={`/spots/:spotId/create/review`}>
-            <CreateAReview />
-          </Route>
-          <Route exact path={'/spots/:spotId'}>
-            <SpotById />
-          </Route>
-          <Route exact path={`/mySpots`}>
-            <UserSpots />
-          </Route>
-        </Switch>
+        <div className='body'>
+          <Switch>
+            <Route exact path='/'>
+              <GetSpots />
+            </Route>
+            <Route exact path={'/spots/create'}>
+              <CreateSpot />
+            </Route>
+            <Route exact path={`/spots/:spotId/edit`}>
+              <EditSpot />
+            </Route>
+            <Route exact path={`/spots/:spotId/create/review`}>
+              <CreateAReview />
+            </Route>
+            <Route exact path={'/spots/:spotId'}>
+              <SpotById />
+            </Route>
+            <Route exact path={`/mySpots`}>
+              <UserSpots />
+            </Route>
+          </Switch>
+        </div>
       )}
     </>
   );
