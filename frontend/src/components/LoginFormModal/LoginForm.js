@@ -26,40 +26,71 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <ul>
-        {errors.map((error) => (
-          <li key={error}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          onChange={(e) => setCredential(e.target.value)}
-          value={credential}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-      <button 
-        type="submit" 
-        onClick={e => {
-          setCredential('Demo-lition')
-          setPassword('password')
-        }}>
-      Demo User
-      </button>
-    </form>
+    <div className="whole-modal">
+      <div className="header">
+        <h4>Log In</h4>
+      </div>
+      <div className="welcome">
+        <p>Welcome to Walmart-AirBnB</p>
+      </div>
+      <form className="login-form" onSubmit={onSubmit}>
+        {/* <ul>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul> */}
+        <div className="login-info">
+          <label className="username-email">
+            <p className="label">
+              Username or Email
+            </p>
+            <input
+              className="input-box"
+              type="text"
+              onChange={(e) => setCredential(e.target.value)}
+              value={credential}
+              required
+            />
+          </label>
+          <label className="password">
+            <p className="label">
+              Password
+            </p>
+            <input
+              className="input-box"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+          </label>
+        </div>
+        <ul className="error-messages">
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+        <div className="login-buttons">
+          <div className="login">
+            <button className="actual-button"type="submit">Log In</button>
+          </div>
+          <div>
+            <div className="login">
+              <button
+              className="actual-button"
+                type="submit"
+                onClick={(e) => {
+                  setCredential("Demo-lition");
+                  setPassword("password");
+                }}
+              >
+                Demo User
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
