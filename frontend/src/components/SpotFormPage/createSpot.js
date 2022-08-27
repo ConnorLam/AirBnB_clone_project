@@ -38,7 +38,8 @@ const CreateSpot = () => {
       if (!lng) errors.push("Please provide a lng")
       if (!description) errors.push("Please provide a description")
       if (description.length < 10 || description.length > 500) errors.push("description must be between 10 and 500")
-      if (previewImage.length < 1) errors.push("Please provide a valid image url")
+      if (previewImage.length < 1) errors.push("Please provide an image url")
+      if (isImage(previewImage) === false) errors.push("Please provide a valid image url")
       
 
 
@@ -49,6 +50,10 @@ const CreateSpot = () => {
   if(user === null) {
     alert('must be signed up to create a spot')
     return history.push(`/`)
+  }
+
+  function isImage(url){
+    return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
 
   async function onSubmit(e){
