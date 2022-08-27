@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { getUserSpots } from "../../store/spots";
 import { deleteASpot } from "../../store/spots";
+import EditSpotModal from "../SpotFormPage/IndexEditSpot";
 
 
 const UserSpots = () => {
@@ -67,7 +68,7 @@ const UserSpots = () => {
                             <div>
                                 {spot.name}, {spot.city} {spot.id}, {spot.price} 
                                 <div>
-                                    <NavLink to={`/spots/${spot.id}/edit`} >Edit Info</NavLink>
+                                    <EditSpotModal spot={spot} />
                                     <button onClick={() => dispatch(deleteASpot(spot.id))}>Delete Spot</button>
                                     {/* <button onClick={() => deleteButton(spot)}>Delete Spot</button> */}
                                 </div>

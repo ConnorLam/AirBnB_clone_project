@@ -5,12 +5,13 @@ import { editASpot, getSpotById } from "../../store/spots";
 
 
 
-const EditSpot = () => {
+const EditSpot = ({spot}) => {
+    console.log('!!!!!!!!!!!!!!!!!!!!', spot)
   const dispatch = useDispatch();
   const history = useHistory();
 //   const spotId = spot.id
 // console.log(spot)
-  const {spotId} = useParams()
+//   const {spotId} = useParams()
   // const parsedSpotId = Number(spotId)
   // console.log(parsedSpotId)
   // const spot = useSelector((state) => state.spots)
@@ -18,29 +19,29 @@ const EditSpot = () => {
 //   console.log(spotId)
 
   const user = useSelector((state) => state.session.user);
-  const spot = useSelector((state) => state.spots)
+//   const spot = useSelector((state) => state.spots)
   // console.log(user)
   // if(spot) console.log(spot[spotId].id)
   // const spotId = spot.id
   // console.log(spotId)
-  useEffect(() => {
-    dispatch(getSpotById(spotId))
-  }, [dispatch, spotId])
+//   useEffect(() => {
+//     dispatch(getSpotById(s))
+//   }, [dispatch, spotId])
   
   
   // spot[spotId].address;
   
-  const [address, setAddress] = useState(spot[spotId].address || '');
-  const [city, setCity] = useState(spot[spotId].city || '');
-  const [state, setState] = useState(spot[spotId].state || '');
-  const [country, setCountry] = useState(spot[spotId].country || '');
-  const [lat, setLat] = useState(spot[spotId].lat || '');
-  const [lng, setLng] = useState(spot[spotId].lng || '');
-  const [name, setName] = useState(spot[spotId].name);
-  const [description, setDescription] = useState(spot[spotId].description || '');
-  const [price, setPrice] = useState(spot[spotId].price || '');
-  const [validationErrors, setValidationErrors] = useState(spot[spotId].validationError || '');
-  const [previewImage, setPreviewImage] = useState(spot[spotId].previewImage || '')
+  const [address, setAddress] = useState(spot?.address || '');
+  const [city, setCity] = useState(spot?.city || '');
+  const [state, setState] = useState(spot?.state || '');
+  const [country, setCountry] = useState(spot?.country || '');
+  const [lat, setLat] = useState(spot?.lat || '');
+  const [lng, setLng] = useState(spot?.lng || '');
+  const [name, setName] = useState(spot?.name);
+  const [description, setDescription] = useState(spot?.description || '');
+  const [price, setPrice] = useState(spot?.price || '');
+  const [validationErrors, setValidationErrors] = useState(spot?.validationError || '');
+//   const [previewImage, setPreviewImage] = useState(spot.previewImage || '')
   const [hasSubmitted, setHasSubmitted] = useState(false);
   
   useEffect(() => {
@@ -77,7 +78,7 @@ const EditSpot = () => {
     if (validationErrors.length) return alert("must fix your errors");
 
     const details = {
-        id: spotId,
+        id: spot.id,
       name,
       price,
       address,
@@ -89,10 +90,10 @@ const EditSpot = () => {
       description,
     };
 
-    const spot = await dispatch(editASpot(details));
+    const editedSpot = await dispatch(editASpot(details));
     // await dispatch(getSpotById(spotId))
 
-    if (spot) {
+    if (editedSpot) {
       history.push(`/spots/${spot.id}`);
     }
   }
@@ -205,7 +206,7 @@ const EditSpot = () => {
             
           />
         </div>
-        <div>
+        {/* <div>
                     <label htmlFor="previewImage">Preview Image</label>
                     <input
                         id="previewImage"
@@ -213,7 +214,7 @@ const EditSpot = () => {
                         onChange={(e) => setPreviewImage(e.target.value)}
                         value={previewImage}
                     />
-                </div>
+                </div> */}
         <button type="submit">Submit</button>
       </form>
     </div>
