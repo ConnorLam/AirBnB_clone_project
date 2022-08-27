@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { editASpot, getSpotById } from "../../store/spots";
+import { useHistory } from "react-router-dom";
+import { editASpot } from "../../store/spots";
 
 
 
 const EditSpot = ({spot}) => {
-    console.log('!!!!!!!!!!!!!!!!!!!!', spot)
+    // console.log('!!!!!!!!!!!!!!!!!!!!', spot)
   const dispatch = useDispatch();
   const history = useHistory();
 //   const spotId = spot.id

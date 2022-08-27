@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useHistory } from "react-router-dom"; 
+import { useHistory } from "react-router-dom"; 
 
 import { getUserSpots } from "../../store/spots";
 import { deleteASpot } from "../../store/spots";
