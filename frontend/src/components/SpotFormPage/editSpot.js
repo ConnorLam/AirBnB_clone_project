@@ -11,7 +11,7 @@ const EditSpot = () => {
 //   const spotId = spot.id
 // console.log(spot)
   const {spotId} = useParams()
-  const parsedSpotId = Number(spotId)
+  // const parsedSpotId = Number(spotId)
   // console.log(parsedSpotId)
   // const spot = useSelector((state) => state.spots)
   // console.log(spot.)
@@ -20,7 +20,7 @@ const EditSpot = () => {
   const user = useSelector((state) => state.session.user);
   const spot = useSelector((state) => state.spots)
   // console.log(user)
-  if(spot) console.log(spot[spotId].id)
+  // if(spot) console.log(spot[spotId].id)
   // const spotId = spot.id
   // console.log(spotId)
   useEffect(() => {
@@ -28,7 +28,7 @@ const EditSpot = () => {
   }, [dispatch, spotId])
   
   
-  
+  // spot[spotId].address;
   
   const [address, setAddress] = useState(spot[spotId].address || '');
   const [city, setCity] = useState(spot[spotId].city || '');
@@ -40,7 +40,7 @@ const EditSpot = () => {
   const [description, setDescription] = useState(spot[spotId].description || '');
   const [price, setPrice] = useState(spot[spotId].price || '');
   const [validationErrors, setValidationErrors] = useState(spot[spotId].validationError || '');
-  // const [previewImage, setPreviewImage] = useState('')
+  const [previewImage, setPreviewImage] = useState(spot[spotId].previewImage || '')
   const [hasSubmitted, setHasSubmitted] = useState(false);
   
   useEffect(() => {
@@ -205,7 +205,7 @@ const EditSpot = () => {
             
           />
         </div>
-        {/* <div>
+        <div>
                     <label htmlFor="previewImage">Preview Image</label>
                     <input
                         id="previewImage"
@@ -213,7 +213,7 @@ const EditSpot = () => {
                         onChange={(e) => setPreviewImage(e.target.value)}
                         value={previewImage}
                     />
-                </div> */}
+                </div>
         <button type="submit">Submit</button>
       </form>
     </div>
