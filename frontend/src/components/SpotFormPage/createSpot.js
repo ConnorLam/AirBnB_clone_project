@@ -20,9 +20,9 @@ const CreateSpot = () => {
     const [lng, setLng] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
-    // const [previewImage, setPreviewImage] = useState('')
+    const [previewImage, setPreviewImage] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
     useEffect(() => {
@@ -38,12 +38,13 @@ const CreateSpot = () => {
       if (!lng) errors.push("Please provide a lng")
       if (!description) errors.push("Please provide a description")
       if (description.length < 10 || description.length > 500) errors.push("description must be between 10 and 500")
+      if (previewImage.length < 1) errors.push("Please provide a valid image url")
       
 
 
       return setValidationErrors(errors);
 
-  }, [name, price, address, city, state, country,lat, lng, description])
+  }, [name, price, address, city, state, country,lat, lng, description, previewImage])
 
   if(user === null) {
     alert('must be signed up to create a spot')
@@ -57,7 +58,7 @@ const CreateSpot = () => {
     if(validationErrors.length) return alert('must fix your errors')
 
 
-    const details = { name, price, address, city, state, country, lng, lat, description }
+    const details = { name, price, address, city, state, country, lng, lat, description, previewImage }
 
     const spot = await dispatch(createOneSpot(details))
 
@@ -179,15 +180,16 @@ const CreateSpot = () => {
                         required
                     />
                 </div>
-                {/* <div>
+                <div>
                     <label htmlFor="previewImage">Preview Image</label>
                     <input
                         id="previewImage"
+                        placeholder="Enter a valid image url"
                         type='url'
                         onChange={(e) => setPreviewImage(e.target.value)}
                         value={previewImage}
                     />
-                </div> */}
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </div>

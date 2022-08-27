@@ -79,7 +79,7 @@ export const getSpotById = (id) => async dispatch => {
 }
 
 export const createOneSpot = (spot) => async dispatch => {
-    const {address, city, state, country, lat, lng, name, description, price} = spot
+    const {address, city, state, country, lat, lng, name, description, price, previewImage} = spot
     const res = await csrfFetch(`/api/spots`, {
         method: 'POST',
         body: JSON.stringify({
@@ -94,11 +94,28 @@ export const createOneSpot = (spot) => async dispatch => {
             price
         })
     })
+    
+    // 
     if (res.ok){
         const createdSpot = await res.json()
-        dispatch(createSpot(createdSpot))
-        return createdSpot
+        // const dispatchSpot = await dispatch(createSpot(createdSpot))
+        // console.log(createdSpot)
+        const imageRes = await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
+            method: 'POST',
+            body: JSON.stringify({
+                url: previewImage,
+                previewImage: true
+            })
+        })
+
+            if(imageRes.ok){
+                createdSpot.previewImage = imageRes.url
+                dispatch(createSpot(createdSpot))
+                return createdSpot
+            }
+
     }
+
     return res
 }
 
