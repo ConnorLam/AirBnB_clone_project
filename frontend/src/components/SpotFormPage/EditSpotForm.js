@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { editASpot } from "../../store/spots";
+import './EditSpotForm.css'
 
 
 
@@ -103,110 +104,118 @@ const EditSpot = ({spot}) => {
   // })
 
   return (
-    <div>
-      <h2>Edit Spot Details</h2>
-      <form onSubmit={onSubmit}>
-        {hasSubmitted && validationErrors.length > 0 && (
-          <div>
-            Please check your form for errors
-            <ul>
-              {validationErrors.map((validationError) => (
-                <li key={validationError}>{validationError}</li>
-              ))}
-            </ul>
+    <>
+      <div className="signup">
+        <h3>Edit Spot</h3>
+      </div>
+      <div className="signup-form-modal overflow-container">
+        <div className="welcome-signup">
+          <h2 className="welcome-header">Details</h2>
+        </div>
+        <form onSubmit={onSubmit}>
+          {hasSubmitted && validationErrors.length > 0 && (
+            <div>
+              Please check your form for errors
+              <ul>
+                {validationErrors.map((validationError) => (
+                  <li key={validationError}>{validationError}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="signup-info edit-spot-info">
+            <div className="input-box name-input-box">
+              <label className='name-label' htmlFor="name">Name</label>
+              <input
+                className="input"
+                id="name"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+            </div>
+            <div>
+              <label htmlFor="address">Address</label>
+              <input
+                className="input"
+                id="address"
+                type="text"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+              />
+            </div>
+            <div>
+              <label htmlFor="city">City</label>
+              <input
+                className="input"
+                id="city"
+                type="text"
+                onChange={(e) => setCity(e.target.value)}
+                value={city}
+              />
+            </div>
+            <div>
+              <label htmlFor="state">State</label>
+              <input
+                className="input"
+                id="state"
+                type="text"
+                onChange={(e) => setState(e.target.value)}
+                value={state}
+              />
+            </div>
+            <div>
+              <label htmlFor="country">Country</label>
+              <input
+                className="input"
+                id="country"
+                type="text"
+                onChange={(e) => setCountry(e.target.value)}
+                value={country}
+              />
+            </div>
+            <div>
+              <label htmlFor="lat">Latitude</label>
+              <input
+                className="input"
+                id="lat"
+                type="number"
+                onChange={(e) => setLat(e.target.value)}
+                value={lat}
+              />
+            </div>
+            <div>
+              <label htmlFor="lng">Longitude</label>
+              <input
+                className="input"
+                id="lng"
+                type="number"
+                onChange={(e) => setLng(e.target.value)}
+                value={lng}
+              />
+            </div>
+            <div>
+              <label htmlFor="description">Description</label>
+              <textarea
+                className="input"
+                id="description"
+                type="text"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+              />
+            </div>
+            <div>
+              <label htmlFor="price">Price</label>
+              <input
+                className="input"
+                id="price"
+                type="number"
+                onChange={(e) => setPrice(e.target.value)}
+                value={price}
+              />
+            </div>
           </div>
-        )}
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="address">Address</label>
-          <input
-            id="address"
-            type="text"
-            onChange={(e) => setAddress(e.target.value)}
-            value={address}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="city">City</label>
-          <input
-            id="city"
-            type="text"
-            onChange={(e) => setCity(e.target.value)}
-            value={city}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="state">State</label>
-          <input
-            id="state"
-            type="text"
-            onChange={(e) => setState(e.target.value)}
-            value={state}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="country">Country</label>
-          <input
-            id="country"
-            type="text"
-            onChange={(e) => setCountry(e.target.value)}
-            value={country}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="lat">Latitude</label>
-          <input
-            id="lat"
-            type="number"
-            onChange={(e) => setLat(e.target.value)}
-            value={lat}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="lng">Longitude</label>
-          <input
-            id="lng"
-            type="number"
-            onChange={(e) => setLng(e.target.value)}
-            value={lng}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            
-          />
-        </div>
-        <div>
-          <label htmlFor="price">Price</label>
-          <input
-            id="price"
-            type="number"
-            onChange={(e) => setPrice(e.target.value)}
-            value={price}
-            
-          />
-        </div>
-        {/* <div>
+          {/* <div>
                     <label htmlFor="previewImage">Preview Image</label>
                     <input
                         id="previewImage"
@@ -215,9 +224,12 @@ const EditSpot = ({spot}) => {
                         value={previewImage}
                     />
                 </div> */}
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+                <div className="signup-button-div">
+                  <button className="signup-button" type="submit">Submit</button>
+                </div>
+        </form>
+      </div>
+    </>
   );
 };
 

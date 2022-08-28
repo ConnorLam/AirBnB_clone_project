@@ -1,0 +1,39 @@
+
+.user-spots-header{
+    display: flex;
+    justify-content: center;
+}
+
+.user-spot-name{
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    font-weight: bold;
+}
+
+.user-spots-ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0% ;
+}
+
+
+
+.edit-delete-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-spots-button{
+    background-color: #FF4564;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+    .user-spots-button:hover{
+        cursor: pointer;
+        background-color: red;
+    }
