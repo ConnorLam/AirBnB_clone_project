@@ -9,7 +9,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    /* justify-content: space-between; */
+    justify-content: space-around;
     /* margin: 3px 2%; */
 }
 
@@ -33,6 +33,10 @@
     .spots{
         text-decoration: none;
         color: black;
+    }
+
+    .description-all-spots{
+        padding-top: 10px;
     }
 
     .first-line{

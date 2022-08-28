@@ -64,7 +64,7 @@ const SpotById = () => {
         )
     } else {
         navLink = (
-            <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink>
+            <NavLink to={`/spots/${spot.id}/create/review`}>Write A Review</NavLink>
         )
     }
 

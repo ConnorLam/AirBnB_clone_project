@@ -50,7 +50,7 @@ const Navigation = ({isLoaded}) => {
         // <ul>
             <nav className='top'>
                 <div>
-                    <NavLink className='home' exact to='/'>airbnb "Clone"</NavLink>
+                    <NavLink className='home' exact to='/'>FakeBnB</NavLink>
                 </div>
                 {isLoaded && session}
             </nav>

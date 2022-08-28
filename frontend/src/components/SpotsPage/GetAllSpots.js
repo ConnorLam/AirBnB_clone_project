@@ -59,21 +59,23 @@ const GetSpots = () => {
                               alt={""}
                             />
                           </div>
-                          <div className="first-line">
-                            <div className="city-state">
-                              {spot.city}, {spot.state}
+                          <div className="description-all-spots">
+                            <div className="first-line">
+                              <div className="city-state">
+                                {spot.city}, {spot.state}
+                              </div>
+                              <div className="avg-rating">
+                                {/* <div className="star-icon">
+                                </div> */}
+                                  <i class="fa-solid fa-star fa-xs"></i>
+                                  <div>
+                                      {Number(spot.avgRating).toFixed(2)}
+                                  </div>
+                              </div>
                             </div>
-                            <div className="avg-rating">
-                              {/* <div className="star-icon">
-                              </div> */}
-                                <i class="fa-solid fa-star fa-xs"></i>
-                                <div>
-                                    {Number(spot.avgRating).toFixed(2)}
-                                </div>
+                            <div>
+                              <span className="spot-price">${spot.price}</span> per night
                             </div>
-                          </div>
-                          <div>
-                            <span className="spot-price">${spot.price}</span> per night
                           </div>
                         </NavLink>
                       </div>
