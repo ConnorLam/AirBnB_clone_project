@@ -65,9 +65,11 @@ const GetSpots = () => {
                             </div>
                             <div className="avg-rating">
                               {/* <div className="star-icon">
-                                    <i class="fa-solid fa-star fa-xs"></i>
                               </div> */}
-                                star {Number(spot.avgRating).toFixed(2)}
+                                <i class="fa-solid fa-star fa-xs"></i>
+                                <div>
+                                    {Number(spot.avgRating).toFixed(2)}
+                                </div>
                             </div>
                           </div>
                           <div>

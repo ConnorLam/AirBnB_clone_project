@@ -68,7 +68,7 @@
             padding: 0% 10%;
             width: 100%;
             background-color: white;
-            border-radius: 30%;
+            border-radius: 30px;
             border: #DDDDDD solid 1px;
         }
 
@@ -76,7 +76,7 @@
                 box-shadow: 3px 3px 3px rgb(218, 215, 215);
             }
 
-            .fa-solid {
+            .fa-bars {
                 display: flex;
                 align-items: center;
                 width: 60px;
@@ -87,7 +87,7 @@
                 /* justify-content: center; */
             }
 
-                    .fa-solid:hover{
+                    .fa-bars:hover{
                         color: black;
                         cursor: pointer;
                     }

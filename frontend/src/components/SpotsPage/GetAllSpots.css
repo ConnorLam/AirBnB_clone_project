@@ -53,9 +53,15 @@
         .spot-price{
             font-weight: bold;
         }
-        /* .avg-rating{
+        
+        .avg-rating{
             display: flex;
             flex-direction: row;
-            align-items: flex-start;
-            justify-content: flex-start;
-        } */
+            /* align-items: flex-start; */
+            /* justify-content: flex-start; */
+        }
+
+        .fa-star{
+            padding-top: 9px;
+            padding-right: 5px;
+        }
