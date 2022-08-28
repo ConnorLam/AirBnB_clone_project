@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux'
 import Navigation from './components/Navigation'
 import GetSpots from './components/SpotsPage/GetAllSpots';
 import SpotById from './components/SpotsPage/SpotDetails';
-import CreateSpot from './components/SpotFormPage/createSpot';
+// import CreateSpot from './components/SpotFormPage/createSpot';
 import UserSpots from './components/SpotsPage/UserSpots';
 // import EditSpot from './components/SpotFormPage/IndexEditSpot';
 import CreateAReview from './components/CreateReviewPage/CreateReview';
@@ -33,9 +33,9 @@ function App() {
             <Route exact path='/'>
               <GetSpots />
             </Route>
-            <Route exact path={'/spots/create'}>
+            {/* <Route exact path={'/spots/create'}>
               <CreateSpot />
-            </Route>
+            </Route> */}
             {/* <Route exact path={`/spots/:spotId/edit`}>
               <EditSpot />
             </Route> */}

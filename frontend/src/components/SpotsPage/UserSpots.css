@@ -26,11 +26,13 @@
 }
 
 .user-spots-button{
+    /* position: relative; */
     background-color: #FF4564;
     border: none;
     color: white;
-    padding: 8px;
+    padding: 10px;
     border-radius: 10px;
+    /* left: 30px; */
 }
 
     .user-spots-button:hover{

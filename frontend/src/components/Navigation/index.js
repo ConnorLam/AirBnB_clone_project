@@ -5,6 +5,7 @@ import './Navigation.css'
 import LoginFormModal from '../LoginFormModal'
 // import { useHistory } from 'react-router-dom'
 import SignUpFormModal from '../SignupFormPage'
+import CreateSpotModal from '../SpotFormPage/IndexCreateSpot'
 
 
 const Navigation = ({isLoaded}) => {
@@ -38,7 +39,7 @@ const Navigation = ({isLoaded}) => {
     } else {
         session = (
             <div className='right-side'>
-                <NavLink className='host-link' to={'/spots/create'}>Become a Host</NavLink>
+                <CreateSpotModal />
                 {/* <NavLink to={'/mySpots'}>Your Spots</NavLink> */}
                 <ProfileButton className='button' user={user}/>
             </div>
