@@ -113,115 +113,114 @@ const EditSpot = ({spot}) => {
           <h2 className="welcome-header">Details</h2>
         </div>
         <form onSubmit={onSubmit}>
-          {hasSubmitted && validationErrors.length > 0 && (
-            <div>
-              Please check your form for errors
-              <ul>
-                {validationErrors.map((validationError) => (
-                  <li key={validationError}>{validationError}</li>
-                ))}
-              </ul>
-            </div>
-          )}
           <div className="signup-info edit-spot-info">
             <div className="input-box name-input-box">
-              <label className='name-label' htmlFor="name">Name</label>
               <input
+                placeholder="Name"
                 className="input"
                 id="name"
                 type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="address">Address</label>
               <input
+                placeholder="Address"
                 className="input"
                 id="address"
                 type="text"
                 onChange={(e) => setAddress(e.target.value)}
                 value={address}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="city">City</label>
               <input
+                placeholder="City"
                 className="input"
                 id="city"
                 type="text"
                 onChange={(e) => setCity(e.target.value)}
                 value={city}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="state">State</label>
               <input
+                placeholder="State"
                 className="input"
                 id="state"
                 type="text"
                 onChange={(e) => setState(e.target.value)}
                 value={state}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="country">Country</label>
               <input
                 className="input"
                 id="country"
                 type="text"
                 onChange={(e) => setCountry(e.target.value)}
                 value={country}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="lat">Latitude</label>
               <input
+                placeholder="Latitude"
                 className="input"
                 id="lat"
                 type="number"
                 onChange={(e) => setLat(e.target.value)}
                 value={lat}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="lng">Longitude</label>
               <input
+                placeholder="Longitude"
                 className="input"
                 id="lng"
                 type="number"
                 onChange={(e) => setLng(e.target.value)}
                 value={lng}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="description">Description</label>
               <textarea
+                placeholder="Description"
                 className="input"
                 id="description"
                 type="text"
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
-              />
+                />
             </div>
             <div>
-              <label htmlFor="price">Price</label>
               <input
+                placeholder="Price"
                 className="input"
                 id="price"
                 type="number"
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}
-              />
+                />
             </div>
           </div>
+            {hasSubmitted && validationErrors.length > 0 && (
+              <div className="errors edit-spot-errors-div">
+                Please check your form for errors
+                <ul>
+                  {validationErrors.map((validationError) => (
+                    <li className='errors' key={validationError}>{validationError}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           {/* <div>
                     <label htmlFor="previewImage">Preview Image</label>
                     <input
-                        id="previewImage"
-                        type='url'
-                        onChange={(e) => setPreviewImage(e.target.value)}
-                        value={previewImage}
+                    id="previewImage"
+                    type='url'
+                    onChange={(e) => setPreviewImage(e.target.value)}
+                    value={previewImage}
                     />
                 </div> */}
                 <div className="signup-button-div">

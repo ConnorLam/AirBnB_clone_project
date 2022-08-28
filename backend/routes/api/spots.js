@@ -253,6 +253,7 @@ router.get('/:spotId', async (req, res) => {
       group: ["Spot.id", 'User.id'],
     //   raw:true 
     });
+    // console.log('test console log', spot.dataValues.numReviews)
 
     if(!spot){
         res.statusCode = 404
@@ -280,7 +281,7 @@ router.get('/:spotId', async (req, res) => {
           imagesArr.push(imagesObj)
         } 
     }
-    console.log('        test         ', imagesArr)
+    // console.log('        test         ', imagesArr)
 
     let details = {
         id: spot.id,
@@ -296,8 +297,8 @@ router.get('/:spotId', async (req, res) => {
         price: spot.price,
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
-        numReviews: spot.numReviews,
-        avgRating: spot.avgRating,
+        numReviews: spot.dataValues.numReviews,
+        avgRating: spot.dataValues.avgRating,
         Images: imagesArr,
         Owner: {
             id: spot.User.dataValues.id,
