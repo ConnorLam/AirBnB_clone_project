@@ -44,16 +44,21 @@ const ProfileButton = ({user}) => {
           <i className="fas fa-user-circle fa-2x"></i>
         </button>
         {showMenu && (
-          <ul className="dropdown">
-            {/* <div className='dropdown-info'>{user.username}</div>
-            <div className='dropdown-info'>{user.email}</div> */}
-            <div>
-              <button className='dropdown-info-button' onClick={goToYourSpots}>Your Spots</button>
-            </div>
-            <div>
-              <button className='dropdown-info-button' onClick={logOut}> Log Out</button>
-            </div>
-          </ul>
+          <div>
+            <ul className="dropdown">
+              {/* <div className='dropdown-info'>{user.username}</div>
+              <div className='dropdown-info'>{user.email}</div> */}
+              <div className='dropdown-info'>
+                <div>
+                  <button className='dropdown-info-button your-spots' onClick={goToYourSpots}>Your Spots</button>
+                </div>
+                <div>
+                  <button className='dropdown-info-button log-out' onClick={logOut}> Log Out</button>
+                </div>
+
+              </div>
+            </ul>
+          </div>
         )}
       </div>
     );
