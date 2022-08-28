@@ -83,7 +83,7 @@
                 align-items: center;
                 width: 60px;
                 height: 40px;
-                color: #222222;
+                color: #717171;
                 /* background-color: white; */
                 /* padding-left: 10px; */
                 /* justify-content: center; */
@@ -95,12 +95,11 @@
                     }
 
             .fas{
-                color: #222222;
+                color: #717171;
             }
 
                     .fas:hover {
                         /* color: grey; */
-                        color: black;
                         cursor: pointer;
                     }
 
