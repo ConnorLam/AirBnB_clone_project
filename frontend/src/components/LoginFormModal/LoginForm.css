@@ -3,11 +3,13 @@
     font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
-    .whole-modal {
+    /* .whole-modal {
         display: flex;
-        /* padding-left: 5%; */
+        padding-left: 4%;
         flex-direction: column;
-    }
+        overflow: scroll;
+        position: absolute;
+    } */
 
 
     .login-modal-button {
@@ -31,6 +33,7 @@
         align-items: center;
         border-bottom: rgb(201, 199, 199) solid 1px;
         font-weight: bold;
+        font-size: large;
         /* background-color: rgb(243, 242, 239); */
         /* border-top-left-radius: 25px; */
         /* border-top-right-radius: 25px; */
@@ -39,8 +42,8 @@
     .welcome {
         display: flex;
         justify-content: flex-start;
-        align-items: flex-end;
-        padding-left: 4%;
+        /* align-items: flex-end; */
+        /* padding-left: 4%; */
         font-weight: 550;
         font-size: large;
         /* padding-bottom: 10%; */
@@ -48,7 +51,7 @@
     
     .login-form {
         display: flex;
-        position: static;
+        /* position: relative; */
         height: 100%;
         flex-direction: column;
         align-items: center;
@@ -63,8 +66,10 @@
             padding-left: 4%;
             padding-right: 4%;
             width: 100%;
-            height: 50%;
+            height: 100%;
             font-size: large;
+            /* overflow: auto; */
+            /* overflow-x: auto; */
         }
 
             .username-email {
