@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* overflow: hidden; */
+
 }
 
 #modal-background {
@@ -19,10 +21,39 @@
 }
 
 #modal-content {
-    height: 60%;
-    width: 40%;
-    margin: 0% 20%;
-    border-radius: 4%;
+    max-height: 100%;
+    width: 50%;
+    /* margin: 0% 20%; */
+    border-radius: 30px; /* percent closer to circle, pixel for rectangle curves */
     position: relative;
     background-color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
+
+
+/* #modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal-content {
+    position: absolute;
+    background-color: white;
+} */

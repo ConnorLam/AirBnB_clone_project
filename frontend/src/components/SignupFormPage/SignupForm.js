@@ -34,68 +34,92 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        First Name
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Last Name
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+    <>
+      <div className="signup">
+        <h3>Sign Up!</h3>
+      </div>
+      <div className="signup-form-modal overflow-container">
+        <div className="welcome-signup">
+          <h2 className="welcome-header">Welcome to FakeBnB</h2>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="signup-info">
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="First Name"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Last Name"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Confirm Password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+            <ul>
+              {errors.map((error, idx) => (
+                <li className="errors" key={idx}>
+                  {error}
+                </li>
+              ))}
+            </ul>
+            <div className="signup-button-div">
+              <button className="signup-button" type="submit">
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 
