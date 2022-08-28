@@ -45,13 +45,13 @@ const ProfileButton = ({user}) => {
         </button>
         {showMenu && (
           <ul className="dropdown">
-            <div className='dropdown-info'>{user.username}</div>
-            <div className='dropdown-info'>{user.email}</div>
-            <div>
-              <button className='dropdown-info-button' onClick={logOut}> Log Out</button>
-            </div>
+            {/* <div className='dropdown-info'>{user.username}</div>
+            <div className='dropdown-info'>{user.email}</div> */}
             <div>
               <button className='dropdown-info-button' onClick={goToYourSpots}>Your Spots</button>
+            </div>
+            <div>
+              <button className='dropdown-info-button' onClick={logOut}> Log Out</button>
             </div>
           </ul>
         )}

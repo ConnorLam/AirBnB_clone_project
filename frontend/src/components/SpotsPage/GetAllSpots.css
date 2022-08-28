@@ -1,5 +1,61 @@
 .img{
     width: 300px;
-    height: auto;
+    height: 300px;
     border-radius: 5%;
 }
+
+.allspotsUl{
+    padding: 0%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    /* margin: 3px 2%; */
+}
+
+/* .allspots-div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+} */
+
+    .wrap-spots-div{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin: 5px 6px;
+        /* justify-content: space-between; */
+        /* margin: 10px; */
+        /* justify-content: space-between; */
+        /* max-width: 300px; */
+    }
+
+    .spots{
+        text-decoration: none;
+        color: black;
+    }
+
+    .first-line{
+        display: flex;
+        justify-content: space-between;
+        color: black;
+        text-decoration: none;
+        /* font-weight: bold; */
+    }
+        .city-state{
+            font-weight: bold;
+        }
+
+        .star-icon {
+            padding-right: 5px;
+        }
+
+        .spot-price{
+            font-weight: bold;
+        }
+        /* .avg-rating{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+        } */

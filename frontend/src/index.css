@@ -19,9 +19,16 @@
             /* position: sticky; */
             /* top: 0; */
             width: 100vw;
+            position: fixed;
+            top: 0;
+            background-color: white;
+            /* margin-bottom: 10px; */
     }
 
     .body {
-        margin: 0% 5%;
+        margin: 7% 4%;
+        /* padding: 0% 5%; */
         /* border-top: rgb(201, 199, 199) solid 1px; */
+        /* height: 100%; */
+        /* margin-top: 100px; */
     }

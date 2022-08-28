@@ -2,4 +2,5 @@
         font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
         width: 100%;
         height: 100%;
+        overflow-x: hidden;
 }

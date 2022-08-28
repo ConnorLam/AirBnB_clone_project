@@ -21,36 +21,61 @@ const GetSpots = () => {
         return null
     }
 
-    function validImage(spot) {
-      if (spot.previewImage) {
-        return spot.previewImage;
-      } else {
-        return "https://thumbs.dreamstime.com/z/young-man-says-no-white-53544424.jpg";
-      }
-    }
+    // function validImage(spot) {
+    //   if (spot.previewImage) {
+    //     return spot.previewImage;
+    //   } else {
+    //     return "https://thumbs.dreamstime.com/z/young-man-says-no-white-53544424.jpg";
+    //   }
+    // }
+
+    // function validReview(spot){
+    //     if (spot.avgRating) {
+    //         return (
+    //           <>
+    //             <div className="star-icon">
+    //                 <i class="fa-solid fa-star fa-xs"></i>
+
+    //             </div>
+    //                 {spot.avgRating.toFixed(2)}
+    //            </> 
+    //         );
+    //     } else {
+    //         return 'No reviews yet'
+    //     }
+    // }
 
     return (
-        <div>
-            <ul>
+        <div className="allspots-div">
+            <ul className="allspotsUl">
                 {spotsArr.map(spot => {
                     return (
-                        <div key={spot.id}>
-                            <NavLink className='Spots' to={`/spots/${spot.id}`}>
-                                <div>
-                                    <img className='img' src={validImage(spot)} alt={spot.name}/>
-                                </div>
-                                <div>
-                                    {spot.city}, {spot.state}
-                                </div>  
-                                <div>
-                                    {Number(spot.avgRating).toFixed(2)}
-                                </div>  
-                                <div>
-                                    {`$${spot.price} night`} 
-                                </div>  
-                            </NavLink>
-                        </div>
-                    )
+                      <div className="wrap-spots-div" key={spot.id}>
+                        <NavLink className="spots" to={`/spots/${spot.id}`}>
+                          <div>
+                            <img
+                              className="img"
+                              src={spot.previewImage}
+                              alt={""}
+                            />
+                          </div>
+                          <div className="first-line">
+                            <div className="city-state">
+                              {spot.city}, {spot.state}
+                            </div>
+                            <div className="avg-rating">
+                              {/* <div className="star-icon">
+                                    <i class="fa-solid fa-star fa-xs"></i>
+                              </div> */}
+                                star {Number(spot.avgRating).toFixed(2)}
+                            </div>
+                          </div>
+                          <div>
+                            <span className="spot-price">${spot.price}</span> per night
+                          </div>
+                        </NavLink>
+                      </div>
+                    );
                 })}
             </ul>
         </div>
