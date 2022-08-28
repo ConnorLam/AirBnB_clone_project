@@ -68,44 +68,99 @@ const SpotById = () => {
         )
     }
 
-    return isLoaded && (
-        <div>
+    return (
+      isLoaded && (
+        <div className="spot-details-page">
+          <div>
+            <h1 className='spot-name'>{spot.name}</h1>
+            <div className='spot-details-header'>
+              <i class="fa-solid fa-star fa-xs"></i>
+              {Number(spot.avgRating).toFixed(2)} ·{" "}
+              <span className='spot-info-header'>{spot.numReviews} reviews</span> ·{" "}
+              <span className='spot-info-header'>
+                {spot.city}, {spot.state}, {spot.country}
+              </span>
+            </div>
+            <div className="spot-details-img-div">
+              <img
+                className="spot-details-image"
+                src={validImage(spot)}
+                alt={spot.name}
+              />
+            </div>
+          </div>
+          <div className="description">
             <div>
-                <h1>{spot.name}</h1>
-                <div>{spot.city}, {spot.state}, {spot.Owner.firstName}</div>
+              <h2>Home hosted by {spot.Owner.firstName}</h2>
+              <div className="spot-details">{spot.description}</div>
+            </div>
+            <div className="right-side-description">
+              <div>${spot.price} night</div>
+              <div className="right-side-reviews">
                 <div>
-                    <img src={validImage(spot)} alt={spot.name}/> 
+                  <i class="fa-solid fa-star fa-xs"></i>
+                  {Number(spot.avgRating).toFixed(2)}
                 </div>
+                {spot.numReviews} reviews
+              </div>
             </div>
-            <div>
-                <h2>Reviews</h2>
-                {/* {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>} */}
-                {/* <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink> */}
+          </div>
+          <div>
+            <div className="review-header">
+              <h2 className="review-h2">
+                <div className="review-stats">
+                  <div className="review-avgRating">
+                    <i class="fa-solid fa-star fa-xs"></i>
+                    {Number(spot.avgRating).toFixed(2)}
+                  </div>{" "}
+                  ·<div>{spot.numReviews} reviews</div>
+                </div>
                 {navLink}
+              </h2>
+              {/* {user.id !== parsedSpotId ? <NavLink to={`/spots/${spot.id}/create/review`} >Write your review</NavLink> : <></>} */}
+              {/* <NavLink to={`/spots/${spot.id}/create/review`}>Write your review</NavLink> */}
             </div>
-            <ul>
-                {reviewsArr.length ? reviewsArr.map(review => {
-                    // console.log('review!!!!!!!!!!!!!!!!!!!!', review)
-                    return(
-                        <div key={review.id}>
-                            <div>
-                                {review.User.firstName} {review.User.lastName}
-                            </div>
-                            <div>
-                                {review.review}
-                            </div>
-                            <div>
-                                <img src={review.Images ? review.Images.map(image => image.url) : <p>no images</p>} alt={''}></img>
-                            </div>
-                            <div>
-                                <DeleteSpot review={review} user={user}/>
-                            </div>
+            <ul className="reviewsUl">
+              {reviewsArr.length ? (
+                reviewsArr.map((review) => {
+                  // console.log('review!!!!!!!!!!!!!!!!!!!!', review)
+                  return (
+                    <div className="reviews-div" key={review.id}>
+                      <div className="reviews-first-line">
+                        <div>
+                          <i className="fas fa-user-circle fa-2x review-user-circle"></i>
                         </div>
-                    )
-                }): <div>Be first to review!</div>}
+                        <div className="review-user-name">
+                          {review.User.firstName} {review.User.lastName}
+                        </div>
+                      </div>
+                      <div className="actual-review">{review.review}</div>
+                      <div>
+                        <img
+                          src={
+                            review.Images ? (
+                              review.Images.map((image) => image.url)
+                            ) : (
+                              <p>no images</p>
+                            )
+                          }
+                          alt={""}
+                        ></img>
+                      </div>
+                      <div>
+                        <DeleteSpot review={review} user={user} />
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div>Be first to review!</div>
+              )}
             </ul>
+          </div>
         </div>
-    )
+      )
+    );
 }
 
 
