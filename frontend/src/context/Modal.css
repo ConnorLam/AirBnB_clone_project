@@ -18,11 +18,12 @@
     position: fixed;
     right: 0;
     top: 0;
+    /* overflow: hidden; */
 }
 
 #modal-content {
     max-height: 80%;
-    width: 50%;
+    width: 40%;
     /* margin: 0% 20%; */
     border-radius: 30px; /* percent closer to circle, pixel for rectangle curves */
     position: relative;

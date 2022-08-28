@@ -26,71 +26,67 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="whole-modal">
-      <div className="header">
+    <>
+      <div className="signup">
         <h4>Log In</h4>
       </div>
-      <div className="welcome">
-        <p>Welcome to Bootleg-AirBnB</p>
-      </div>
-      <form className="login-form" onSubmit={onSubmit}>
-        {/* <ul>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul> */}
-        <div className="login-info">
-          <label className="username-email">
-            <p className="label">
-              Username or Email
-            </p>
-            <input
-              className="input-box"
-              type="text"
-              onChange={(e) => setCredential(e.target.value)}
-              value={credential}
-              required
-            />
-          </label>
-          <label className="password">
-            <p className="label">
-              Password
-            </p>
-            <input
-              className="input-box"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-          </label>
+      <div className="signup-form-modal overflow-container">
+        <div className="welcome-signup">
+          <h2 className="welcome-header">Welcome to Bootleg-AirBnB</h2>
         </div>
-        <ul className="error-messages">
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-        <div className="login-buttons">
-          <div className="login">
-            <button className="actual-button"type="submit">Log In</button>
-          </div>
-          <div>
-            <div className="login">
-              <button
-              className="actual-button"
-                type="submit"
-                onClick={(e) => {
-                  setCredential("Demo-lition");
-                  setPassword("password");
-                }}
-              >
-                Demo User
-              </button>
+        <form onSubmit={onSubmit}>
+          <div className="signup-info">
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Username or Email"
+                type="text"
+                onChange={(e) => setCredential(e.target.value)}
+                value={credential}
+                required
+              />
+            </div>
+            <div className="input-box">
+              <input
+                className="input"
+                placeholder="Password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
             </div>
           </div>
-        </div>
-      </form>
-    </div>
+          <ul>
+            {errors.map((error, idx) => (
+              <li className='errors' key={idx}>{error}</li>
+            ))}
+          </ul>
+          <div className="signup-button-div">
+            {/* <div className="login"> */}
+              <button className="signup-button" type="submit">
+                Log In
+              </button>
+            {/* </div> */}
+            {/* <div> */}
+              {/* <div className="login"> */}
+                <button
+                  className="signup-button"
+                  type="submit"
+                  onClick={(e) => {
+                    setCredential("Demo-lition");
+                    setPassword("password");
+                  }}
+                >
+                  Demo User
+                </button>
+              {/* </div> */}
+            {/* </div> */}
+          </div>
+        </form>
+
+      </div>
+    </>
   );
 };
 

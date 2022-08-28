@@ -24,9 +24,9 @@ function App() {
 
   return (
     <>
-      <div className='navBar'>
+      <nav className='navBar'>
         <Navigation isLoaded={isLoaded} />
-      </div>
+      </nav>
       {isLoaded && (
         <div className='body'>
           <Switch>
