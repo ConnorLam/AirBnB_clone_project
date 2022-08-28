@@ -7,7 +7,7 @@ const EditSpotModal = ({spot}) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>
+      <button className="user-spots-button" onClick={() => setShowModal(true)}>
         Edit Spot
       </button>
       {showModal && (

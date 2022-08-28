@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from "react-router-dom"; 
-
+import { useHistory, NavLink } from "react-router-dom"; 
 import { getUserSpots } from "../../store/spots";
 import { deleteASpot } from "../../store/spots";
 import EditSpotModal from "../SpotFormPage/IndexEditSpot";
+import './UserSpots.css'
 
 
 const UserSpots = () => {
@@ -56,25 +56,52 @@ const UserSpots = () => {
 
     return (
         <div>
-            <h2>All Your Spots</h2>
-            <ul>
+            <h1 className="user-spots-header">All Your Spots</h1>
+            <ul className="allspotsUl user-spots-ul">
                 {spotsArr?.map(spot => {
                     // console.log(spot.id)
-                    return(
-                        <div>
-                            <div>
-                                <img src={validImage(spot)} alt={spot.name}/>
+                    return (
+                            <div className="wrap-spots-div ">
+                        <NavLink className='spots' to={`/spots/${spot.id}`}>
+                            <div className="user-spot-name">
+                                {spot.name}
                             </div>
                             <div>
-                                {spot.name}, {spot.city} {spot.id}, {spot.price} 
-                                <div>
-                                    <EditSpotModal spot={spot} />
-                                    <button onClick={() => dispatch(deleteASpot(spot.id))}>Delete Spot</button>
-                                    {/* <button onClick={() => deleteButton(spot)}>Delete Spot</button> */}
+                            <img
+                                className="img"
+                                src={validImage(spot)}
+                                alt={spot.name}
+                                />
+                            </div>
+                            {/* <div> */}
+                            <div className="first-line">
+                                <div className="city-state">
+                                {spot.city}, {spot.state}
+                                </div>
+                                <div className="avg-rating">
+                                {/* <div className="star-icon">
+                                </div> */}
+                                <i class="fa-solid fa-star fa-xs"></i>
+                                <div>{Number(spot.avgRating).toFixed(2)}</div>
                                 </div>
                             </div>
-                        </div>
-                    )
+                            <div>
+                                <span className="spot-price">${spot.price} </span>
+                                per night
+                            </div>
+                        </NavLink>
+                          <div className="edit-delete-buttons">
+                            <EditSpotModal spot={spot} />
+                            <button className="user-spots-button"
+                              onClick={() => dispatch(deleteASpot(spot.id))}
+                              >
+                              Delete Spot
+                            </button>
+                            {/* <button onClick={() => deleteButton(spot)}>Delete Spot</button> */}
+                          </div>
+                        {/* </div> */}
+                      </div>
+                    );
                 })}
             </ul>
         </div>

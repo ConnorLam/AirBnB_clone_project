@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
 import DeleteSpot from '../DeleteReviewButton/DeleteReview'
+import './SpotDetail.css'
 
 
 const SpotById = () => {
