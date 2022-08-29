@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: [[10, 500]],
-          msg: "must be between 10 and 500 characters"
+          args: [10, 500],
+          msg: "Review must be between 10 and 500 characters"
 
         } 
       }

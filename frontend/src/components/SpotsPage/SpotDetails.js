@@ -5,6 +5,7 @@ import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
 import DeleteSpot from '../DeleteReviewButton/DeleteReview'
 import './SpotDetail.css'
+import CreateReviewModal from '../CreateReviewPage'
 
 
 const SpotById = () => {
@@ -64,7 +65,7 @@ const SpotById = () => {
         )
     } else {
         navLink = (
-            <NavLink to={`/spots/${spot.id}/create/review`}>Write A Review</NavLink>
+            <CreateReviewModal spot={spot}/>
         )
     }
 
@@ -74,7 +75,7 @@ const SpotById = () => {
           <div>
             <h1 className='spot-name'>{spot.name}</h1>
             <div className='spot-details-header'>
-              <i class="fa-solid fa-star fa-xs"></i>
+              <i className="fa-solid fa-star fa-xs"></i>
               {Number(spot.avgRating).toFixed(2)} ·{" "}
               <span className='spot-info-header'>{spot.numReviews} reviews</span> ·{" "}
               <span className='spot-info-header'>
@@ -98,7 +99,7 @@ const SpotById = () => {
               <div>${spot.price} night</div>
               <div className="right-side-reviews">
                 <div>
-                  <i class="fa-solid fa-star fa-xs"></i>
+                  <i className="fa-solid fa-star fa-xs"></i>
                   {Number(spot.avgRating).toFixed(2)}
                 </div>
                 {spot.numReviews} reviews
@@ -110,7 +111,7 @@ const SpotById = () => {
               <h2 className="review-h2">
                 <div className="review-stats">
                   <div className="review-avgRating">
-                    <i class="fa-solid fa-star fa-xs"></i>
+                    <i className="fa-solid fa-star fa-xs"></i>
                     {Number(spot.avgRating).toFixed(2)}
                   </div>{" "}
                   ·<div>{spot.numReviews} reviews</div>
@@ -131,7 +132,7 @@ const SpotById = () => {
                           <i className="fas fa-user-circle fa-2x review-user-circle"></i>
                         </div>
                         <div className="review-user-name">
-                          {review.User.firstName} {review.User.lastName}
+                          {review?.User?.firstName} {review?.User?.lastName}
                         </div>
                       </div>
                       <div className="actual-review">{review.review}</div>

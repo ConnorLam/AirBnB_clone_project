@@ -44,11 +44,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-          min: -90,
-          max: 90,
+          // min: -90,
+          // max: 90,
           invalidLatitude(){
             if (this.lat > 90 || this.lat < -90){
-              throw new Error('Invalid Latitude')
+              throw new Error('Latitude must be between -90 and 90')
             }
           }
         }
@@ -57,11 +57,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-          min: -180,
-          max: 180,
+          // min: -180,
+          // max: 180,
           invalidLongitude(){
             if (this.lng > 180 || this.lng < -180){
-              throw new Error('Invalid Longitude')
+              throw new Error('Longitude must be between 180 and -180')
             }
           }
         }
@@ -75,7 +75,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          len: [10, 500]
+          len: {
+            args: [10, 500],
+            msg: "Description must be between 10 and 500 characters"
+          }
         }
       },
       price: {

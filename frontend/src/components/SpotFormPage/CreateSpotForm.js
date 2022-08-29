@@ -38,8 +38,8 @@ const CreateSpot = ({setShowModal}) => {
     if (!lat) errors.push("Please provide a lat");
     if (!lng) errors.push("Please provide a lng");
     if (!description) errors.push("Please provide a description");
-    if (description.length < 10 || description.length > 500)
-      errors.push("description must be between 10 and 500");
+    // if (description.length < 10 || description.length > 500)
+    //   errors.push("description must be between 10 and 500");
     if (previewImage.length < 1) errors.push("Please provide an image url");
     if (isImage(previewImage) === false)
       errors.push("Please provide a valid image url");
@@ -87,7 +87,12 @@ const CreateSpot = ({setShowModal}) => {
     };
 
     
-    const spot = await dispatch(createOneSpot(details));
+    const spot = await dispatch(createOneSpot(details)).catch(async (res) =>{
+      const data = await res.json()
+      // console.log(data)
+      if(data && data.errors) setValidationErrors(data.errors)
+      // if(data &&)
+    })
     
     
 
@@ -223,9 +228,9 @@ const CreateSpot = ({setShowModal}) => {
                 </div>
             </div>
                 {hasSubmitted && validationErrors.length > 0 && (
-                    <div>
+                    <div className="errors">
                     Please check your form for errors
-                    <ul>
+                    <ul className="errors">
                         {validationErrors.map((validationError) => (
                         <li key={validationError}>{validationError}</li>
                         ))}
