@@ -47,15 +47,22 @@ const Navigation = ({isLoaded}) => {
     }
 
     return (
-        // <ul>
-            <nav className='top'>
-                <div>
-                    <NavLink className='home' exact to='/'>FakeBnB</NavLink>
-                </div>
-                {isLoaded && session}
-            </nav>
-        // </ul>
-    )
+      // <ul>
+      <nav className="top">
+        <div className='left-side-nav'>
+          <NavLink className="home" exact to="/">
+            <img
+              className="logo"
+              src="https://cdn0.iconfinder.com/data/icons/brands-colored-2/224/airbnb-social-network-brand-logo-512.png"
+              alt="NOT FOUND"
+            ></img>
+            FakeBnB
+          </NavLink>
+        </div>
+        {isLoaded && session}
+      </nav>
+      // </ul>
+    );
 }
 
 export default Navigation
