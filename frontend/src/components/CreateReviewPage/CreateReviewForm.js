@@ -18,7 +18,7 @@ const CreateAReview = ({setShowModal}) => {
   const [validationErrors, setValidationErrors] = useState([]);
   // const [submissionErrors, setSubmissionErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false)
+
 
   // useEffect(() => {
   //     const errors = []
