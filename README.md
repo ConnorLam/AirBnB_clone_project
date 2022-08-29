@@ -63,10 +63,9 @@ User can see their created spots and edit/delete them in this page, by going to 
 ![Screen Shot 2022-08-29 at 1 25 21 AM](https://user-images.githubusercontent.com/104233383/187157893-29595a25-9d8c-4d86-9323-e00578efa3a1.png)
 
 
-User can view reviews by clicking on a spot and looking at the bottom of the page!
+User can view reviews by clicking on a spot and looking at the bottom of the page
 
-[Screen Shot 2022-08-29 at 1 26 56 AM](https://user-images.githubusercontent.com/104233383/187158176-c527ea22-1c21-42ea-9a54-d738651086cd.png)
-
+![Screen Shot 2022-08-29 at 1 26 56 AM](https://user-images.githubusercontent.com/104233383/187158176-c527ea22-1c21-42ea-9a54-d738651086cd.png)
 
 User can delete a review that they have created by clicking on delete button where they wrote the review
 
