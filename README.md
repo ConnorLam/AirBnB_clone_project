@@ -1,5 +1,7 @@
 # AirBnB_clone_project
 
+[Link to live site](https://airbnb-clone-connor-lam.herokuapp.com/)
+
 ### About FakeBnB:
 
 FakeBnB is a website clone of AirBnB. FakeBnB's intentions are to be used as a marketplace for temporary home stays for vacations and things like it
