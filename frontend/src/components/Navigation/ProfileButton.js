@@ -29,6 +29,7 @@ const ProfileButton = ({user}) => {
     const logOut = (e) => {
         e.preventDefault()
         dispatch(logout())
+        history.push('/')
     }
 
     const goToYourSpots = (e) => {
