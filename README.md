@@ -2,7 +2,7 @@
 
 ### About FakeBnB:
 
-FakeBnB is a website clone of AirBnB. FakeBnB can be used as a marketplace for temporary home stays for vacations and things like it
+FakeBnB is a website clone of AirBnB. FakeBnB's intentions are to be used as a marketplace for temporary home stays for vacations and things like it
 
 ### Wiki Links
 
