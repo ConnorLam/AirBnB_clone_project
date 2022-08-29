@@ -28,24 +28,10 @@ module.exports = {
      },
      {
        url: "https://www.protocol.com/media-library/as-ever-the-challenge-for-airbnb-is-to-balance-the-needs-of-hosts-and-guests.jpg?id=26433106&width=1245&height=700&quality=85&coordinates=0%2C299%2C0%2C300",
-       previewImage: false,
+       previewImage: true,
        spotId: 3,
        reviewId: null,
        userId: 3,
-     },
-     {
-       url: "https://media.architecturaldigest.com/photos/62bdb5fda47d113b36863416/16:9/w_1738,h_977,c_limit/Mod%20Tree%202.jpeg",
-       previewImage: false,
-       spotId: null,
-       reviewId: 1,
-       userId: 1,
-     },
-     {
-       url: "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iUAZY8gOcp5U/v0/1200x-1.jpg",
-       previewImage: false,
-       spotId: null,
-       reviewId: 1,
-       userId: 1,
      },
    ]);
   },
