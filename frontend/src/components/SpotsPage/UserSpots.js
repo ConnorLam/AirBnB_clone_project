@@ -81,7 +81,7 @@ const UserSpots = () => {
                                 <div className="avg-rating">
                                 {/* <div className="star-icon">
                                 </div> */}
-                                <i class="fa-solid fa-star fa-xs"></i>
+                                <i className="fa-solid fa-star fa-xs"></i>
                                 <div>{Number(spot.avgRating).toFixed(2)}</div>
                                 </div>
                             </div>
