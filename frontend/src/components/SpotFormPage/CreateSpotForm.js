@@ -71,7 +71,7 @@ const CreateSpot = ({setShowModal}) => {
     e.preventDefault();
 
     setHasSubmitted(true);
-    if (validationErrors.length) return alert("must fix your errors");
+    // if (validationErrors.length) return alert("must fix your errors");
 
     const details = {
       name,

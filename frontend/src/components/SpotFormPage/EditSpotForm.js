@@ -6,7 +6,7 @@ import './EditSpotForm.css'
 
 
 
-const EditSpot = ({spot}) => {
+const EditSpot = ({spot, setShowModal}) => {
     // console.log('!!!!!!!!!!!!!!!!!!!!', spot)
   const dispatch = useDispatch();
   const history = useHistory();
@@ -56,7 +56,9 @@ const EditSpot = ({spot}) => {
     if (!state.length) errors.push("Please provide a state");
     if (!country.length) errors.push("Please provide a country");
     if (!lat) errors.push("Please provide a lat");
+    if (lat < -90 || lat > 90) errors.push('Latitude must be between 90 and -90')
     if (!lng) errors.push("Please provide a lng");
+    if (lng < -180 || lng > 180) errors.push('Latitude must be between -180 and 180')
     if (!description) errors.push("Please provide a description");
     if (description.length < 10 || description.length > 500)
     errors.push("description must be between 10 and 500");
@@ -96,6 +98,7 @@ const EditSpot = ({spot}) => {
 
     if (editedSpot) {
       history.push(`/spots/${spot.id}`);
+      // setShowModal(false)
     }
   }
 

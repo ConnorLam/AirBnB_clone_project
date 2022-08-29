@@ -12,7 +12,7 @@ const EditSpotModal = ({spot}) => {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditSpot spot={spot}/>
+          <EditSpot spot={spot} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>
