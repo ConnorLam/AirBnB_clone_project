@@ -114,7 +114,7 @@ const SpotById = () => {
                     <i className="fa-solid fa-star fa-xs"></i>
                     {Number(spot.avgRating).toFixed(2)}
                   </div>{" "}
-                  ·<div>{spot.numReviews} reviews</div>
+                  ·<div className='review-numReviews'>{spot.numReviews} reviews</div>
                 </div>
                 {navLink}
               </h2>

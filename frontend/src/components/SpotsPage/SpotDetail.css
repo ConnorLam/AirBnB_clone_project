@@ -101,12 +101,20 @@
                     /* border: solid red 1px; */
                     display: flex;
                     height: 3em;
-                    width: 15%;
-                    justify-content: space-around;
+                    width: 20%;
+                    /* justify-content: space-around; */
                     align-items: center;
                     font-size: large;
                 }
+
+                .review-avgRating{
+                    margin-right: 10px;
+                }
         
+                .review-numReviews{
+                    margin-left: 10px;
+                }
+
         .reviewsUl{
             padding: 0%;
             display: flex;
