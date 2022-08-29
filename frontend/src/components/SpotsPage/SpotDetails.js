@@ -1,5 +1,5 @@
 import { useEffect, useState} from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
