@@ -26,7 +26,7 @@
         .spot-details-img-div{
             display: flex;
             /* padding: 10px 0%; */
-            width: 49%;
+            width: 50%;
             margin-right: 1%;
             /* justify-content: center; */
         }
@@ -165,14 +165,15 @@
     display: flex;
     /* flex-direction: column; */
     flex-wrap: wrap;
-    width: 49%;
+    width: 50%;
     height: 50%;
     /* padding: 10px 0px; */
 }
 
     .image-right{
         width: 49%;
-        height: 52%;
+        height: 50%;
+        max-height: 250px;
     }
 
         .image-1{

@@ -94,10 +94,10 @@ const SpotById = () => {
                 />
               </div>
               <div className="spot-details-image-right">
-                <img className='image-right image-1' src={validImage(spot)} alt={spot.name} />
-                <img className='image-right image-2' src={validImage(spot)} alt={spot.name} />
-                <img className='image-right image-3' src={validImage(spot)} alt={spot.name} />
-                <img className='image-right image-4' src={validImage(spot)} alt={spot.name} />
+                <img className='image-right image-1' src={'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={spot.name} />
+                <img className='image-right image-2' src={'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={spot.name} />
+                <img className='image-right image-3' src={'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={spot.name} />
+                <img className='image-right image-4' src={'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt={spot.name} />
               </div>
             </div>
           </div>
