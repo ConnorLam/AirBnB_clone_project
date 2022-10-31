@@ -73,21 +73,32 @@ const SpotById = () => {
       isLoaded && (
         <div className="spot-details-page">
           <div>
-            <h1 className='spot-name'>{spot.name}</h1>
-            <div className='spot-details-header'>
+            <h1 className="spot-name">{spot.name}</h1>
+            <div className="spot-details-header">
               <i className="fa-solid fa-star fa-xs"></i>
               {Number(spot.avgRating).toFixed(2)} ·{" "}
-              <span className='spot-info-header'>{spot.numReviews} reviews</span> ·{" "}
-              <span className='spot-info-header'>
+              <span className="spot-info-header">
+                {spot.numReviews} reviews
+              </span>{" "}
+              ·{" "}
+              <span className="spot-info-header">
                 {spot.city}, {spot.state}, {spot.country}
               </span>
             </div>
-            <div className="spot-details-img-div">
-              <img
-                className="spot-details-image"
-                src={validImage(spot)}
-                alt={spot.name}
-              />
+            <div className="outer-spot-details-img">
+              <div className="spot-details-img-div">
+                <img
+                  className="spot-details-image"
+                  src={validImage(spot)}
+                  alt={spot.name}
+                />
+              </div>
+              <div className="spot-details-image-right">
+                <img className='image-right image-1' src={validImage(spot)} alt={spot.name} />
+                <img className='image-right image-2' src={validImage(spot)} alt={spot.name} />
+                <img className='image-right image-3' src={validImage(spot)} alt={spot.name} />
+                <img className='image-right image-4' src={validImage(spot)} alt={spot.name} />
+              </div>
             </div>
           </div>
           <div className="description">
@@ -114,7 +125,10 @@ const SpotById = () => {
                     <i className="fa-solid fa-star fa-xs"></i>
                     {Number(spot.avgRating).toFixed(2)}
                   </div>{" "}
-                  ·<div className='review-numReviews'>{spot.numReviews} reviews</div>
+                  ·
+                  <div className="review-numReviews">
+                    {spot.numReviews} reviews
+                  </div>
                 </div>
                 {navLink}
               </h2>
