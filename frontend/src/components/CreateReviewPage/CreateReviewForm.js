@@ -77,13 +77,13 @@ const CreateAReview = ({setShowModal, setAvgRating, setNumReviews}) => {
       });
 
       await dispatch(spotReview(spotId));
+      await dispatch(getSpotById(spotId))
 
       if(newReview){
         setShowModal(false)
         // setNumReviews(reviewsList.length)
       }
 
-      await dispatch(getSpotById(spotId))
 
     // .then(() => {history.push(`/spots/${spotId}`)})
     // .then(() => {dispatch(spotReview(spotId))})
