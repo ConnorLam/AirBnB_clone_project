@@ -1,6 +1,7 @@
 import { deleteASpot } from "../../store/review";
 import { useDispatch } from "react-redux";
 import './DeleteReview.css'
+import { getSpotById } from "../../store/spots";
 
 const DeleteSpot = ({review, user}) => {
     const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const DeleteSpot = ({review, user}) => {
         );
     } else {
         button = (
-            <button className="delete-review-button" onClick={() => dispatch(deleteASpot(review.id))}>
+            <button className="delete-review-button" onClick={() => dispatch(deleteASpot(review.id)).then(() => dispatch(getSpotById(review.spotId)))}>
               Delete Review
             </button>
         )
