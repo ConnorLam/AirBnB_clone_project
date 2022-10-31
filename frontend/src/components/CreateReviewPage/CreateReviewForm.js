@@ -3,14 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { createReview } from "../../store/review";
 import { spotReview } from "../../store/review";
+import { getSpotById } from "../../store/spots";
 
-const CreateAReview = ({setShowModal}) => {
+const CreateAReview = ({setShowModal, setAvgRating, setNumReviews}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   // `/spots/:spotId/create/review`
   const { spotId } = useParams();
 
   const user = useSelector((state) => state.session.user);
+  const reviews = useSelector((state) => state.reviews)
+  // console.log(reviews)
+  const reviewsList = Object.values(reviews)
+  // console.log(reviewsList)
   // console.log(user)
 
   const [review, setReview] = useState("");
@@ -75,7 +80,11 @@ const CreateAReview = ({setShowModal}) => {
 
       if(newReview){
         setShowModal(false)
+        // setNumReviews(reviewsList.length)
       }
+
+      await dispatch(getSpotById(spotId))
+
     // .then(() => {history.push(`/spots/${spotId}`)})
     // .then(() => {dispatch(spotReview(spotId))})
     // console.log('!!!!!!!!!!!!!!!!!!', reviewByUser)

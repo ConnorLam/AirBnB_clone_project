@@ -11,17 +11,20 @@ import CreateReviewModal from '../CreateReviewPage'
 const SpotById = () => {
     const {spotId} = useParams()
     // console.log(spotId)
-
-    const [isLoaded, setIsLoaded] = useState(false)
-
+    const reviews = useSelector((state) => state.reviews);
+    // console.log('this is in my component', reviews)
+    let reviewsArr = Object.values(reviews);
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => state.spots[parsedSpotId])
+
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [numReviews, setNumReviews] = useState(spot?.numReviews)
+    const [avgRating, setAvgRating] = useState(spot?.avgRating)
+
     const user = useSelector(state => state.session.user)
     // console.log(user)
     // console.log(spotId)
-    const reviews = useSelector(state => state.reviews)
-    // console.log('this is in my component', reviews)
-    let reviewsArr = Object.values(reviews)
+    // console.log(reviewsArr)
     // console.log(reviewsArr, 'ARRAY')
     // console.log('this is my selector', spot)
     // console.log(getSpotById.res)
@@ -37,6 +40,8 @@ const SpotById = () => {
 
     if(!spot || spot === {}) return <div>loading</div>
 
+
+    // console.log(spot)
 
     if(!reviews) return null
     // if(!user) return null
@@ -65,7 +70,7 @@ const SpotById = () => {
         )
     } else {
         navLink = (
-            <CreateReviewModal spot={spot}/>
+            <CreateReviewModal spot={spot} setAvgRating={setAvgRating} setNumReviews={setNumReviews}/>
         )
     }
 
@@ -78,7 +83,7 @@ const SpotById = () => {
               <i className="fa-solid fa-star fa-xs"></i>
               {Number(spot.avgRating).toFixed(2)} ·{" "}
               <span className="spot-info-header">
-                {spot.numReviews} reviews
+                {numReviews} reviews
               </span>{" "}
               ·{" "}
               <span className="spot-info-header">
@@ -107,7 +112,7 @@ const SpotById = () => {
               <div className="spot-details">{spot.description}</div>
             </div>
             <div className="right-side-description">
-              <div>${spot.price} night</div>
+              <div>$ {spot.price} night</div>
               <div className="right-side-reviews">
                 <div>
                   <i className="fa-solid fa-star fa-xs"></i>
@@ -163,7 +168,7 @@ const SpotById = () => {
                         ></img>
                       </div>
                       <div>
-                        <DeleteSpot review={review} user={user} />
+                        <DeleteSpot review={review} user={user} setNumReviews={setNumReviews}/>
                       </div>
                     </div>
                   );
