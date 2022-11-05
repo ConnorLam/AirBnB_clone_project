@@ -26,7 +26,7 @@ module.exports = {
     },
     {
     ownerId: 2,
-    address: '123 Hogwarts Ave',
+    address: '123 Coolplace Ave',
     city: 'Los Angeles',
     state: 'California',
     country: 'United States',
@@ -47,7 +47,19 @@ module.exports = {
     name: 'Home3',
     description: 'This is a cool place',
     price: 100
-    }
+    },
+    // {
+    // ownerId: ,
+    // address: ,
+    // city: 'Los Angeles',
+    // state: 'California',
+    // country: 'United States',
+    // lat: 50,
+    // lng: 50,
+    // name: '',
+    // description: '',
+    // price: 
+    // },
   ])
   },
 
