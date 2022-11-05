@@ -282,19 +282,19 @@ router.get('/:spotId', async (req, res) => {
         } 
     }
 
-    let bookingsArr = []
-    const bookingsData = await Booking.findAll({
-      where: {spotId: req.params.spotId}
-    })
+    // let bookingsArr = []
+    // const bookingsData = await Booking.findAll({
+    //   where: {spotId: req.params.spotId}
+    // })
 
-    for (let booking of bookingsData){
-      let bookingsObj = {}
-      if(booking.spotId){
-        bookingsObj.id = booking.id
-        bookingsObj.startDate = booking.startDate
-        bookingsObj.endDate = booking.endDate
-      }
-    }
+    // for (let booking of bookingsData){
+    //   let bookingsObj = {}
+    //   if(booking.spotId){
+    //     bookingsObj.id = booking.id
+    //     bookingsObj.startDate = booking.startDate
+    //     bookingsObj.endDate = booking.endDate
+    //   }
+    // }
     // console.log('        test         ', imagesArr)
 
     let details = {
@@ -319,7 +319,7 @@ router.get('/:spotId', async (req, res) => {
             firstName: spot.User.dataValues.firstName,
             lastName: spot.User.dataValues.lastName
         },
-        Bookings: bookingsArr
+        // Bookings: bookingsArr
         
     }
     
