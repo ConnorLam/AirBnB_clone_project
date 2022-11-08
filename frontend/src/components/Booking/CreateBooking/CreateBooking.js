@@ -12,26 +12,35 @@ const BookingsForm = ({spot}) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const date = new Date().toISOString().slice(0, 10);
+    const date = new Date();
+    const isoDate = date.toISOString().slice(0, 10);
     const today = new Date();
     const tomorrow = new Date();
-
+    
     tomorrow.setDate(today.getDate() + 1);
-
+    
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [startDate, setStartDate] = useState(tomorrow)
-    const [endDate, setEndDate] = useState('')
+    const [startDate, setStartDate] = useState(date)
+    const newStartDate = new Date(startDate);
+    const dayAfterStart = new Date()
+    dayAfterStart.setDate(today.getDate() + 1)
+    
+    const [endDate, setEndDate] = useState(dayAfterStart)
     const [guest, setGuest] = useState(1)
 
     
-    console.log('THIS IS TOMORROW', tomorrow)
-    console.log('this is tomorrow to iso', tomorrow.toISOString().slice(0, 10));
+    // console.log('THIS IS TOMORROW', tomorrow)
+    // console.log('this is tomorrow to iso', tomorrow.toISOString().slice(0, 10));
 
 
     console.log(startDate)
+    console.log(endDate)
+
+    // const newStartDate = new Date(startDate)
+    // console.log(newStartDate)
 
 
-    console.log(spot)
+    // console.log(spot)
     return(
         <div>
             <div className="spot-info-booking">
@@ -51,16 +60,18 @@ const BookingsForm = ({spot}) => {
                     <label>CHECK-IN</label>
                     <input 
                         type='date'
-                        min={tomorrow.toISOString().slice(0,10)}
-                        value={startDate.toISOString().slice(0, 10)}
+                        min={startDate}
+                        value={isoDate}
                         onChange={(e) => setStartDate(e.target.value)}
                     />
                 </div>
                 <div>
                     <label>CHECKOUT</label>
                     <input 
-                        type='date'
-                        // min={}
+                        type='date'startDate
+                        min={endDate.toISOString().slice(0, 10)}
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
                     />
                 </div>
                 <div>
@@ -69,6 +80,7 @@ const BookingsForm = ({spot}) => {
                         type='number'
                         min={1}
                         value={guest}
+                        onChange={(e) => setGuest(e.target.value)}
                     />
                 </div>
             </div>
