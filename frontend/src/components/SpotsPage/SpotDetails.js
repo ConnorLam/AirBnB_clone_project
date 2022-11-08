@@ -108,11 +108,11 @@ const SpotById = () => {
             </div>
           </div>
           <div className="description">
-            <div>
+            <div className='description-left'>
               <h2>Home hosted by {spot.Owner.firstName}</h2>
               <div className="spot-details">{spot.description}</div>
             </div>
-            <div>
+            <div className='booking-form'>
               <BookingsForm spot={spot}/>
             </div>
             {/* <div className="right-side-description">
