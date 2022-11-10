@@ -45,7 +45,7 @@ export const createReview = (reviewObj, spotId) => async dispatch => {
         method: 'POST',
         body: JSON.stringify(reviewObj)
     })
-    console.log(res)
+    // console.log(res)
     if(res.ok){
         // console.log('res', res)
         const createdReview = await res.json()

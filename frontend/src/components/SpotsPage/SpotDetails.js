@@ -5,6 +5,7 @@ import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
 import DeleteSpot from '../DeleteReviewButton/DeleteReview'
 import './SpotDetail.css'
+import BookingsForm from '../Booking/CreateBooking/CreateBooking'
 import CreateReviewModal from '../CreateReviewPage'
 
 
@@ -107,11 +108,14 @@ const SpotById = () => {
             </div>
           </div>
           <div className="description">
-            <div>
+            <div className='description-left'>
               <h2>Home hosted by {spot.Owner.firstName}</h2>
               <div className="spot-details">{spot.description}</div>
             </div>
-            <div className="right-side-description">
+            <div className='booking-form'>
+              {user.id !== spot.ownerId ? <BookingsForm spot={spot}/> : null}
+            </div>
+            {/* <div className="right-side-description">
               <div>$ {spot.price} night</div>
               <div className="right-side-reviews">
                 <div>
@@ -120,7 +124,7 @@ const SpotById = () => {
                 </div>
                 {spot.numReviews} reviews
               </div>
-            </div>
+            </div> */}
           </div>
           <div>
             <div className="review-header">

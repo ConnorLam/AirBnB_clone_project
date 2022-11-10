@@ -281,6 +281,20 @@ router.get('/:spotId', async (req, res) => {
           imagesArr.push(imagesObj)
         } 
     }
+
+    // let bookingsArr = []
+    // const bookingsData = await Booking.findAll({
+    //   where: {spotId: req.params.spotId}
+    // })
+
+    // for (let booking of bookingsData){
+    //   let bookingsObj = {}
+    //   if(booking.spotId){
+    //     bookingsObj.id = booking.id
+    //     bookingsObj.startDate = booking.startDate
+    //     bookingsObj.endDate = booking.endDate
+    //   }
+    // }
     // console.log('        test         ', imagesArr)
 
     let details = {
@@ -304,7 +318,8 @@ router.get('/:spotId', async (req, res) => {
             id: spot.User.dataValues.id,
             firstName: spot.User.dataValues.firstName,
             lastName: spot.User.dataValues.lastName
-        }
+        },
+        // Bookings: bookingsArr
         
     }
     
@@ -600,11 +615,12 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         }
       ]
     })
+    console.log(bookings)
     return res.json({ Bookings: bookings });
   } else {
     const bookings = await Booking.findAll({
       where: {spotId: req.params.spotId},
-      attributes: ['spotId', 'startDate', 'endDate']
+      attributes: ['id', 'userId', 'spotId', 'startDate', 'endDate']
     })
     return res.json({Bookings: bookings})
   }
@@ -628,13 +644,23 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
   const bookings = await Booking.findAll({
     where: {
       [Op.and]: [
-        {startDate: startDate}, {spotId: spot.id}
+        {spotId: spot.id
+        },
+        {[Op.or]: [{
+          startDate: {
+            [Op.between]: [startDate, endDate]
+          },
+          endDate: {
+            [Op.between]: [startDate, endDate]
+          }
+        }]}
+
       ]
     },
   })
 
   // const bookingSet = new Set(booking)
-  // console.log(booking)
+  console.log(bookings)
 
 
   // startDate = new Date(startDate)
@@ -644,7 +670,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
   if(spot.ownerId === user.id){
     res.statusCode = 403
     return res.json({
-      message: "Forbidden",
+      message: "Owner of spot cannot book for spot",
       statusCode: 403,
     });
   }
