@@ -54,7 +54,7 @@ export const createBookingThunk = (bookingObj) => async dispatch => {
         body: JSON.stringify(bookingObj)
     })
     const data = await res.json()
-    console.log(data, 'this is inside my thunk')
+    // console.log(data, 'this is inside my thunk')
     if(res.ok){
         await dispatch(createBookingAction(data))
     }
@@ -97,7 +97,8 @@ const bookingsReducer = (state = initialState, action) => {
     let newState = {}
     switch(action.type){
         case (GET_SPOTS_BOOKINGS): {
-            action.payload.bookings.forEach(booking => {
+            // console.log(action.payload)
+            action.payload.Bookings.forEach(booking => {
                 newState[booking.id] = booking
             })
             return newState

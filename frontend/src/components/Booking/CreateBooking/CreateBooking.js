@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
-import { createBookingThunk } from "../../../store/booking"
+import { createBookingThunk, getSpotBookingThunk } from "../../../store/booking"
 
 
 
@@ -12,12 +12,22 @@ const BookingsForm = ({spot}) => {
 
     // console.log('this is the spot', spot)
 
+    
     const user = useSelector(state => state.session.user)
-
+    
+    
     // console.log(user)
     const dispatch = useDispatch()
     const history = useHistory()
+    
+    const bookings = useSelector(state => state.bookings)
+    const bookingsArr = Object.values(bookings)
+    // const bookingsArrMap = bookingsArr.map(booking => {
+    //     return console.log(booking.startDate)    
+    // })
 
+    // console.log(bookingsArrMap)
+    
     const date = new Date();
     const isoDate = date.toISOString().slice(0, 10);
     const today = new Date();
@@ -27,16 +37,20 @@ const BookingsForm = ({spot}) => {
     
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [startDate, setStartDate] = useState('')
-
     const [validationErrors, setValidationErrors] = useState([])
     const newStartDate = new Date(startDate ? startDate : null);
     const dayAfterStart = new Date()
     dayAfterStart.setDate(newStartDate.getDate() + 1)
-    
     const [endDate, setEndDate] = useState('')
+    const [isLoaded, setIsLoaded] = useState(false)
     // const [guest, setGuest] = useState('')
     // console.log(startDate)
     // console.log(endDate)
+    useEffect(() => {
+        dispatch(getSpotBookingThunk(spot.id))
+        .then(() => setIsLoaded(true))
+    }, [dispatch, spot.id, setIsLoaded])
+
 
     useEffect(() => {
         const errors = []
@@ -44,6 +58,30 @@ const BookingsForm = ({spot}) => {
         if (!startDate || !endDate) errors.push('Please select check-in and checkout dates')
         if (startDate && endDate && endDate < startDate) errors.push('Checkout date must be after check-in date')
         if (startDate && endDate && startDate === endDate) errors.push('Must book spot for at least a day')
+
+        let bookingConflict = false
+
+
+        bookingsArr.forEach((booking) => {
+          let reqStartDateParse = Date.parse(startDate);
+          let reqEndDateParse = Date.parse(endDate);
+          let existingStartBooking = Date.parse(booking.startDate);
+          let existingEndBooking = Date.parse(booking.endDate);
+
+          if (
+            (reqStartDateParse >= existingStartBooking &&
+              reqStartDateParse <= existingEndBooking) ||
+            (reqEndDateParse >= existingStartBooking &&
+              reqEndDateParse <= existingEndBooking)
+          ) {
+            bookingConflict = true;
+          }
+
+        });
+
+        if (bookingConflict === true){
+            errors.push(`Sorry, this spot is already booked for the specified dates`)
+        }
         // if (guest <= 0) errors.push('Must book for at least 1 guest')
         // if()
 
@@ -68,21 +106,10 @@ const BookingsForm = ({spot}) => {
 
         const newBooking = await dispatch(createBookingThunk(bookingDetails))
 
-        // console.log('this is the newBooking in component', newBooking.response.status === 403)
-
-            .catch(async (res) => {
-                const data = await res.json()
-                console.log(data)
-                if(data && data.message){
-                    setValidationErrors([data.message])
-                }
-                return
-            })
-
-        // alert(`You have booked ${spot.name}`)
-        // setIsSubmitted(false)
-        // setStartDate('')
-        // setEndDate('')
+        alert(`You have booked ${spot.name}`)
+        setIsSubmitted(false)
+        setStartDate('')
+        setEndDate('')
 
     }
     
@@ -100,7 +127,7 @@ const BookingsForm = ({spot}) => {
 
 
     // console.log(spot)
-    return(
+    return isLoaded && (
         <div>
             <div className="spot-info-booking">
                 <div>
