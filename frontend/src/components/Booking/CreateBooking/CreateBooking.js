@@ -9,7 +9,12 @@ import { createBookingThunk } from "../../../store/booking"
 
 
 const BookingsForm = ({spot}) => {
+
+    // console.log('this is the spot', spot)
+
     const user = useSelector(state => state.session.user)
+
+    // console.log(user)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -29,7 +34,7 @@ const BookingsForm = ({spot}) => {
     dayAfterStart.setDate(newStartDate.getDate() + 1)
     
     const [endDate, setEndDate] = useState('')
-    const [guest, setGuest] = useState(1)
+    // const [guest, setGuest] = useState('')
 
     useEffect(() => {
         const errors = []
@@ -37,13 +42,13 @@ const BookingsForm = ({spot}) => {
         if (!startDate || !endDate) errors.push('Please select check-in and checkout dates')
         if (endDate <= startDate) errors.push('Checkout date must be after check-in date')
         if (startDate === endDate) errors.push('Must book spot for at least a day')
-        if (guest <= 0) errors.push('Must book for at least 1 guest')
+        // if (guest <= 0) errors.push('Must book for at least 1 guest')
         // if()
 
 
 
         return setValidationErrors(errors)
-    }, [startDate, endDate, guest])
+    }, [startDate, endDate])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -51,9 +56,28 @@ const BookingsForm = ({spot}) => {
 
         setIsSubmitted(true)
 
+        if(validationErrors.length > 0) return
+
         const bookingDetails = {
-            
+            spotId: spot.id,
+            startDate: startDate,
+            endDate: endDate
         }
+
+        const newBooking = await dispatch(createBookingThunk(bookingDetails))
+
+            .catch(async (res) => {
+                const data = await res.json()
+                console.log(data)
+                if(data && data.message){
+                    setValidationErrors([data.message])
+                }
+            })
+
+        alert(`You have booked ${spot.name}`)
+        setIsSubmitted(false)
+        setStartDate('')
+        setEndDate('')
 
     }
     
@@ -75,7 +99,7 @@ const BookingsForm = ({spot}) => {
         <div>
             <div className="spot-info-booking">
                 <div>
-                    ${spot.price}
+                    ${spot.price} night
                 </div>
                 <div>
                     <i className="fa-solid fa-star fa-xs"></i>
@@ -85,7 +109,7 @@ const BookingsForm = ({spot}) => {
                     {spot.numReviews} reviews
                 </div>
             </div>
-            <form className="booking-form-inputs">
+            <form onSubmit={onSubmit} className="booking-form-inputs">
                 <div>
                     <label>CHECK-IN</label>
                     <input 
@@ -104,7 +128,7 @@ const BookingsForm = ({spot}) => {
                         onChange={(e) => setEndDate(e.target.value)}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <label>GUESTS</label>
                     <input 
                         type='number'
@@ -112,7 +136,16 @@ const BookingsForm = ({spot}) => {
                         value={guest}
                         onChange={(e) => setGuest(e.target.value)}
                     />
-                </div>
+                </div> */}
+                {isSubmitted && validationErrors.length > 0 && (
+                    <div>
+                        <ul>
+                            {validationErrors.map(error => (
+                                <li className="errors" key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
                 <div>
                     <button type="submit">Reserve</button>
                 </div>
