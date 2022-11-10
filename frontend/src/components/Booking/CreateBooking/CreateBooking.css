@@ -1,0 +1,10 @@
+.spot-info-booking{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stars-reviews{
+    display: flex;
+    flex-direction: row;
+}

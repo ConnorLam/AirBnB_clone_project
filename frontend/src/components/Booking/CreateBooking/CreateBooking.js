@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { createBookingThunk, getSpotBookingThunk } from "../../../store/booking"
 
+import './CreateBooking.css'
+
 
 
 
@@ -128,17 +130,20 @@ const BookingsForm = ({spot}) => {
 
     // console.log(spot)
     return isLoaded && (
-        <div>
+        <>
             <div className="spot-info-booking">
-                <div>
+                <div className="price">
                     ${spot.price} night
                 </div>
-                <div>
-                    <i className="fa-solid fa-star fa-xs"></i>
-                    {Number(spot.avgRating).toFixed(2)}
-                </div>
-                <div>
-                    {spot.numReviews} reviews
+                <div className="stars-reviews">
+                    <div>
+                        <i className="fa-solid fa-star fa-xs"></i>
+                        {Number(spot.avgRating).toFixed(1)}
+                    </div>
+
+                    <div>
+                        {spot.numReviews} reviews
+                    </div>
                 </div>
             </div>
             <form onSubmit={onSubmit} className="booking-form-inputs">
@@ -182,7 +187,7 @@ const BookingsForm = ({spot}) => {
                     <button type="submit">Reserve</button>
                 </div>
             </form>
-        </div>
+        </>
 
     )
 

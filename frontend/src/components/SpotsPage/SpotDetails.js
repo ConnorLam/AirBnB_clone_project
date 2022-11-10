@@ -107,24 +107,17 @@ const SpotById = () => {
               </div>
             </div>
           </div>
-          <div className="description">
-            <div className='description-left'>
-              <h2>Home hosted by {spot.Owner.firstName}</h2>
-              <div className="spot-details">{spot.description}</div>
+          <div className='middle-section'>
+            <div className="description">
+              <div className='description-left'>
+                <h2>Home hosted by {spot.Owner.firstName}</h2>
+                <div className="spot-details">{spot.description}</div>
+              </div>
             </div>
             <div className='booking-form'>
               {user.id !== spot.ownerId ? <BookingsForm spot={spot}/> : null}
             </div>
-            {/* <div className="right-side-description">
-              <div>$ {spot.price} night</div>
-              <div className="right-side-reviews">
-                <div>
-                  <i className="fa-solid fa-star fa-xs"></i>
-                  {Number(spot.avgRating).toFixed(2)}
-                </div>
-                {spot.numReviews} reviews
-              </div>
-            </div> */}
+
           </div>
           <div>
             <div className="review-header">
