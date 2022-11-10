@@ -35,13 +35,15 @@ const BookingsForm = ({spot}) => {
     
     const [endDate, setEndDate] = useState('')
     // const [guest, setGuest] = useState('')
+    // console.log(startDate)
+    // console.log(endDate)
 
     useEffect(() => {
         const errors = []
 
         if (!startDate || !endDate) errors.push('Please select check-in and checkout dates')
-        if (endDate <= startDate) errors.push('Checkout date must be after check-in date')
-        if (startDate === endDate) errors.push('Must book spot for at least a day')
+        if (startDate && endDate && endDate < startDate) errors.push('Checkout date must be after check-in date')
+        if (startDate && endDate && startDate === endDate) errors.push('Must book spot for at least a day')
         // if (guest <= 0) errors.push('Must book for at least 1 guest')
         // if()
 
@@ -66,18 +68,21 @@ const BookingsForm = ({spot}) => {
 
         const newBooking = await dispatch(createBookingThunk(bookingDetails))
 
+        // console.log('this is the newBooking in component', newBooking.response.status === 403)
+
             .catch(async (res) => {
                 const data = await res.json()
                 console.log(data)
                 if(data && data.message){
                     setValidationErrors([data.message])
                 }
+                return
             })
 
-        alert(`You have booked ${spot.name}`)
-        setIsSubmitted(false)
-        setStartDate('')
-        setEndDate('')
+        // alert(`You have booked ${spot.name}`)
+        // setIsSubmitted(false)
+        // setStartDate('')
+        // setEndDate('')
 
     }
     
