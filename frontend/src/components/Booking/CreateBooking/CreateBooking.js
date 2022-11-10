@@ -46,6 +46,9 @@ const BookingsForm = ({spot}) => {
     const [endDate, setEndDate] = useState('')
     const [isLoaded, setIsLoaded] = useState(false)
     // const [guest, setGuest] = useState('')
+    console.log(startDate)
+    console.log(newStartDate)
+    console.log(dayAfterStart)
     // console.log(startDate)
     // console.log(endDate)
     useEffect(() => {
@@ -143,30 +146,36 @@ const BookingsForm = ({spot}) => {
                 {Number(spot.avgRating).toFixed(1)} ·
               </div>
               &nbsp;
-              <div className="review">{spot.numReviews} {spot.numReviews !== 1 ? 'reviews' : 'review'}</div>
+              <div className="review">
+                {spot.numReviews} {spot.numReviews !== 1 ? "reviews" : "review"}
+              </div>
             </div>
           </div>
           <form onSubmit={onSubmit} className="booking-form-inputs">
             <div className="input-boxes">
-                <div>
-                <label>CHECK-IN</label>
-                <input
-                    type="date"
-                    min={isoDate}
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                />
+              <div className="check-in">
+                <div className="label">
+                    <label>CHECK-IN</label>
                 </div>
-                <div>
-                <label>CHECKOUT</label>
                 <input
-                    type="date"
-                    startDate
-                    min={dayAfterStart.toISOString().slice(0, 10)}
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
+                  type="date"
+                  allowInputToggle={true}
+                  min={isoDate}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
                 />
+              </div>
+              <div className="checkout">
+                <div className="label">
+                    <label>CHECKOUT</label>
                 </div>
+                <input
+                  type="date"
+                  min={startDate ? dayAfterStart.toISOString().slice(0, 10) : isoDate}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
             </div>
             {/* <div>
                     <label>GUESTS</label>
