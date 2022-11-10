@@ -129,43 +129,46 @@ const BookingsForm = ({spot}) => {
 
 
     // console.log(spot)
-    return isLoaded && (
+    return (
+      isLoaded && (
         <>
-            <div className="spot-info-booking">
-                <div className="price">
-                    ${spot.price} night
+          <div className="spot-info-booking">
+            <div>
+              <span className="price">${spot.price}</span>{" "}
+              <span className="night">night</span>
+            </div>
+            <div className="stars-reviews">
+              <div className="star">
+                <i className="fa-solid fa-star fa-2xs"></i>
+                {Number(spot.avgRating).toFixed(1)} ·
+              </div>
+              &nbsp;
+              <div className="review">{spot.numReviews} {spot.numReviews !== 1 ? 'reviews' : 'review'}</div>
+            </div>
+          </div>
+          <form onSubmit={onSubmit} className="booking-form-inputs">
+            <div className="input-boxes">
+                <div>
+                <label>CHECK-IN</label>
+                <input
+                    type="date"
+                    min={isoDate}
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                />
                 </div>
-                <div className="stars-reviews">
-                    <div>
-                        <i className="fa-solid fa-star fa-xs"></i>
-                        {Number(spot.avgRating).toFixed(1)}
-                    </div>
-
-                    <div>
-                        {spot.numReviews} reviews
-                    </div>
+                <div>
+                <label>CHECKOUT</label>
+                <input
+                    type="date"
+                    startDate
+                    min={dayAfterStart.toISOString().slice(0, 10)}
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                />
                 </div>
             </div>
-            <form onSubmit={onSubmit} className="booking-form-inputs">
-                <div>
-                    <label>CHECK-IN</label>
-                    <input 
-                        type='date'
-                        min={isoDate}
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>CHECKOUT</label>
-                    <input 
-                        type='date'startDate
-                        min={dayAfterStart.toISOString().slice(0, 10)}
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                    />
-                </div>
-                {/* <div>
+            {/* <div>
                     <label>GUESTS</label>
                     <input 
                         type='number'
@@ -174,22 +177,26 @@ const BookingsForm = ({spot}) => {
                         onChange={(e) => setGuest(e.target.value)}
                     />
                 </div> */}
-                {isSubmitted && validationErrors.length > 0 && (
-                    <div>
-                        <ul>
-                            {validationErrors.map(error => (
-                                <li className="errors" key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+            {isSubmitted && validationErrors.length > 0 && (
+              <div>
                 <div>
-                    <button type="submit">Reserve</button>
+                  {validationErrors.map((error) => (
+                    <li className="errors" key={error}>
+                      {error}
+                    </li>
+                  ))}
                 </div>
-            </form>
+              </div>
+            )}
+            <div className="div-reserve-button">
+              <button className="reserve-button" type="submit">
+                Reserve
+              </button>
+            </div>
+          </form>
         </>
-
-    )
+      )
+    );
 
 
 }
