@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
+import { createBookingThunk } from "../../../store/booking"
 
 
 
@@ -20,21 +21,50 @@ const BookingsForm = ({spot}) => {
     tomorrow.setDate(today.getDate() + 1);
     
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [startDate, setStartDate] = useState(date)
-    const newStartDate = new Date(startDate);
+    const [startDate, setStartDate] = useState('')
+
+    const [validationErrors, setValidationErrors] = useState([])
+    const newStartDate = new Date(startDate ? startDate : null);
     const dayAfterStart = new Date()
-    dayAfterStart.setDate(today.getDate() + 1)
+    dayAfterStart.setDate(newStartDate.getDate() + 1)
     
-    const [endDate, setEndDate] = useState(dayAfterStart)
+    const [endDate, setEndDate] = useState('')
     const [guest, setGuest] = useState(1)
 
+    useEffect(() => {
+        const errors = []
+
+        if (!startDate || !endDate) errors.push('Please select check-in and checkout dates')
+        if (endDate <= startDate) errors.push('Checkout date must be after check-in date')
+        if (startDate === endDate) errors.push('Must book spot for at least a day')
+        if (guest <= 0) errors.push('Must book for at least 1 guest')
+        // if()
+
+
+
+        return setValidationErrors(errors)
+    }, [startDate, endDate, guest])
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+
+        setIsSubmitted(true)
+
+        const bookingDetails = {
+            
+        }
+
+    }
+    
+    // console.log('HIHIHIHIIHIH', dayAfterStart.toISOString().slice(0, 10))
     
     // console.log('THIS IS TOMORROW', tomorrow)
     // console.log('this is tomorrow to iso', tomorrow.toISOString().slice(0, 10));
 
 
-    console.log(startDate)
-    console.log(endDate)
+    // console.log(startDate)
+    // console.log(endDate)
 
     // const newStartDate = new Date(startDate)
     // console.log(newStartDate)
@@ -55,13 +85,13 @@ const BookingsForm = ({spot}) => {
                     {spot.numReviews} reviews
                 </div>
             </div>
-            <div className="booking-form-inputs">
+            <form className="booking-form-inputs">
                 <div>
                     <label>CHECK-IN</label>
                     <input 
                         type='date'
-                        min={startDate}
-                        value={isoDate}
+                        min={isoDate}
+                        value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
                     />
                 </div>
@@ -69,7 +99,7 @@ const BookingsForm = ({spot}) => {
                     <label>CHECKOUT</label>
                     <input 
                         type='date'startDate
-                        min={endDate.toISOString().slice(0, 10)}
+                        min={dayAfterStart.toISOString().slice(0, 10)}
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                     />
@@ -83,7 +113,10 @@ const BookingsForm = ({spot}) => {
                         onChange={(e) => setGuest(e.target.value)}
                     />
                 </div>
-            </div>
+                <div>
+                    <button type="submit">Reserve</button>
+                </div>
+            </form>
         </div>
 
     )
