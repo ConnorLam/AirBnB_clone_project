@@ -608,19 +608,21 @@ router.get('/:spotId/bookings', async (req, res) => {
     const bookings = await Booking.findAll({
       where: {spotId: req.params.spotId},
       attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
+      order: [['startDate', 'ASC']],
       include: [
         {
           model: User,
           attributes: ['id', 'firstName', 'lastName']
         }
-      ]
+      ],
     })
     console.log(bookings)
     return res.json({ Bookings: bookings });
   } else {
     const bookings = await Booking.findAll({
       where: {spotId: req.params.spotId},
-      attributes: ['id', 'userId', 'spotId', 'startDate', 'endDate']
+      attributes: ['id', 'userId', 'spotId', 'startDate', 'endDate'],
+      order: [['startDate', 'ASC']]
     })
     return res.json({Bookings: bookings})
   }

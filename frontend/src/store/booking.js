@@ -99,7 +99,7 @@ const bookingsReducer = (state = initialState, action) => {
         case (GET_SPOTS_BOOKINGS): {
             // console.log(action.payload)
             action.payload.Bookings.forEach(booking => {
-                newState[booking.id] = booking
+                newState[booking.startDate] = booking
             })
             return newState
         }

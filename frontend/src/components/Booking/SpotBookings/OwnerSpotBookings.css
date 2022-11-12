@@ -1,0 +1,22 @@
+.bookings-data{
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.booking-header{
+    display: flex;
+    justify-content: center;
+}
+
+.table-label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.actual-label{
+    text-decoration: underline;
+    margin-bottom: 5px;
+}

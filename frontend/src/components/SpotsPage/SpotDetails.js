@@ -7,6 +7,7 @@ import DeleteSpot from '../DeleteReviewButton/DeleteReview'
 import './SpotDetail.css'
 import BookingsForm from '../Booking/CreateBooking/CreateBooking'
 import CreateReviewModal from '../CreateReviewPage'
+import OwnerSpotBookings from '../Booking/SpotBookings/OwnerSpotBookings'
 
 
 const SpotById = () => {
@@ -197,9 +198,9 @@ const SpotById = () => {
                 </ul>
               </div>
             </div>
-            <div className={'booking-form right'}>
-              {/* {user && user.id !== spot.ownerId ? <BookingsForm spot={spot}/> : null} */}
-              <BookingsForm spot={spot} />
+            <div className={user?.id !== spot.ownerId ? 'booking-form right' : 'booking-form right'}>
+              {user?.id !== spot.ownerId ? <BookingsForm spot={spot}/> : <OwnerSpotBookings spot={spot}/>}
+              {/* <BookingsForm spot={spot} /> */}
             </div>
           </div>
           {/* <div>
