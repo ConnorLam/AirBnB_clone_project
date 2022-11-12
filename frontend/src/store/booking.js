@@ -37,7 +37,7 @@ const deleteBookingAction = payload => {
 }
 
 export const getSpotBookingThunk = (spotId) => async dispatch => {
-    const res = await csrfFetch(`/api/spots/${spotId}/bookings`)
+    const res = await fetch(`/api/spots/${spotId}/bookings`)
     const data = await res.json()
 
     if(res.ok){

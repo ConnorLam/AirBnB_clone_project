@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { createBookingThunk, getSpotBookingThunk } from "../../../store/booking"
+import LoginForm from "../../LoginFormModal/LoginForm"
+import LoginFormModal from "../../LoginFormModal"
+import { Modal } from "../../../context/Modal"
 
 import './CreateBooking.css'
 
@@ -37,6 +40,7 @@ const BookingsForm = ({spot}) => {
     
     tomorrow.setDate(today.getDate() + 1);
     
+    const [showModal, setShowModal] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [startDate, setStartDate] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
@@ -46,9 +50,9 @@ const BookingsForm = ({spot}) => {
     const [endDate, setEndDate] = useState('')
     const [isLoaded, setIsLoaded] = useState(false)
     // const [guest, setGuest] = useState('')
-    console.log(startDate)
-    console.log(newStartDate)
-    console.log(dayAfterStart)
+    // console.log(startDate)
+    // console.log(newStartDate)
+    // console.log(dayAfterStart)
     // console.log(startDate)
     // console.log(endDate)
     useEffect(() => {
@@ -98,6 +102,12 @@ const BookingsForm = ({spot}) => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
+        if(!user){
+          // history.push('/')
+            return
+          
+        }
+
 
         setIsSubmitted(true)
 
@@ -132,6 +142,36 @@ const BookingsForm = ({spot}) => {
 
 
     // console.log(spot)
+
+    // const reserveButton = () => {
+
+    // }
+
+    let session;
+    if(!user){
+      session = (
+          <>
+            <button className="reserve-button"
+              // className="login-modal-button"
+              onClick={() => setShowModal(true)}
+            >
+              Reserve
+            </button>
+            {showModal && (
+              <Modal onClose={() => setShowModal(false)}>
+                <LoginForm />
+              </Modal>
+            )}
+          </>
+      )
+    } else {
+      session = (
+        <button className="reserve-button" type="submit">
+          Reserve
+        </button>
+      )
+    }
+
     return (
       isLoaded && (
         <>
@@ -159,7 +199,7 @@ const BookingsForm = ({spot}) => {
                 </div>
                 <input
                   type="date"
-                  allowInputToggle={true}
+                  // allowInputToggle={true}
                   min={isoDate}
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
@@ -198,9 +238,7 @@ const BookingsForm = ({spot}) => {
               </div>
             )}
             <div className="div-reserve-button">
-              <button className="reserve-button" type="submit">
-                Reserve
-              </button>
+                {session}
             </div>
           </form>
         </>

@@ -197,8 +197,9 @@ const SpotById = () => {
                 </ul>
               </div>
             </div>
-            <div className='booking-form right'>
-              {user.id !== spot.ownerId ? <BookingsForm spot={spot}/> : null}
+            <div className={'booking-form right'}>
+              {/* {user && user.id !== spot.ownerId ? <BookingsForm spot={spot}/> : null} */}
+              <BookingsForm spot={spot} />
             </div>
           </div>
           {/* <div>
