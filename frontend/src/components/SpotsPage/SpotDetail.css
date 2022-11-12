@@ -110,7 +110,7 @@
                     /* border: solid red 1px; */
                     display: flex;
                     height: 3em;
-                    width: 20%;
+                    width: 100%;
                     /* justify-content: space-around; */
                     align-items: center;
                     font-size: large;

@@ -32,7 +32,7 @@ const LoginForm = () => {
       </div>
       <div className="signup-form-modal overflow-container">
         <div className="welcome-signup">
-          <h2 className="welcome-header">Welcome to Bootleg-AirBnB</h2>
+          <h2 className="welcome-header">Welcome to FakeBnB</h2>
         </div>
         <form onSubmit={onSubmit}>
           <div className="signup-info">
