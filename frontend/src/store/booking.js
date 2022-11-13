@@ -37,7 +37,7 @@ const deleteBookingAction = payload => {
 }
 
 export const getSpotBookingThunk = (spotId) => async dispatch => {
-    const res = await csrfFetch(`/api/spots/${spotId}/bookings`)
+    const res = await fetch(`/api/spots/${spotId}/bookings`)
     const data = await res.json()
 
     if(res.ok){
@@ -99,7 +99,7 @@ const bookingsReducer = (state = initialState, action) => {
         case (GET_SPOTS_BOOKINGS): {
             // console.log(action.payload)
             action.payload.Bookings.forEach(booking => {
-                newState[booking.id] = booking
+                newState[booking.startDate] = booking
             })
             return newState
         }
