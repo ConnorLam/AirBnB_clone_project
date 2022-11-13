@@ -17,8 +17,8 @@ const OwnerSpotBookings = ({spot}) => {
 
     const bookings = useSelector((state) => state.bookings);
     const bookingsArr = Object.values(bookings);
-    console.log(bookings)
-    console.log(bookingsArr)
+    // console.log(bookings)
+    // console.log(bookingsArr)
 
 
     useEffect(() => {

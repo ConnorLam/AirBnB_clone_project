@@ -210,13 +210,19 @@
 }
 
 .booking-form{
-    width: 35%;
-    height: 100%;
+    width: 100%;
+    /* height: 100%; */
     margin-top: 1%;
     /* border: solid 1px red; */
-    padding: 2% 1%;
+    padding: 30px 20px;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     /* position: sticky; */
     top: 0px;
+}
+
+.booking-stuff{
+    display: flex;
+    flex-direction: column;
+    width: 35%;
 }
