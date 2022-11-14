@@ -99,15 +99,15 @@ export const updateBookingThunk = (bookingObj) => async dispatch => {
     return data
 }
 
-export const deleteBookingThunk = (bookingId) => async dispatch => {
-    const res = await csrfFetch(`/api/bookings/${bookingId}`, {
+export const deleteBookingThunk = ({startDate, id}) => async dispatch => {
+    const res = await csrfFetch(`/api/bookings/${id}`, {
         method: 'DELETE',
     })
 
     const data = await res.json()
 
     if (res.ok){
-        await dispatch(deleteBookingAction(bookingId))
+        await dispatch(deleteBookingAction({id, startDate}))
     }
 
     return data
@@ -145,7 +145,9 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case (DELETE_BOOKING): {
             newState = {...state}
-            delete newState[action.payload]
+            console.log(newState)
+            console.log(action.payload)
+            delete newState[action.payload.startDate]
             return newState
         }
         default: {

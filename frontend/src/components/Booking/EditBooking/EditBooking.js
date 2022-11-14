@@ -11,10 +11,10 @@ const EditBooking = ({spot}) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
 
-    useEffect(() => {
-      dispatch(getSpotBookingThunk(spot?.id))
-      .then(() => setIsLoaded(true));
-    }, [dispatch, spot?.id, setIsLoaded]);
+    // useEffect(() => {
+    //   dispatch(getSpotBookingThunk(spot?.id))
+    //   .then(() => setIsLoaded(true));
+    // }, [dispatch, spot?.id, setIsLoaded]);
     return (
         <div>
             hi

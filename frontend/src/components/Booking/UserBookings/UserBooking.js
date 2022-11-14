@@ -21,11 +21,9 @@ const UserBookings = () => {
 
     let bookingsArr = Object.values(bookings)
     useEffect(() => {
-        if(user){
             dispatch(getUserBookingThunk())
             .then(() => setIsLoaded(true))
-        }
-    }, [dispatch, user, bookingsArr.length])
+    }, [dispatch, user])
 
     console.log(bookingsArr)
     // console.log(bookings)
@@ -80,7 +78,7 @@ const UserBookings = () => {
                 </NavLink>
                 <div className="edit-delete-buttons">
                     <EditBookingModal spot={booking.Spot}/>
-                    <button className="user-spots-button" onClick={() => dispatch(deleteBookingThunk(booking.id))}>
+                    <button className="user-spots-button" onClick={() => dispatch(deleteBookingThunk({startDate: booking.startDate, id: booking.id}))}>
                         Cancel Booking
                     </button>
                 </div>
