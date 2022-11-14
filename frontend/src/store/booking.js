@@ -8,9 +8,18 @@ const ADD_BOOKING = 'bookings/create-booking'
 const UPDATE_BOOKING = 'bookings/update-booking'
 const DELETE_BOOKING = 'bookings/delete-booking'
 
+//actions
+
 const getSpotBookingAction = payload => {
     return {
         type: GET_SPOTS_BOOKINGS,
+        payload
+    }
+}
+
+const getUserBookingAction = payload => {
+    return {
+        type: GET_USER_BOOKINGS,
         payload
     }
 }
@@ -36,12 +45,25 @@ const deleteBookingAction = payload => {
     }
 }
 
+//thunks
+
 export const getSpotBookingThunk = (spotId) => async dispatch => {
     const res = await fetch(`/api/spots/${spotId}/bookings`)
     const data = await res.json()
 
     if(res.ok){
         await dispatch(getSpotBookingAction(data))
+    }
+
+    return data
+}
+
+export const getUserBookingThunk = () => async dispatch => {
+    const res = await csrfFetch(`/api/bookings/current`)
+
+    const data = await res.json()
+    if(res.ok){
+        await dispatch(getUserBookingAction(data))
     }
 
     return data
@@ -77,19 +99,21 @@ export const updateBookingThunk = (bookingObj) => async dispatch => {
     return data
 }
 
-export const deleteBookingThunk = (bookingId) => async dispatch => {
-    const res = await csrfFetch(`/api/bookings/${bookingId}`, {
+export const deleteBookingThunk = ({startDate, id}) => async dispatch => {
+    const res = await csrfFetch(`/api/bookings/${id}`, {
         method: 'DELETE',
     })
 
     const data = await res.json()
 
     if (res.ok){
-        await dispatch(deleteBookingAction(bookingId))
+        await dispatch(deleteBookingAction({id, startDate}))
     }
 
     return data
 }
+
+//reducer
 
 const initialState = {}
 
@@ -98,6 +122,12 @@ const bookingsReducer = (state = initialState, action) => {
     switch(action.type){
         case (GET_SPOTS_BOOKINGS): {
             // console.log(action.payload)
+            action.payload.Bookings.forEach(booking => {
+                newState[booking.startDate] = booking
+            })
+            return newState
+        }
+        case (GET_USER_BOOKINGS): {
             action.payload.Bookings.forEach(booking => {
                 newState[booking.startDate] = booking
             })
@@ -115,7 +145,9 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case (DELETE_BOOKING): {
             newState = {...state}
-            delete newState[action.payload]
+            console.log(newState)
+            console.log(action.payload)
+            delete newState[action.payload.startDate]
             return newState
         }
         default: {

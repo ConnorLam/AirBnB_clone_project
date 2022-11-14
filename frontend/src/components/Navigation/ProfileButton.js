@@ -37,6 +37,11 @@ const ProfileButton = ({user}) => {
         return history.push('/mySpots')
     }
 
+    const goToYourBookings = (e) => {
+      e.preventDefault()
+      return history.push(`/myBookings`)
+    }
+
     return (
       <div>
         {/* () => showMenu === false ? setShowMenu(true) : showMenu */}
@@ -50,6 +55,9 @@ const ProfileButton = ({user}) => {
               {/* <div className='dropdown-info'>{user.username}</div>
               <div className='dropdown-info'>{user.email}</div> */}
               <div className='dropdown-info'>
+                <div>
+                  <button className='dropdown-info-button your-bookings' onClick={goToYourBookings}>Your Bookings</button>
+                </div>
                 <div>
                   <button className='dropdown-info-button your-spots' onClick={goToYourSpots}>Your Spots</button>
                 </div>

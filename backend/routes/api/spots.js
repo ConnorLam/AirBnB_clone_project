@@ -616,7 +616,7 @@ router.get('/:spotId/bookings', async (req, res) => {
         }
       ],
     })
-    console.log(bookings)
+    // console.log(bookings)
     return res.json({ Bookings: bookings });
   } else {
     const bookings = await Booking.findAll({

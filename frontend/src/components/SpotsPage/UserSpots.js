@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, NavLink } from "react-router-dom"; 
 import { getUserSpots } from "../../store/spots";
@@ -14,6 +14,7 @@ const UserSpots = () => {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const [isLoaded, setIsLoaded] = useState(false)
 
     if(!user){
         alert('must be logged in to access')
@@ -21,9 +22,8 @@ const UserSpots = () => {
     }
     
     useEffect(() => {
-        if(user){
             dispatch(getUserSpots())
-        }
+            .then(() => setIsLoaded(true))
     }, [dispatch, user])
     
     let spots = useSelector(state => state.spots)
@@ -54,14 +54,14 @@ const UserSpots = () => {
     //     setState(true)
     // }
 
-    return (
+    return isLoaded && (
         <div>
             <h1 className="user-spots-header">All Your Spots</h1>
             <ul className="allspotsUl user-spots-ul">
                 {spotsArr?.map(spot => {
                     // console.log(spot.id)
                     return (
-                            <div className="wrap-spots-div ">
+                            <div className="wrap-spots-div">
                         <NavLink className='spots' to={`/spots/${spot.id}`}>
                             <div className="user-spot-name">
                                 {spot.name}

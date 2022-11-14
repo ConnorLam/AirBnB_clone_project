@@ -9,6 +9,7 @@ import GetSpots from './components/SpotsPage/GetAllSpots';
 import SpotById from './components/SpotsPage/SpotDetails';
 // import CreateSpot from './components/SpotFormPage/createSpot';
 import UserSpots from './components/SpotsPage/UserSpots';
+import UserBookings from './components/Booking/UserBookings/UserBooking';
 // import EditSpot from './components/SpotFormPage/IndexEditSpot';
 // import CreateAReview from './components/CreateReviewPage/CreateReview';
 
@@ -47,6 +48,9 @@ function App() {
             </Route>
             <Route exact path={`/mySpots`}>
               <UserSpots />
+            </Route>
+            <Route exact path={`/myBookings`}>
+              <UserBookings />
             </Route>
           </Switch>
         </div>
