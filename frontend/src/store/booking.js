@@ -8,6 +8,8 @@ const ADD_BOOKING = 'bookings/create-booking'
 const UPDATE_BOOKING = 'bookings/update-booking'
 const DELETE_BOOKING = 'bookings/delete-booking'
 
+//actions
+
 const getSpotBookingAction = payload => {
     return {
         type: GET_SPOTS_BOOKINGS,
@@ -43,6 +45,8 @@ const deleteBookingAction = payload => {
     }
 }
 
+//thunks
+
 export const getSpotBookingThunk = (spotId) => async dispatch => {
     const res = await fetch(`/api/spots/${spotId}/bookings`)
     const data = await res.json()
@@ -59,7 +63,7 @@ export const getUserBookingThunk = () => async dispatch => {
 
     const data = await res.json()
     if(res.ok){
-        await dispatch(getUserBookingAction)
+        await dispatch(getUserBookingAction(data))
     }
 
     return data
@@ -108,6 +112,8 @@ export const deleteBookingThunk = (bookingId) => async dispatch => {
 
     return data
 }
+
+//reducer
 
 const initialState = {}
 

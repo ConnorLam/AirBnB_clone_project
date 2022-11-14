@@ -14,14 +14,21 @@ const SpotBookings = ({ spot }) => {
   const bookings = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookings);
 //   console.log(bookings);
-//   console.log(bookingsArr);
+  console.log(bookingsArr);
 
   useEffect(() => {
     dispatch(getSpotBookingThunk(spot.id)).then(() => setIsLoaded(true));
   }, [dispatch, spot.id, setIsLoaded]);
 
-  return (
-    isLoaded && (
+  let hasBookings;
+  if (bookingsArr.length === 0){
+    hasBookings = (
+      <div className="no-bookings">
+        This spot has no bookings
+      </div>
+    )
+  } else {
+    hasBookings = (
       <div className="bookings-data">
         <div className="booking-header">
           <div>Bookings</div>
@@ -49,7 +56,12 @@ const SpotBookings = ({ spot }) => {
           </div>
         </div>
       </div>
-    )
+    );
+  }
+
+
+  return (
+    isLoaded && hasBookings
   );
 };
 

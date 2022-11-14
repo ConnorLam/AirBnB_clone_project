@@ -42,13 +42,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 5em;
+            height: auto;
             margin: 1% 0%;
             width: 100%;
             /* margin-bottom: 1%; */
-            padding-top: 1%;
+            /* padding-top: 1%; */
             padding-bottom: 3%;
             border-bottom: #dedddd solid 1px;
+        }
+
+        .description-left>h2{
+            margin-top: 0px;
         }
 
             .spot-details{
