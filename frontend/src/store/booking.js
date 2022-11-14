@@ -15,6 +15,13 @@ const getSpotBookingAction = payload => {
     }
 }
 
+const getUserBookingAction = payload => {
+    return {
+        type: GET_USER_BOOKINGS,
+        payload
+    }
+}
+
 const createBookingAction = payload => {
     return {
         type: ADD_BOOKING,
@@ -42,6 +49,17 @@ export const getSpotBookingThunk = (spotId) => async dispatch => {
 
     if(res.ok){
         await dispatch(getSpotBookingAction(data))
+    }
+
+    return data
+}
+
+export const getUserBookingThunk = () => async dispatch => {
+    const res = await csrfFetch(`/api/bookings/current`)
+
+    const data = await res.json()
+    if(res.ok){
+        await dispatch(getUserBookingAction)
     }
 
     return data
@@ -98,6 +116,12 @@ const bookingsReducer = (state = initialState, action) => {
     switch(action.type){
         case (GET_SPOTS_BOOKINGS): {
             // console.log(action.payload)
+            action.payload.Bookings.forEach(booking => {
+                newState[booking.startDate] = booking
+            })
+            return newState
+        }
+        case (GET_USER_BOOKINGS): {
             action.payload.Bookings.forEach(booking => {
                 newState[booking.startDate] = booking
             })

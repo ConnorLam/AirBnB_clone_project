@@ -10,6 +10,8 @@ const OwnerSpotBookings = ({spot}) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
+    // const user = useSelector((state) => state.session.user)
+    // console.log(user)
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -28,7 +30,7 @@ const OwnerSpotBookings = ({spot}) => {
 
     return (
       isLoaded && (
-        <div className="bookings-data">
+        <div className='bookings-data'>
           <div className="booking-header">
             <div>Bookings</div>
           </div>
