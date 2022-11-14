@@ -11,6 +11,7 @@ const UserBookings = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
     const [isLoaded, setIsLoaded] = useState(false)
+    const today = new Date().toISOString().slice(0, 10);
 
     if (!user) {
       alert("must be logged in to access");
@@ -46,18 +47,25 @@ const UserBookings = () => {
     //     .then(() => setIsLoaded(true))
     // }
 
-    return isLoaded && (
-        (
+    return (
+      isLoaded && (
         <div>
           <h1 className="user-spots-header">Your Bookings</h1>
+          <div className="past-booking-warning">Past bookings cannot be updated</div>
           <ul className="allspotsUl">
             {bookingsArr.map((booking, i) => (
               <div className="wrap-spots-div" key={i}>
                 <NavLink className="spots" to={`/spots/${booking.Spot?.id}`}>
                   <div className="user-spot-name">{booking.Spot?.name}</div>
-                  <div className="booking-dates">
+                  {booking.startDate <= today ||
+                  booking.endDate <= today ? <div className="booking-dates">Past Booking</div> : (
+                    <div className="booking-dates">
+                      {booking.startDate} to {booking.endDate}
+                    </div>
+                  )}
+                  {/* <div className="booking-dates">
                     {booking.startDate} to {booking.endDate}
-                  </div>
+                  </div> */}
                   <div>
                     <img
                       className="img"
@@ -76,12 +84,43 @@ const UserBookings = () => {
                     per night
                   </div>
                 </NavLink>
-                <div className="edit-delete-buttons">
-                    <EditBookingModal spot={booking.Spot}/>
-                    <button className="user-spots-button" onClick={() => dispatch(deleteBookingThunk({startDate: booking.startDate, id: booking.id}))}>
-                        Cancel Booking
+                {booking.startDate <= today ||
+                booking.endDate <= today ? null : (
+                  <div className="edit-delete-buttons">
+                    <EditBookingModal spot={booking.Spot} />
+
+                    <button
+                      className="user-spots-button"
+                      onClick={() =>
+                        dispatch(
+                          deleteBookingThunk({
+                            startDate: booking.startDate,
+                            id: booking.id,
+                          })
+                        )
+                      }
+                    >
+                      Cancel Booking
                     </button>
-                </div>
+                  </div>
+                )}
+                {/* <div className="edit-delete-buttons">
+                  <EditBookingModal spot={booking.Spot} />
+
+                  <button
+                    className="user-spots-button"
+                    onClick={() =>
+                      dispatch(
+                        deleteBookingThunk({
+                          startDate: booking.startDate,
+                          id: booking.id,
+                        })
+                      )
+                    }
+                  >
+                    Cancel Booking
+                  </button>
+                </div> */}
               </div>
             ))}
           </ul>

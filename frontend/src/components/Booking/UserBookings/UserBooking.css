@@ -3,3 +3,9 @@
     justify-content: center;
     margin: 10px 0px;
 }
+
+.past-booking-warning{
+    color: rgb(186, 184, 184);
+    display: flex;
+    justify-content: center;
+}

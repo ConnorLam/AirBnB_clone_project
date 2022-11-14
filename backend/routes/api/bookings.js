@@ -167,11 +167,11 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
         });
     }
 
-    if(booking.startDate < today){
-        console.log('hi')
+    if(booking.startDate <= today || booking.endDate <= today){
+        // console.log('hi')
         res.statusCode = 403
         return res.json({
-          message: "Bookings that have been started can't be deleted",
+          message: "Bookings that have occured can't be deleted",
           statusCode: 403,
         });
     }
