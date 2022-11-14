@@ -13,9 +13,18 @@ const router = express.Router();
 router.get('/current', async (req, res) => {
     const {user} = req
     const bookings = await Booking.findAll({
-        where: {userId: user.id},
-        attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt']
-    })
+      where: { userId: user.id },
+      attributes: [
+        "id",
+        "spotId",
+        "userId",
+        "startDate",
+        "endDate",
+        "createdAt",
+        "updatedAt",
+      ],
+      order: [["startDate", "ASC"]],
+    });
     // console.log(bookings)
     let bookingsArr = []
 
@@ -131,13 +140,14 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
 
 router.delete('/:bookingId', requireAuth, async(req, res) => {
     const {user} = req
+    // console.log(user)
     const id = user.id
     const today = new Date().toISOString().slice(0, 10);
 
 
-    const booking = await Booking.findByPk(req.params.bookingId, {
-      where: { userId: id },
-    });
+    console.log(req.params.bookingId)
+
+    const booking = await Booking.findByPk(req.params.bookingId)
 
     if(!booking){
         res.statusCode = 404
@@ -146,6 +156,8 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
           statusCode: 404,
         });
     }
+
+    // console.log('booking', booking)
 
     if(booking.userId !== id){
         res.statusCode = 403;
@@ -156,6 +168,7 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
     }
 
     if(booking.startDate < today){
+        console.log('hi')
         res.statusCode = 403
         return res.json({
           message: "Bookings that have been started can't be deleted",

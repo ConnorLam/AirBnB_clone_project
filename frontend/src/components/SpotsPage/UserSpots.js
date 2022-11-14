@@ -61,7 +61,7 @@ const UserSpots = () => {
                 {spotsArr?.map(spot => {
                     // console.log(spot.id)
                     return (
-                            <div className="wrap-spots-div ">
+                            <div className="wrap-spots-div">
                         <NavLink className='spots' to={`/spots/${spot.id}`}>
                             <div className="user-spot-name">
                                 {spot.name}
