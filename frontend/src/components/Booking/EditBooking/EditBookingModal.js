@@ -2,7 +2,7 @@ import EditBooking from "./EditBooking";
 import { useState } from "react";
 import { Modal } from "../../../context/Modal";
 
-const EditBookingModal = ({ spot }) => {
+const EditBookingModal = ({ booking }) => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = (e) => {
@@ -17,7 +17,7 @@ const EditBookingModal = ({ spot }) => {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditBooking spot={spot} setShowModal={setShowModal} />
+          <EditBooking booking={booking} setShowModal={setShowModal} />
         </Modal>
       )}
     </>

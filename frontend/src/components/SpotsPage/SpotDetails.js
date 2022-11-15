@@ -200,10 +200,10 @@ const SpotById = () => {
               </div>
             </div>
             <div className='booking-stuff'>
-              <div className={user?.id !== spot.ownerId ? 'booking-form right' : null}>
+              <div className={user?.id !== spot.ownerId ? 'booking-form right' : null} id={user?.id !== spot.ownerId ? null : 'spot-bookings'}>
                 {user?.id !== spot.ownerId ? <SpotBookings spot={spot}/> : null}
               </div>
-              <div className={user?.id !== spot.ownerId ? 'booking-form right' : 'booking-form right'}>
+              <div className={user?.id !== spot.ownerId ? 'booking-form right' : 'booking-form right'} id={user?.id !== spot.ownerId ? 'spot-bookings' : null}>
                 {user?.id !== spot.ownerId ? <BookingsForm spot={spot}/> : <OwnerSpotBookings spot={spot}/>}
                 
                 {/* <BookingsForm spot={spot} /> */}

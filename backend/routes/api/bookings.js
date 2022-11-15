@@ -33,6 +33,18 @@ router.get('/current', async (req, res) => {
             attributes: {exclude: ['createdAt', 'updatedAt', 'description']},
             raw: true
         })
+
+        const spotBookings = await Booking.findAll({
+          where: {
+            spotId: booking.spotId
+          },
+          order: [['startDate', 'ASC']],
+          raw: true
+        })
+
+        if(spot){
+          spot['booking'] = spotBookings
+        }
         // console.log(spot)
         let image = await Image.findOne({
             where: {
@@ -74,6 +86,12 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     const booking = await Booking.findByPk(req.params.bookingId, {
         where: {userId: id}
     })
+
+    const spot = await Spot.findByPk(booking.spotId, {
+      attributes: { exclude: ["createdAt", "updatedAt", "description"] },
+      raw: true,
+    });
+
     if(!booking){
         res.statusCode = 404
         return res.json({
@@ -102,6 +120,7 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     }
 
     if(startDate < today || endDate < today){
+      console.log("\n\n\n", 'BYEBYEBYEBEY', "\n\n\n");
         res.statusCode = 403
         return res.json({
             "message": "Past bookings can't be modified",
@@ -115,6 +134,7 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     });
 
     if(bookingsTaken.length >= 1){
+      console.log("\n\n\n", 'hihiihihih', "\n\n\n");
         res.statusCode = 403
         return res.json({
           message: "Sorry, this spot is already booked for the specified dates",
@@ -132,6 +152,8 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
         startDate,
         endDate,
     })
+
+    console.log('\n\n\n', booking, '\n\n\n')
 
     await booking.save()
     res.json(booking)
@@ -167,11 +189,11 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
         });
     }
 
-    if(booking.startDate < today){
-        console.log('hi')
+    if(booking.startDate <= today || booking.endDate <= today){
+        // console.log('hi')
         res.statusCode = 403
         return res.json({
-          message: "Bookings that have been started can't be deleted",
+          message: "Bookings that have occured can't be deleted",
           statusCode: 403,
         });
     }

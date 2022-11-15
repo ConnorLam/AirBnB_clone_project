@@ -1,0 +1,51 @@
+/* .edit-booking-form{
+    padding: 50px 30px;
+} */
+
+.header{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: larger;
+    border-bottom: rgb(201, 199, 199) solid 1px;
+}
+
+.form-added-bookings{
+    display: flex;
+    flex-direction: column;
+    /* padding: 50px 30px; */
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    overflow: auto;
+    /* padding-top: none; */
+}
+
+.user-booking{
+    color: blue;
+}
+
+.key{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    height: 15px;
+    width: 15px;
+    /* border: 1px solid ; */
+    background-color: blue;
+}
+
+.your-booking-label{
+    color: grey;
+}
+
+.bookings-data{
+    margin-top: 2em;
+}
+
+.booking-header{
+    margin-bottom: 5px;
+}

@@ -282,6 +282,21 @@ router.get('/:spotId', async (req, res) => {
         } 
     }
 
+    // const bookingsData = await Booking.findAll({
+    //   where: {spotId: req.params.spotId}
+    // })
+    // let bookingsArr = []
+    // for(let booking of bookingsData){
+    //   let bookingsObj = {}
+    //   if(booking.spotId){
+    //     bookingsObj.id = booking.id
+    //     bookingsObj.spotId = booking.spotId
+    //     bookingsObj.startDate = booking.startDate
+    //     bookingsObj.endDate = booking.endDate
+    //     bookingsArr.push(bookingsObj)
+    //   }
+    // }
+
     // let bookingsArr = []
     // const bookingsData = await Booking.findAll({
     //   where: {spotId: req.params.spotId}
@@ -319,6 +334,7 @@ router.get('/:spotId', async (req, res) => {
             firstName: spot.User.dataValues.firstName,
             lastName: spot.User.dataValues.lastName
         },
+        // Bookings: bookingsArr
         // Bookings: bookingsArr
         
     }

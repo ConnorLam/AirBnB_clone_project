@@ -10,6 +10,7 @@ const OwnerSpotBookings = ({spot}) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
+    const today = new Date().toISOString().slice(0, 10);
     // const user = useSelector((state) => state.session.user)
     // console.log(user)
 
@@ -31,9 +32,9 @@ const OwnerSpotBookings = ({spot}) => {
   let hasBookings;
   if (bookingsArr.length === 0){
     hasBookings = (
-      <div className="no-bookings">
+      <h3 className="no-bookings">
         This spot has no bookings
-      </div>
+      </h3>
     )
   } else {
     hasBookings = (
@@ -46,7 +47,7 @@ const OwnerSpotBookings = ({spot}) => {
             <div className="actual-label">User</div>
             <div>
               {bookingsArr.map((booking, i) => (
-                <div className="each-user" key={i}>
+                <div className="each-user" id={booking.endDate < today ? 'display-none' : null} key={i}>
                   {booking.User?.firstName}&nbsp;{booking.User?.lastName}
                 </div>
               ))}
@@ -56,7 +57,7 @@ const OwnerSpotBookings = ({spot}) => {
             <div className="actual-label">Start Date</div>
             <div>
               {bookingsArr.map((booking, i) => (
-                <div className="start-end" key={i}>
+                <div className="start-end" id={booking.endDate < today ? 'display-none' : null} key={i}>
                   {booking.startDate}
                 </div>
               ))}
@@ -66,7 +67,7 @@ const OwnerSpotBookings = ({spot}) => {
             <div className="actual-label">End Date</div>
             <div>
               {bookingsArr.map((booking, i) => (
-                <div className="start-end" key={i}>
+                <div className="start-end" id={booking.endDate < today ? 'display-none' : null} key={i}>
                   {booking.endDate}
                 </div>
               ))}

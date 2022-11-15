@@ -4,6 +4,10 @@
     width: 100%;
 }
 
+#spot-bookings{
+    padding-top: 30px;
+}
+
 .spot-details-header{
     margin-bottom: 1%;
 }
@@ -219,6 +223,7 @@
     margin-top: 1%;
     /* border: solid 1px red; */
     padding: 30px 20px;
+    padding-top: 0px;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     /* position: sticky; */
