@@ -21,9 +21,9 @@ const UserBookings = () => {
     let bookings = useSelector(state => state.bookings)
     let bookingsArr = Object.values(bookings)
 
-    useEffect(() => {
-        bookingsArr = Object.values(bookings)
-    }, [bookings])
+    // useEffect(() => {
+    //     bookingsArr = Object.values(bookings)
+    // }, [bookings])
 
     useEffect(() => {
             dispatch(getUserBookingThunk())
@@ -32,8 +32,8 @@ const UserBookings = () => {
 
     // console.log(bookingsArr)
     // console.log(bookings)
-    if(bookingsArr.length === 0){
-        return <h2>No spots available</h2>
+    if(bookingsArr.length < 1){
+        return <div className="no-bookings">You have no bookings yet</div>
     }
 
     function validImage(spot) {
@@ -50,6 +50,7 @@ const UserBookings = () => {
     //     await dispatch(deleteBookingThunk(booking.id))
     //     .then(() => setIsLoaded(true))
     // }
+
 
     return (
       isLoaded && (

@@ -17,3 +17,11 @@
 .past-booking-title{
     color: rgb(186, 184, 184);
 }
+
+.no-bookings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+}
