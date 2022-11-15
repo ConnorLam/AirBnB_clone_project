@@ -19,8 +19,12 @@ const UserBookings = () => {
     }
 
     let bookings = useSelector(state => state.bookings)
-
     let bookingsArr = Object.values(bookings)
+
+    useEffect(() => {
+        bookingsArr = Object.values(bookings)
+    }, [bookings])
+
     useEffect(() => {
             dispatch(getUserBookingThunk())
             .then(() => setIsLoaded(true))

@@ -9,7 +9,8 @@ const EditBooking = ({spot}) => {
     const user = useSelector((state) => state.session.user)
 
     const [isLoaded, setIsLoaded] = useState(false);
-    console.log(spot.id)
+    // console.log(spot.id)
+    console.log(spot.booking)
 
 
     // useEffect(() => {

@@ -33,6 +33,17 @@ router.get('/current', async (req, res) => {
             attributes: {exclude: ['createdAt', 'updatedAt', 'description']},
             raw: true
         })
+
+        const spotBookings = await Booking.findAll({
+          where: {
+            spotId: booking.spotId
+          },
+          raw: true
+        })
+
+        if(spot){
+          spot['booking'] = spotBookings
+        }
         // console.log(spot)
         let image = await Image.findOne({
             where: {
