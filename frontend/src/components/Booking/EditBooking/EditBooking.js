@@ -41,11 +41,11 @@ const EditBooking = ({booking}) => {
 
       let bookingConflict = false;
 
-      bookingsArr.forEach((booking) => {
+      bookingsArr.forEach((eachBooking) => {
         let reqStartDateParse = Date.parse(startDate);
         let reqEndDateParse = Date.parse(endDate);
-        let existingStartBooking = Date.parse(booking.startDate);
-        let existingEndBooking = Date.parse(booking.endDate);
+        let existingStartBooking = Date.parse(eachBooking.startDate);
+        let existingEndBooking = Date.parse(eachBooking.endDate);
 
         if (
           (reqStartDateParse >= existingStartBooking &&
@@ -81,8 +81,10 @@ const EditBooking = ({booking}) => {
         }
 
         const newBooking = await dispatch(updateBookingThunk(bookingDetails))
+        console.log(newBooking)
 
         alert(`You have edited your booking dates on ${booking.Spot.name}`)
+        history.push(`/spots/${booking.Spot.id}`)
 
     }
 
@@ -145,20 +147,25 @@ const EditBooking = ({booking}) => {
                     )}
                     <div className="div-reserve-button">
                         <button className="reserve-button" type="submit">
-                            Reserve
+                            Edit Booking
                         </button>
                     </div>
                 </form>
                 <div className="bookings-data">
                     <div className="booking-header">
-                        <div>Bookings</div>
+                        <div>Bookings taken from {booking.Spot.name}</div>
                     </div>
+                    <div className="key">
+                        <div className="box" />&nbsp;
+                        <div className="your-booking-label">Your booking</div>
+                    </div>
+
                     <div className="table-label">
                         <div className="start-date">
                         <div className="actual-label">Start Date</div>
                             <div>
                             {bookingsArr.map((eachBooking, i) => (
-                                <div className={eachBooking.startDate === booking.startDate ? "start-end user-booking": 'start-end'} key={i}>
+                                <div className={eachBooking.startDate === booking.startDate ? "start-end user-booking": 'start-end'} id={eachBooking.endDate < isoDate ? 'display-none' : null} key={i}>
                                     {eachBooking.startDate}
                                 </div>
                             ))}
@@ -168,7 +175,7 @@ const EditBooking = ({booking}) => {
                         <div className="actual-label">End Date</div>
                             <div>
                             {bookingsArr.map((eachBooking, i) => (
-                                <div className={eachBooking.endDate === booking.endDate ? "start-end user-booking": 'start-end'} key={i}>
+                                <div className={eachBooking.endDate === booking.endDate ? "start-end user-booking": 'start-end'} id={eachBooking.endDate < isoDate ? 'display-none' : null} key={i}>
                                     {eachBooking.endDate}
                                 </div>
                             ))}

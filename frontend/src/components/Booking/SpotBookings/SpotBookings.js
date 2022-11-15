@@ -14,7 +14,7 @@ const SpotBookings = ({ spot }) => {
   const bookings = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookings);
 //   console.log(bookings);
-  console.log(bookingsArr);
+  const today = new Date().toISOString().slice(0, 10)
 
   useEffect(() => {
     dispatch(getSpotBookingThunk(spot.id)).then(() => setIsLoaded(true));
@@ -23,9 +23,9 @@ const SpotBookings = ({ spot }) => {
   let hasBookings;
   if (bookingsArr.length === 0){
     hasBookings = (
-      <div className="no-bookings">
+      <h3 className="no-bookings">
         This spot has no bookings
-      </div>
+      </h3>
     )
   } else {
     hasBookings = (
@@ -38,7 +38,7 @@ const SpotBookings = ({ spot }) => {
             <div className="actual-label">Start Date</div>
             <div>
               {bookingsArr.map((booking, i) => (
-                <div className="start-end" key={i}>
+                <div className="start-end" id={booking.endDate < today ? 'display-none' : null} key={i}>
                   {booking.startDate}
                 </div>
               ))}
@@ -48,7 +48,7 @@ const SpotBookings = ({ spot }) => {
             <div className="actual-label">End Date</div>
             <div>
               {bookingsArr.map((booking, i) => (
-                <div className="start-end" key={i}>
+                <div className="start-end" id={booking.endDate < today ? 'display-none' : null} key={i}>
                   {booking.endDate}
                 </div>
               ))}

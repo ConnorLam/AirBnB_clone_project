@@ -86,6 +86,12 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     const booking = await Booking.findByPk(req.params.bookingId, {
         where: {userId: id}
     })
+
+    const spot = await Spot.findByPk(booking.spotId, {
+      attributes: { exclude: ["createdAt", "updatedAt", "description"] },
+      raw: true,
+    });
+
     if(!booking){
         res.statusCode = 404
         return res.json({
@@ -114,6 +120,7 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     }
 
     if(startDate < today || endDate < today){
+      console.log("\n\n\n", 'BYEBYEBYEBEY', "\n\n\n");
         res.statusCode = 403
         return res.json({
             "message": "Past bookings can't be modified",
@@ -127,6 +134,7 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     });
 
     if(bookingsTaken.length >= 1){
+      console.log("\n\n\n", 'hihiihihih', "\n\n\n");
         res.statusCode = 403
         return res.json({
           message: "Sorry, this spot is already booked for the specified dates",
@@ -144,6 +152,8 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
         startDate,
         endDate,
     })
+
+    console.log('\n\n\n', booking, '\n\n\n')
 
     await booking.save()
     res.json(booking)

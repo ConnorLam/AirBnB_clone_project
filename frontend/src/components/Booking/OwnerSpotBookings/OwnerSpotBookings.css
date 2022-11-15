@@ -26,6 +26,11 @@
 .no-bookings{
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: large;
     font-weight: 700;
+}
+
+#display-none{
+    display: none;
 }
