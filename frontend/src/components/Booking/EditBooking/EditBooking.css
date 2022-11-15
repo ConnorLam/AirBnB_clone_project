@@ -1,0 +1,21 @@
+/* .edit-booking-form{
+    padding: 50px 30px;
+} */
+
+.header{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: larger;
+    border-bottom: rgb(201, 199, 199) solid 1px;
+}
+
+.form-added-bookings{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 30px;
+}
+
+.user-booking{
+    color: blue;
+}

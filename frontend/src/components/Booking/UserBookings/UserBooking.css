@@ -9,3 +9,11 @@
     display: flex;
     justify-content: center;
 }
+/* 
+.opaque{
+    opacity: 0.5;
+} */
+
+.past-booking-title{
+    color: rgb(186, 184, 184);
+}

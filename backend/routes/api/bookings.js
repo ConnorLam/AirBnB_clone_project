@@ -38,6 +38,7 @@ router.get('/current', async (req, res) => {
           where: {
             spotId: booking.spotId
           },
+          order: [['startDate', 'ASC']],
           raw: true
         })
 
