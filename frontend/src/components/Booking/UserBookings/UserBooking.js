@@ -38,6 +38,7 @@ const UserBookings = () => {
     for (let booking of bookingsArr){
       if(booking.endDate > today){
         futureBookings.push(booking)
+        break
       }
     }
 
