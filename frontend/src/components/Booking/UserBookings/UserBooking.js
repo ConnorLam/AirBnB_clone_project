@@ -30,10 +30,22 @@ const UserBookings = () => {
             .then(() => setIsLoaded(true))
     }, [dispatch, user])
 
+    if(bookingsArr.length < 1){
+      return <div className="no-bookings">You have no bookings yet</div>
+    }
+    
+    let futureBookings = []
+    for (let booking of bookingsArr){
+      if(booking.endDate > today){
+        futureBookings.push(booking)
+      }
+    }
+
+    
     // console.log(bookingsArr)
     // console.log(bookings)
-    if(bookingsArr.length < 1){
-        return <div className="no-bookings">You have no bookings yet</div>
+    if(futureBookings.length < 1){
+      return <div className="no-bookings">You have no bookings yet</div>;
     }
 
     console.log(bookingsArr)
