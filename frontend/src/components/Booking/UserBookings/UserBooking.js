@@ -59,7 +59,7 @@ const UserBookings = () => {
           <ul className="allspotsUl">
             {bookingsArr.map((booking, i) => (
               <div className={booking.startDate <= today ||
-                  booking.endDate <= today ? "wrap-spots-div opaque": 'wrap-spots-div'} key={i}>
+                  booking.endDate <= today ? "wrap-spots-div opaque": 'wrap-spots-div'} id={booking.endDate < today ? 'display-none': null}key={i}>
                 <NavLink className="spots" to={`/spots/${booking.Spot?.id}`}>
                   <div className="user-spot-name">{booking.Spot?.name}</div>
                   {booking.startDate <= today ||
