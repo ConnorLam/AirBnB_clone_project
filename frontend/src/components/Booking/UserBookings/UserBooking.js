@@ -36,6 +36,8 @@ const UserBookings = () => {
         return <div className="no-bookings">You have no bookings yet</div>
     }
 
+    console.log(bookingsArr)
+
     function validImage(spot) {
       if (spot?.previewImage) {
         return spot?.previewImage;
