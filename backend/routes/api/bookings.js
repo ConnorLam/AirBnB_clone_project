@@ -165,6 +165,7 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
     // console.log(user)
     const id = user.id
     const today = new Date().toISOString().slice(0, 10);
+    console.log(today)
 
 
     console.log(req.params.bookingId)
@@ -189,7 +190,7 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
         });
     }
 
-    if(booking.startDate <= today || booking.endDate <= today){
+    if(booking.startDate < today){
         // console.log('hi')
         res.statusCode = 403
         return res.json({
