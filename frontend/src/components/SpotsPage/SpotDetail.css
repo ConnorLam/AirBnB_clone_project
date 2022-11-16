@@ -55,6 +55,10 @@
             border-bottom: #dedddd solid 1px;
         }
 
+        .description-left{
+            width: 100%;
+        }
+
         .description-left>h2{
             margin-top: 0px;
         }
@@ -239,4 +243,46 @@
 
 #no-cursor{
     cursor: default;
+}
+
+.likes{
+    display: flex;
+    align-items: center;
+}
+
+.like-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.likes {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+    align-items: center;
+    /* width: 10%; */
+    /* transition: .5s; */
+}
+
+#is-liked {
+    color: blue;
+    /* margin-right: 10px; */
+}
+
+#is-liked:hover {
+    color: rgb(92, 92, 246);
+}
+
+.like-button {
+    cursor: pointer;
+}
+
+#not-liked:hover {
+    color: rgb(92, 92, 246);
+}
+
+#one-like {
+    padding-right: 10px;
 }

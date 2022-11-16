@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf"
+
 const GET_SPOT_LIKES = 'like/get-spot-likes'
 const LIKE_SPOT = 'like/create-like'
 const DELETE_LIKE = 'like/delete-like'
@@ -35,7 +37,7 @@ export const getSpotLikeThunk = (spotId) => async dispatch => {
 }
 
 export const createLikeThunk = ({spotId, userId}) => async dispatch => {
-    const res = await fetch(`/api/spot/${spotId}/like`, {
+    const res = await csrfFetch(`/api/spots/${spotId}/likes`, {
         method: 'POST',
         spotId,
         userId
@@ -51,7 +53,7 @@ export const createLikeThunk = ({spotId, userId}) => async dispatch => {
 }
 
 export const deleteLikeThunk = (likeId) => async dispatch => {
-    const res = await fetch(`/api/likes/${likeId}`, {
+    const res = await csrfFetch(`/api/likes/${likeId}`, {
         method: 'DELETE'
     })
 

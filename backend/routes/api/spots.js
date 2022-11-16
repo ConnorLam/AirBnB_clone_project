@@ -792,11 +792,13 @@ router.post(`/:spotId/likes`, requireAuth, async(req, res) => {
       spotId: spot.id
     }
   })
+  console.log("\n\n\n\n\n", likeCheck, "\n\n\n\n'");
 
   if (likeCheck) {
     res.statusCode = 403;
     const error = new Error();
-    console.log("!!!!!!", error);
+    // console.log("!!!!!!", error);
+    console.log('\n\n\n\n\n', 'hihihiihih', '\n\n\n\n\n')
     error.status = 403;
     error.errors = ["User already has a like for this spot"];
     // return res.json({
