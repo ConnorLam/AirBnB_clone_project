@@ -165,11 +165,12 @@ const SpotById = () => {
                         <div className="reviews-div" key={review.id}>
                           <div className="reviews-first-line">
                             <div>
-                              <i className="fas fa-user-circle fa-2x review-user-circle"></i>
+                              <i className="fas fa-user-circle fa-2x review-user-circle" id='no-cursor'></i>
                             </div>
                             <div className="review-user-name">
                               {review?.User?.firstName} {review?.User?.lastName}
                             </div>
+                            {/* <UpdateReviewModal review={review} user={user} /> */}
                           </div>
                           <div className="actual-review">{review.review}</div>
                           <div>
@@ -185,12 +186,12 @@ const SpotById = () => {
                             ></img>
                           </div>
                           <div>
+                            <UpdateReviewModal review={review} user={user} />
                             <DeleteSpot
                               review={review}
                               user={user}
                               setNumReviews={setNumReviews}
                             />
-                            <UpdateReviewModal review={review} user={user} />
                           </div>
                         </div>
                       );

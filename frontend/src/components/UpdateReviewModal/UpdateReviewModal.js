@@ -16,16 +16,19 @@ const UpdateReviewModal = ({review, user}) => {
         )
     } else {
         modal = (
-            <>
-        <div className='edit-review'>
-          <i onClick={() => setShowModal(true)} class="fa-regular fa-pen-to-square edit"></i>
-        </div>
-        {showModal && (
-          <Modal onClose={() => setShowModal(false)}>
-            <EditReviewForm review={review} user={user} setShowModal={setShowModal}/>
-          </Modal>
-        )}
-      </>
+        <>
+            {/* <div className='edit-review'>
+            <i onClick={() => setShowModal(true)} class="fa-regular fa-pen-to-square edit"></i>
+            </div> */}
+            <button className="delete-review-button" onClick={() => setShowModal(true)}>
+                Edit Review
+            </button>
+            {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+                <EditReviewForm review={review} user={user} setShowModal={setShowModal}/>
+            </Modal>
+            )}
+        </>
         )
     }
 
