@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
-const { User, Spot, Review, Image, Booking, sequelize } = require("../../db/models");
+const { User, Spot, Review, Image, Booking, Like, sequelize } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { application } = require("express");
@@ -746,6 +746,75 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
 
   // console.log(newBooking.id)
   res.json(newBooking)
+})
+
+router.get(`/:spotId/likes`, async(req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  if (!spot) {
+    res.statusCode = 404;
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const likes = await Like.findAll({
+    where: { spotId: spot.id },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+    ],
+  });
+
+  res.json({Likes: likes})
+
+})
+
+router.post(`/:spotId/likes`, requireAuth, async(req, res) => {
+  const {user} = req
+  const id = user.id
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  if (!spot) {
+    res.statusCode = 404;
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const likeCheck = await Like.findOne({
+    where: {
+      userId: id,
+      spotId: spot.id
+    }
+  })
+  console.log("\n\n\n\n\n", likeCheck, "\n\n\n\n'");
+
+  if (likeCheck) {
+    res.statusCode = 403;
+    const error = new Error();
+    // console.log("!!!!!!", error);
+    console.log('\n\n\n\n\n', 'hihihiihih', '\n\n\n\n\n')
+    error.status = 403;
+    error.errors = ["User already has a like for this spot"];
+    // return res.json({
+    //   message: "User already has a review for this spot",
+    //   statusCode: 403,
+    // });
+    throw error;
+  }
+
+  const userLike = await Like.create({
+    userId: id,
+    spotId: spot.id
+  })
+
+  res.json(userLike)
+
 })
 
 

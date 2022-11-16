@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal'
 // import { useHistory } from 'react-router-dom'
 import SignUpFormModal from '../SignupFormPage'
 import CreateSpotModal from '../SpotFormPage/IndexCreateSpot'
+import SearchBar from '../SearchBar/SearchBar'
 
 
 const Navigation = ({isLoaded}) => {
@@ -59,6 +60,9 @@ const Navigation = ({isLoaded}) => {
             FakeBnB
           </NavLink>
         </div>
+        {/* <div>
+          <SearchBar />
+        </div> */}
         {isLoaded && session}
       </nav>
       // </ul>

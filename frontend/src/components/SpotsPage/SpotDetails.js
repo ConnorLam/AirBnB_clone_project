@@ -1,5 +1,5 @@
 import { useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpotById } from '../../store/spots'
 import { spotReview } from '../../store/review'
@@ -10,25 +10,46 @@ import CreateReviewModal from '../CreateReviewPage'
 import OwnerSpotBookings from '../Booking/OwnerSpotBookings/OwnerSpotBookings'
 import SpotBookings from '../Booking/SpotBookings/SpotBookings'
 import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal'
+import { getSpotLikeThunk, createLikeThunk, deleteLikeThunk } from '../../store/like'
+import { Modal } from '../../context/Modal'
+import LoginForm from '../LoginFormModal/LoginForm'
+
 
 
 const SpotById = () => {
     const {spotId} = useParams()
-    // console.log(spotId)
-    const reviews = useSelector((state) => state.reviews);
-    // console.log('this is in my component', reviews)
-    let reviewsArr = Object.values(reviews);
+    const history = useHistory()
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => state.spots[parsedSpotId])
+    const user = useSelector(state => state.session.user)
+    
+    const reviews = useSelector((state) => state.reviews);
+    let reviewsArr = Object.values(reviews);
+    const likes = useSelector((state) => state.likes)
+    let likesArr = Object.values(likes)
+    const likesId = likesArr.map((like) => {
+      return like.userId;
+      // gets the user id of each like so we can see if user already has a like
+    });
+
+    const likeOrDislike = async () => {
+      if(likesId.includes(user.id)){
+        await dispatch(deleteLikeThunk(likesArr[likesId.indexOf(user.id)].id))
+      } else {
+        const payload = {spotId : spot.id, userId: user.id}
+        await dispatch(createLikeThunk(payload))
+      }
+    }
+
+
 
     // const state = useSelector(state => console.log(state))
-    console.log(reviewsArr)
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [numReviews, setNumReviews] = useState(spot?.numReviews)
     const [avgRating, setAvgRating] = useState(spot?.avgRating)
+    const [showModal, setShowModal] = useState(false);
 
-    const user = useSelector(state => state.session.user)
     // console.log(user)
     // console.log(spotId)
     // console.log(reviewsArr)
@@ -41,6 +62,7 @@ const SpotById = () => {
         dispatch(getSpotById(spotId))
             .then(() =>
             dispatch(spotReview(spotId))
+            .then(() => dispatch(getSpotLikeThunk(spotId)))
         .then(() => (setIsLoaded(true)))
         );
     }, [dispatch, spotId])
@@ -80,6 +102,32 @@ const SpotById = () => {
             <CreateReviewModal spot={spot} setAvgRating={setAvgRating} setNumReviews={setNumReviews}/>
         )
     }
+
+
+    let session;
+    if (!user) {
+      session = (
+        <>
+          <div className="likes">
+              <i onClick={() => setShowModal(true)} className="fa-solid fa-thumbs-up like-button" id={likesId.includes(user?.id) ? 'is-liked' : 'not-liked'}></i>&nbsp;&nbsp;
+              <div id={likesArr.length === 1 ? 'one-like' : 'many-likes'}>{likesArr.length === 1 ? `${likesArr.length} like` : `${likesArr.length} likes` }</div>
+          </div>
+          {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+              <LoginForm />
+            </Modal>
+          )}
+        </>
+      );
+    } else {
+      session = (
+        <div className="likes">
+            <i onClick={() => likeOrDislike()} className="fa-solid fa-thumbs-up like-button" id={likesId.includes(user?.id) ? 'is-liked' : 'not-liked'}></i>&nbsp;&nbsp;
+            <div id={likesArr.length === 1 ? 'one-like' : 'many-likes'}>{likesArr.length === 1 ? `${likesArr.length} like` : `${likesArr.length} likes` }</div>
+        </div>
+      );
+    }
+
 
     return (
       isLoaded && (
@@ -138,7 +186,11 @@ const SpotById = () => {
             <div className="middle-section left">
               <div className="description">
                 <div className="description-left">
-                  <h2>Home hosted by {spot.Owner.firstName}</h2>
+                  <div className='like-header'>
+                    <h2>Home hosted by {spot.Owner.firstName}</h2>
+
+                    {session}
+                  </div>
                   <div className="spot-details">{spot.description}</div>
                 </div>
               </div>
