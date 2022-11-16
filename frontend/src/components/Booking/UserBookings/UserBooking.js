@@ -12,6 +12,7 @@ const UserBookings = () => {
     const user = useSelector((state) => state.session.user);
     const [isLoaded, setIsLoaded] = useState(false)
     const today = new Date().toISOString().slice(0, 10);
+    // console.log(today)
 
     if (!user) {
       alert("must be logged in to access");
@@ -36,6 +37,7 @@ const UserBookings = () => {
     
     let futureBookings = []
     for (let booking of bookingsArr){
+      console.log(booking)
       if(booking.endDate > today){
         futureBookings.push(booking)
         break
@@ -46,7 +48,7 @@ const UserBookings = () => {
     // console.log(bookingsArr)
     // console.log(bookings)
     if(futureBookings.length < 1){
-      return <div className="no-bookings-yet">You have no bookings yet</div>;
+      return <div className="no-bookings-yet">You have no future bookings yet</div>;
     }
 
     console.log(bookingsArr)
@@ -71,15 +73,15 @@ const UserBookings = () => {
       isLoaded && (
         <div>
           <h1 className="user-spots-header">Your Bookings</h1>
-          <div className="past-booking-warning">Past bookings cannot be updated</div>
+          <div className="past-booking-warning">Past or current bookings cannot be updated</div>
           <ul className="allspotsUl">
             {bookingsArr.map((booking, i) => (
               <div className={booking.startDate <= today ||
                   booking.endDate <= today ? "wrap-spots-div opaque": 'wrap-spots-div'} id={booking.endDate < today ? 'display-none': null}key={i}>
                 <NavLink className="spots" to={`/spots/${booking.Spot?.id}`}>
                   <div className="user-spot-name">{booking.Spot?.name}</div>
-                  {booking.startDate <= today ||
-                  booking.endDate <= today ? <div className="booking-dates past-booking-title">Past Booking</div> : (
+                  {booking.startDate < today ||
+                  booking.endDate <= today ? <div className="booking-dates past-booking-title">Current Booking</div> : (
                     <div className="booking-dates">
                       {booking.startDate} to {booking.endDate}
                     </div>
@@ -105,7 +107,7 @@ const UserBookings = () => {
                     per night
                   </div>
                 </NavLink>
-                {booking.startDate <= today ||
+                {booking.startDate < today ||
                 booking.endDate <= today ? null : (
                   <div className="edit-delete-buttons">
                     <EditBookingModal booking={booking} />
