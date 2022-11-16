@@ -19,7 +19,10 @@ const UserBookings = () => {
       history.push("/");
     }
 
+    // let state = useSelector(state => console.log(state))
+
     let bookings = useSelector(state => state.bookings)
+    // console.log(bookings)
     let bookingsArr = Object.values(bookings)
 
     // useEffect(() => {
@@ -51,7 +54,7 @@ const UserBookings = () => {
       return <div className="no-bookings-yet">You have no future bookings yet</div>;
     }
 
-    console.log(bookingsArr)
+    // console.log(bookingsArr)
 
     function validImage(spot) {
       if (spot?.previewImage) {
