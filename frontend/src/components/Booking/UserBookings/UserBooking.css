@@ -18,7 +18,7 @@
     color: rgb(186, 184, 184);
 }
 
-.no-bookings{
+.no-bookings-yet{
     display: flex;
     justify-content: center;
     align-items: center;
