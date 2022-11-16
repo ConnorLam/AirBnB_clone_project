@@ -145,8 +145,8 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case (DELETE_BOOKING): {
             newState = {...state}
-            console.log(newState)
-            console.log(action.payload)
+            // console.log(newState)
+            // console.log(action.payload)
             delete newState[action.payload.startDate]
             return newState
         }

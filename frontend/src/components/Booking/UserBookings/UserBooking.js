@@ -31,7 +31,7 @@ const UserBookings = () => {
     }, [dispatch, user])
 
     if(bookingsArr.length < 1){
-      return <div className="no-bookings">You have no bookings yet</div>
+      return <div className="no-bookings-yet">You have no bookings yet</div>
     }
     
     let futureBookings = []
@@ -46,7 +46,7 @@ const UserBookings = () => {
     // console.log(bookingsArr)
     // console.log(bookings)
     if(futureBookings.length < 1){
-      return <div className="no-bookings">You have no bookings yet</div>;
+      return <div className="no-bookings-yet">You have no bookings yet</div>;
     }
 
     console.log(bookingsArr)
