@@ -11,6 +11,20 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+   await queryInterface.bulkInsert('Likes', [
+    {
+      userId: 1,
+      spotId: 3,
+    },
+    {
+      userId: 3,
+      spotId: 2,
+    },
+    {
+      userId: 2,
+      spotId: 1
+    }
+   ])
   },
 
   async down (queryInterface, Sequelize) {
@@ -20,5 +34,8 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete("Likes", {
+      userId: {[Op.in]: [1, 2, 3]}
+    })
   }
 };
