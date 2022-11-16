@@ -21,6 +21,9 @@ const SpotById = () => {
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => state.spots[parsedSpotId])
 
+    // const state = useSelector(state => console.log(state))
+    console.log(reviewsArr)
+
     const [isLoaded, setIsLoaded] = useState(false)
     const [numReviews, setNumReviews] = useState(spot?.numReviews)
     const [avgRating, setAvgRating] = useState(spot?.avgRating)
@@ -86,7 +89,7 @@ const SpotById = () => {
             <div className="spot-details-header">
               <i className="fa-solid fa-star fa-xs"></i>
               {Number(spot.avgRating).toFixed(2)} ·{" "}
-              <span className="spot-info-header">{numReviews} reviews</span> ·{" "}
+              <span className="spot-info-header">{spot.numReviews} reviews</span> ·{" "}
               <span className="spot-info-header">
                 {spot.city}, {spot.state}, {spot.country}
               </span>
