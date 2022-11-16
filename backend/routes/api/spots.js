@@ -748,7 +748,30 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
   res.json(newBooking)
 })
 
+router.get(`/:spotId/likes`, async(req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId)
 
+  if (!spot) {
+    res.statusCode = 404;
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const likes = await Like.findAll({
+    where: { spotId: spot.id },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+    ],
+  });
+
+  res.json({Likes: likes})
+
+})
 
 router.post(`/:spotId/likes`, requireAuth, async(req, res) => {
   const {user} = req
