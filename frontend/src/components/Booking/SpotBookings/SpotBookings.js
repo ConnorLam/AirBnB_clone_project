@@ -20,6 +20,19 @@ const SpotBookings = ({ spot }) => {
     dispatch(getSpotBookingThunk(spot.id)).then(() => setIsLoaded(true));
   }, [dispatch, spot.id, setIsLoaded]);
 
+  let futureBookings = [];
+  for (let booking of bookingsArr) {
+    // console.log(booking)
+    if (booking.endDate > today) {
+      futureBookings.push(booking);
+      break;
+    }
+  }
+
+  if (futureBookings.length < 1) {
+    return <h3 className="no-bookings">{spot.name} has no future bookings yet</h3>;
+  }
+
   let hasBookings;
   if (bookingsArr.length === 0){
     hasBookings = (
