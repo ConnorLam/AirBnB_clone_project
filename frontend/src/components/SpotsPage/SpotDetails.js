@@ -10,6 +10,7 @@ import CreateReviewModal from '../CreateReviewPage'
 import OwnerSpotBookings from '../Booking/OwnerSpotBookings/OwnerSpotBookings'
 import SpotBookings from '../Booking/SpotBookings/SpotBookings'
 import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal'
+import { getSpotLikeThunk,  } from '../../store/like'
 
 
 const SpotById = () => {
