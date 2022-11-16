@@ -62,6 +62,7 @@ export const getUserBookingThunk = () => async dispatch => {
     const res = await csrfFetch(`/api/bookings/current`)
 
     const data = await res.json()
+    console.log('\n\n\n', data, '\n\n in thunk')
     if(res.ok){
         await dispatch(getUserBookingAction(data))
     }
@@ -129,7 +130,7 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case (GET_USER_BOOKINGS): {
             action.payload.Bookings.forEach(booking => {
-                newState[booking.startDate] = booking
+                newState[booking.id] = booking
             })
             return newState
         }

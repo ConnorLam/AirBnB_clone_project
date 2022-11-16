@@ -24,11 +24,15 @@ router.get('/current', async (req, res) => {
         "updatedAt",
       ],
       order: [["startDate", "ASC"]],
+      raw: true
     });
     // console.log(bookings)
     let bookingsArr = []
 
     for(let booking of bookings){
+
+      console.log('\n\n\n', booking, '\n\n\n')
+
         const spot = await Spot.findByPk(booking.spotId, {
             attributes: {exclude: ['createdAt', 'updatedAt', 'description']},
             raw: true
@@ -153,7 +157,7 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
         endDate,
     })
 
-    console.log('\n\n\n', booking, '\n\n\n')
+    // console.log('\n\n\n', booking, '\n\n\n')
 
     await booking.save()
     res.json(booking)

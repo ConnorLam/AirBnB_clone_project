@@ -21,6 +21,9 @@ const SpotById = () => {
     const parsedSpotId = Number(spotId)
     const spot = useSelector(state => state.spots[parsedSpotId])
 
+    // const state = useSelector(state => console.log(state))
+    console.log(reviewsArr)
+
     const [isLoaded, setIsLoaded] = useState(false)
     const [numReviews, setNumReviews] = useState(spot?.numReviews)
     const [avgRating, setAvgRating] = useState(spot?.avgRating)
@@ -86,7 +89,7 @@ const SpotById = () => {
             <div className="spot-details-header">
               <i className="fa-solid fa-star fa-xs"></i>
               {Number(spot.avgRating).toFixed(2)} ·{" "}
-              <span className="spot-info-header">{numReviews} reviews</span> ·{" "}
+              <span className="spot-info-header">{spot.numReviews} reviews</span> ·{" "}
               <span className="spot-info-header">
                 {spot.city}, {spot.state}, {spot.country}
               </span>
@@ -103,28 +106,28 @@ const SpotById = () => {
                 <img
                   className="image-right image-1"
                   src={
-                    "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                      validImage(spot)
                   }
                   alt={spot.name}
                 />
                 <img
                   className="image-right image-2"
                   src={
-                    "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                      validImage(spot)
                   }
                   alt={spot.name}
                 />
                 <img
                   className="image-right image-3"
                   src={
-                    "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                      validImage(spot)
                   }
                   alt={spot.name}
                 />
                 <img
                   className="image-right image-4"
                   src={
-                    "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                      validImage(spot)
                   }
                   alt={spot.name}
                 />

@@ -49,9 +49,11 @@ const EditBooking = ({booking}) => {
 
         if (
           (reqStartDateParse >= existingStartBooking &&
-            reqStartDateParse <= existingEndBooking) ||
+            reqStartDateParse <= existingEndBooking &&
+            eachBooking.id !== booking.id) ||
           (reqEndDateParse >= existingStartBooking &&
-            reqEndDateParse <= existingEndBooking)
+            reqEndDateParse <= existingEndBooking &&
+            eachBooking.id !== booking.id)
         ) {
           bookingConflict = true;
         }
@@ -66,6 +68,7 @@ const EditBooking = ({booking}) => {
       return setValidationErrors(errors);
     }, [startDate, endDate]);
 
+    // let data;
     const onSubmit = async (e) => {
         e.preventDefault()
 
@@ -81,7 +84,7 @@ const EditBooking = ({booking}) => {
         }
 
         const newBooking = await dispatch(updateBookingThunk(bookingDetails))
-        console.log(newBooking)
+        // console.log(newBooking.Response.ok)
 
         alert(`You have edited your booking dates on ${booking.Spot.name}`)
         history.push(`/spots/${booking.Spot.id}`)
