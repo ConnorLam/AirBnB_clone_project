@@ -131,24 +131,41 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
             "statusCode": 403
         })
     }
-    const bookingsTaken = await Booking.findAll({
+    
+
+    const bookings = await Booking.findAll({
       where: {
-        [Op.and]: [{ startDate: startDate }, { spotId: booking.spotId }],
+        spotId: spot.id,
       },
+      raw: true,
     });
 
-    if(bookingsTaken.length >= 1){
-      console.log("\n\n\n", 'hihiihihih', "\n\n\n");
-        res.statusCode = 403
+
+    let bookingConflict = false;
+    bookings.forEach((eachBooking) => {
+      let reqStartDateParse = Date.parse(startDate);
+      let reqEndDateParse = Date.parse(endDate);
+      let existingStartBooking = Date.parse(eachBooking.startDate);
+      let existingEndBooking = Date.parse(eachBooking.endDate);
+
+      if (
+        (reqStartDateParse >= existingStartBooking && eachBooking.id !== booking.id &&
+          reqStartDateParse <= existingEndBooking) ||
+        (reqEndDateParse >= existingStartBooking && eachBooking.id !== booking.id && 
+          reqEndDateParse <= existingEndBooking)
+      ) {
+        bookingConflict = true;
+        res.statusCode = 403;
         return res.json({
           message: "Sorry, this spot is already booked for the specified dates",
           statusCode: 403,
           errors: {
-            startDate: "Start date conflicts with an existing booking",
-            endDate: "End date conflicts with an existing booking",
+            startDate: `Start date conflicts with an existing booking ${booking.startDate}`,
+            endDate: `End date conflicts with an existing booking ${booking.endDate}`,
           },
         });
-    }
+      }
+    });
 
     booking.set({
         spotId: booking.spotId,
