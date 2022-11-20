@@ -24,7 +24,7 @@ const SpotById = () => {
     const user = useSelector(state => state.session.user)
     
     const reviews = useSelector((state) => state.reviews);
-    let reviewsArr = Object.values(reviews);
+    let reviewsArr = Object.values(reviews).reverse();
     const likes = useSelector((state) => state.likes)
     let likesArr = Object.values(likes)
     const likesId = likesArr.map((like) => {
