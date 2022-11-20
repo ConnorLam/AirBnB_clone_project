@@ -295,3 +295,8 @@
 #one-like {
     padding-right: 10px;
 }
+
+.fourohfour{
+    display: flex;
+    justify-content: center;
+}
