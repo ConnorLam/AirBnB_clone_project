@@ -24,7 +24,7 @@ const SpotById = () => {
     const user = useSelector(state => state.session.user)
     
     const reviews = useSelector((state) => state.reviews);
-    let reviewsArr = Object.values(reviews);
+    let reviewsArr = Object.values(reviews).reverse();
     const likes = useSelector((state) => state.likes)
     let likesArr = Object.values(likes)
     const likesId = likesArr.map((like) => {
@@ -150,7 +150,7 @@ const SpotById = () => {
                   alt={spot.name}
                 />
               </div>
-              <div className="spot-details-image-right">
+              {/* <div className="spot-details-image-right">
                 <img
                   className="image-right image-1"
                   src={
@@ -179,7 +179,7 @@ const SpotById = () => {
                   }
                   alt={spot.name}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className='left-right'>

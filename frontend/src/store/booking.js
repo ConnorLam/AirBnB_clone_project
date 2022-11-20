@@ -62,7 +62,7 @@ export const getUserBookingThunk = () => async dispatch => {
     const res = await csrfFetch(`/api/bookings/current`)
 
     const data = await res.json()
-    console.log('\n\n\n', data, '\n\n in thunk')
+    // console.log('\n\n\n', data, '\n\n in thunk')
     if(res.ok){
         await dispatch(getUserBookingAction(data))
     }
@@ -106,6 +106,7 @@ export const deleteBookingThunk = ({startDate, id}) => async dispatch => {
     })
 
     const data = await res.json()
+    console.log(data, 'delete thunk')
 
     if (res.ok){
         await dispatch(deleteBookingAction({id, startDate}))
@@ -148,7 +149,7 @@ const bookingsReducer = (state = initialState, action) => {
             newState = {...state}
             // console.log(newState)
             // console.log(action.payload)
-            delete newState[action.payload.startDate]
+            delete newState[action.payload.id]
             return newState
         }
         default: {

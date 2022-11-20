@@ -70,21 +70,38 @@ const UserBookings = () => {
     //     await dispatch(deleteBookingThunk(booking.id))
     //     .then(() => setIsLoaded(true))
     // }
+    // (bookingsArr.forEach(booking => {
+    //   console.log(booking.endDate)
+    //   console.log(today)
+    //   console.log(booking.endDate < today)
+    // }))
 
 
     return (
       isLoaded && (
         <div>
           <h1 className="user-spots-header">Your Bookings</h1>
-          <div className="past-booking-warning">Past or current bookings cannot be updated</div>
+          <div className="past-booking-warning">
+            Past or current bookings cannot be updated
+          </div>
           <ul className="allspotsUl">
             {bookingsArr.map((booking, i) => (
-              <div className={booking.startDate <= today ||
-                  booking.endDate <= today ? "wrap-spots-div opaque": 'wrap-spots-div'} id={booking.endDate < today ? 'display-none': null}key={i}>
+              <div
+                className={
+                  booking.startDate <= today || booking.endDate <= today
+                    ? "wrap-spots-div opaque"
+                    : "wrap-spots-div"
+                }
+                id={booking.endDate <= today ? "display-none" : null}
+                key={i}
+              >
                 <NavLink className="spots" to={`/spots/${booking.Spot?.id}`}>
                   <div className="user-spot-name">{booking.Spot?.name}</div>
-                  {booking.startDate < today ||
-                  booking.endDate <= today ? <div className="booking-dates past-booking-title">Current Booking</div> : (
+                  {booking.startDate < today && booking.endDate >= today ? (
+                    <div className="booking-dates past-booking-title">
+                        {booking.startDate} to {booking.endDate}
+                    </div>
+                  ) : (
                     <div className="booking-dates">
                       {booking.startDate} to {booking.endDate}
                     </div>
