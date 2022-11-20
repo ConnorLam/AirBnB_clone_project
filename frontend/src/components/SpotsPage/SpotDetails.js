@@ -150,7 +150,7 @@ const SpotById = () => {
                   alt={spot.name}
                 />
               </div>
-              <div className="spot-details-image-right">
+              {/* <div className="spot-details-image-right">
                 <img
                   className="image-right image-1"
                   src={
@@ -179,7 +179,7 @@ const SpotById = () => {
                   }
                   alt={spot.name}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className='left-right'>
