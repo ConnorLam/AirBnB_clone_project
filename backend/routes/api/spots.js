@@ -51,7 +51,7 @@ router.get('/', checkValidate, async (req, res) => {
 
   let { size, page } = req.query;
   if (!page) page = 1;
-  if (!size) size = 20;
+  if (!size) size = 40;
   page = parseInt(page);
   size = parseInt(size);
   const pagination = {};
