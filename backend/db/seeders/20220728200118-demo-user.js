@@ -14,8 +14,8 @@ module.exports = {
     */
     await queryInterface.bulkInsert("Users", [
       {
-        firstName: "Connor",
-        lastName: "Lam",
+        firstName: "Demo",
+        lastName: "User",
         email: "demo@user.io",
         username: "Demo-lition",
         hashedPassword: bcrypt.hashSync("password"),

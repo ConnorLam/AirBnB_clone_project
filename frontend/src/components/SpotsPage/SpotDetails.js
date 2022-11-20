@@ -67,7 +67,7 @@ const SpotById = () => {
         );
     }, [dispatch, spotId])
 
-    if(!spot || spot === {}) return <div>loading</div>
+    if(!spot || spot === {}) return <div className='fourohfour'><h1>404! This page does not exist</h1></div>
 
 
     // console.log(spot)
