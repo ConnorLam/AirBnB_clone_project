@@ -12,7 +12,7 @@ const UserBookings = () => {
     const user = useSelector((state) => state.session.user);
     const [isLoaded, setIsLoaded] = useState(false)
     const today = new Date().toISOString().slice(0, 10);
-    console.log(today)
+    // console.log(today)
 
     if (!user) {
       alert("must be logged in to access");
@@ -92,7 +92,7 @@ const UserBookings = () => {
                     ? "wrap-spots-div opaque"
                     : "wrap-spots-div"
                 }
-                id={booking.endDate < today ? "display-none" : null}
+                id={booking.endDate <= today ? "display-none" : null}
                 key={i}
               >
                 <NavLink className="spots" to={`/spots/${booking.Spot?.id}`}>
