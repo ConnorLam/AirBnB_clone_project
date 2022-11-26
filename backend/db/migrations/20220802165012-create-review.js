@@ -1,4 +1,16 @@
 'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === "production") {
+  options.schema = process.env.SCHEMA; // define your schema in options object
+}
+
+let indexOptions = {}
+indexOptions.tableName = 'Reviews'
+if (process.env.NODE_ENV === "production") {
+  indexOptions.schema = process.env.SCHEMA; // define your schema in options object
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Reviews", {
@@ -38,13 +50,13 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-    });
-    await queryInterface.addIndex('Reviews',
+    }, options);
+    await queryInterface.addIndex(indexOptions, 'Reviews',
     ['spotId', 'userId'],
     {unique: true})
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reviews');
-    await queryInterface.removeIndex('Reviews', ['spotId', 'userId'])
+    await queryInterface.dropTable("Reviews", options);
+    await queryInterface.removeIndex(indexOptions, "Reviews", ["spotId", "userId"]);
   }
 };
