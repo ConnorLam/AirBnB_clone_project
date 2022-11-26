@@ -1,5 +1,10 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === "production") {
+  options.schema = process.env.SCHEMA; // define your schema in options object
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -11,7 +16,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert("Images", [
+   options.tableName = 'Images'
+   await queryInterface.bulkInsert(options, "Images", [
      {
        url: "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666",
        previewImage: true,
@@ -162,7 +168,8 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Images", {
+    options.tableName = 'Images'
+    await queryInterface.bulkDelete(options, "Images", {
       userId: { [Op.in]: [1, 2, 3] },
     });
   }
