@@ -17,7 +17,7 @@ module.exports = {
      * }], {});
     */
    options.tableName = 'Likes'
-   await queryInterface.bulkInsert(options, 'Likes', [
+   await queryInterface.bulkInsert(options, [
     {
       userId: 1,
       spotId: 3,
@@ -41,7 +41,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     options.tableName = 'Likes'
-    await queryInterface.bulkDelete(options, "Likes", {
+    await queryInterface.bulkDelete(options, {
       userId: {[Op.in]: [1, 2, 3]}
     })
   }

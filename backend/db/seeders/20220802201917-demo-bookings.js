@@ -17,7 +17,7 @@ module.exports = {
      * }], {});
     */
    options.tableName = 'Bookings'
-   await queryInterface.bulkInsert(options, 'Bookings', [
+   await queryInterface.bulkInsert(options, [
     {
       spotId: 1,
       userId: 2,
@@ -47,7 +47,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     options.tableName = 'Bookings'
-    await queryInterface.bulkDelete(options, "Bookings", {
+    await queryInterface.bulkDelete(options, {
       userId: { [Op.in]: [1, 2, 3] },
     });
   }
