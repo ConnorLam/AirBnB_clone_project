@@ -17,7 +17,7 @@ module.exports = {
      * }], {});
     */
    options.tableName = 'Images'
-   await queryInterface.bulkInsert(options, "Images", [
+   await queryInterface.bulkInsert(options, [
      {
        url: "https://news.airbnb.com/wp-content/uploads/sites/4/2019/06/PJM020719Q202_Luxe_WanakaNZ_LivingRoom_0264-LightOn_R1.jpg?fit=2500%2C1666",
        previewImage: true,
@@ -169,7 +169,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     options.tableName = 'Images'
-    await queryInterface.bulkDelete(options, "Images", {
+    await queryInterface.bulkDelete(options, {
       userId: { [Op.in]: [1, 2, 3] },
     });
   }
