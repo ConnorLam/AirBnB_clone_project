@@ -1,6 +1,6 @@
 # AirBnB_clone_project
 
-[Link to live site](https://airbnb-clone-connor-lam.herokuapp.com/)
+[Link to live site](https://fake-bnb.onrender.com/)
 
 ### About FakeBnB:
 
